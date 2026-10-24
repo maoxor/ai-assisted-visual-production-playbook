@@ -1,0 +1,19 @@
+name: Gap
+description: Une lacune de la méthode, une pratique non éprouvée, une vérification manquante (voir ROADMAP.md)
+title: "Gap: "
+labels: ["gap"]
+body:
+  - type: textarea
+    id: gap
+    attributes:
+      label: Ce qui manque
+    validations:
+      required: true
+  - type: textarea
+    id: consequence
+    attributes:
+      label: Conséquence pour la méthode
+  - type: textarea
+    id: action
+    attributes:
+      label: Action et critère de fin

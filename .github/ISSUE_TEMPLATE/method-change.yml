@@ -1,0 +1,33 @@
+name: Method change
+description: Proposer de modifier un principe, une étape du workflow, une liste de contrôle, un outil ou un modèle
+title: "Method change: "
+labels: ["method-change"]
+body:
+  - type: input
+    id: target
+    attributes:
+      label: Document ou outil concerné
+      placeholder: "ex. docs/workflow/06-production.md"
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Pourquoi changer
+      description: La limite constatée de la pratique actuelle, décrite de façon générique.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposition
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Portée (version)
+      options:
+        - "correctif : précision, correction"
+        - "mineure : étape, guide, outil, modèle ou skill ajouté"
+        - "majeure : principe changé, décision remplacée"
+    validations:
+      required: true

@@ -1,0 +1,39 @@
+name: Lesson learned
+description: Une erreur corrigée, une pratique qui a marché, une découverte à ne pas perdre (forme générique)
+title: "Lesson learned: "
+labels: ["lesson-learned"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Décrire l'enseignement sous une forme **générique** : aucun nom de projet, de client, d'œuvre ou de personne,
+        aucun chiffre, livrable ni citation propres à un projet (décision 0007).
+  - type: textarea
+    id: situation
+    attributes:
+      label: Situation (générique)
+      description: Le type de travail et le moment où le problème ou la réussite apparaît.
+    validations:
+      required: true
+  - type: textarea
+    id: effect
+    attributes:
+      label: Effet
+      description: Coût, défaut visible, temps perdu, ou bénéfice constaté.
+  - type: textarea
+    id: practice
+    attributes:
+      label: Correction ou pratique retenue
+  - type: textarea
+    id: rule
+    attributes:
+      label: Règle proposée
+      description: Où l'intégrer (principe, étape du workflow, liste de contrôle, anti-modèle, outil) et à quel niveau de maturité.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Vérifications
+      options:
+        - label: Aucun contenu de projet, aucun secret, aucune donnée personnelle
+          required: true
+        - label: Méthode et non choix esthétique
