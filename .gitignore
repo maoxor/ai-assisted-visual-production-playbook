@@ -1,0 +1,23 @@
+# Environments and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+
+# This repository never contains project outputs, media or assets (decision 0007)
+*.mp4
+*.mov
+*.webm
+*.mkv
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.avif
+*.exr
+*.blend
+*.blend1
+renders/
+outputs/
