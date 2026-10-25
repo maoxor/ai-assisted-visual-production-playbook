@@ -1,6 +1,6 @@
 [project]
 name = "ai-assisted-visual-production-playbook"
-version = "2.0.0"
+version = "2.0.1"
 description = "Method and tested tools for producing 3D renders, animations and web background videos with an AI coding agent."
 readme = "README.md"
 license = "MIT"

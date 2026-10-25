@@ -29,4 +29,3 @@ level concerned is updated. Larger items are tracked as **Gap** issues.
 | Action | Why | Done when |
 |---|---|---|
 | Add a local **pre-commit hook** running `check_repo.py` with the deny list | CI does not know local deny lists | Hook documented in `CONTRIBUTING.md` |
-| Test the **plugin installation** from the public repository | Manifests are validated locally (`claude plugin validate`); installation from GitHub requires a public repository | Installation verified and documented |

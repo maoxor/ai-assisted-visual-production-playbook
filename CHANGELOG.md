@@ -2,6 +2,13 @@
 
 Format: [versioning](CONTRIBUTING.md#versioning). Each release has a `vX.Y.Z` Git tag.
 
+## v2.0.1 — 2026-10-25
+
+- The repository is public; private vulnerability reporting is enabled.
+- Plugin installation from GitHub verified (`/plugin marketplace add`, then `/plugin install`); the roadmap item is
+  closed.
+- Decision 0008 records the publication.
+
 ## v2.0.0 — 2026-10-25
 
 Open-source release ([decision 0008](docs/decisions/0008-open-source-release.md)).

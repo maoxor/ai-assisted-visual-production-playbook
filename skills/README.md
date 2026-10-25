@@ -33,7 +33,7 @@ mkdir -p <project>/.claude/skills && cp -R skills/work-log <project>/.claude/ski
 The skills then appear as `visual-production:work-log`, `visual-production:test-first-change` and
 `visual-production:visual-iteration`. From a local clone, `/plugin marketplace add ./ai-assisted-visual-production-playbook`
 works the same way. The manifests (`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`) are checked with
-`claude plugin validate .`.
+`claude plugin validate .` in CI, and installation from GitHub with the two commands above has been verified.
 
 ## Adapt
 

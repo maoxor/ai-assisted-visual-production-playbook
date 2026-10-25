@@ -32,8 +32,9 @@ its purpose at a glance, install it, verify it or reuse it.
 - **Reproducibility**: `pyproject.toml` and `uv.lock` pin the tools' dependencies; CI runs on Linux, macOS and
   Windows; `examples/demo.py` reproduces every tool's behaviour on synthetic data.
 - **Packaging**: the skills are also distributed as a Claude Code plugin (`.claude-plugin/`).
-- **Publication itself** (switching the repository to public) remains an explicit decision of the lead
-  ([P12](../principles.md#p12)).
+- **Publication itself** (switching the repository to public) is an explicit decision of the lead
+  ([P12](../principles.md#p12)); it was taken on 2026-10-25, after the pre-publication checks (repository checks with
+  a deny list, full history review, licence, private vulnerability reporting enabled).
 
 ## Consequences
 
