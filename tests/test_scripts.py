@@ -2,6 +2,8 @@
 
   uv run pytest tests/test_scripts.py
 """
+import json
+import os
 import shutil
 import subprocess
 import sys
@@ -22,7 +24,8 @@ def test_new_project_creates_the_skeleton(tmp_path):
     for rel in ["CLAUDE.md", "AGENTS.md", ".gitignore", "docs/BRIEF.md", "docs/instruction-register.md",
                 "docs/work-logs/_template.md", "docs/DELIVERY_REPORT.md", "archive/_template-README.md",
                 ".claude/skills/work-log/SKILL.md", ".claude/skills/visual-iteration/SKILL.md",
-                "tools/fingerprint.py", "tools/README.md"]:
+                "tools/fingerprint.py", "tools/README.md", ".claude/settings.json",
+                ".claude/hooks/guard_archive.py", ".claude/hooks/_common.py"]:
         assert (target / rel).is_file(), rel
     assert (target / "config").is_dir() and (target / "outputs").is_dir()
     assert all(line.startswith("created") for line in report)
@@ -40,10 +43,19 @@ def test_new_project_never_overwrites(tmp_path):
     assert all(line.startswith("kept") for line in report)
 
 
-def test_new_project_without_tools(tmp_path):
-    target, _ = new_project.create(tmp_path / "demo", "Demo", tools=False)
+def test_new_project_without_tools_or_hooks(tmp_path):
+    target, _ = new_project.create(tmp_path / "demo", "Demo", tools=False, hooks=False)
     assert not (target / "tools").exists()
+    assert not (target / ".claude/hooks").exists() and not (target / ".claude/settings.json").exists()
     assert (target / ".claude/skills/test-first-change/SKILL.md").is_file()
+
+
+def test_installed_hook_blocks_archive_edits_in_the_new_project(tmp_path):
+    target, _ = new_project.create(tmp_path / "demo", "Demo")
+    event = json.dumps({"tool_name": "Edit", "tool_input": {"file_path": str(target / "archive" / "v1.md")}})
+    r = subprocess.run([sys.executable, str(target / ".claude/hooks/guard_archive.py")], input=event, text=True,
+                       capture_output=True, env={**os.environ, "CLAUDE_PROJECT_DIR": str(target)})
+    assert r.returncode == 2
 
 
 def test_copied_tool_runs_in_the_new_project(tmp_path):
