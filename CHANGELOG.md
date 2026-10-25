@@ -2,6 +2,17 @@
 
 Format: [versioning](CONTRIBUTING.md#versioning). Each release has a `vX.Y.Z` Git tag.
 
+## v2.2.0 — 2026-10-25
+
+- **Real-time 3D for the web** guide, [proven]: references and feature inventory before generation, detail budget from
+  the closest framing, measure without rendering to iterate and render to prove, shared toolkit copied with checksums,
+  construction by shape, motion, swing and atlas checks.
+- The **real-time web 3D** column of the adaptation guide becomes [proven]; games remain [extrapolated].
+- Anti-patterns **A21** (every check passes on a rudimentary result) and **A22** (a measurement reported without a
+  threshold).
+- P1: a threshold is never moved to let a candidate pass; a suspected instrument is tested on a known case.
+- Evidence-based iteration, rule 8: a review note describes the final capture, not the generator's intent.
+
 ## v2.1.0 — 2026-10-25
 
 - **Hooks for rendering projects** ([`hooks/`](hooks/README.md)), [proposed]: `guard_archive.py` (archives

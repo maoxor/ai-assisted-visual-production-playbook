@@ -1,8 +1,8 @@
 # Adapting the method to another project
 
-The method has been proven on **offline 3D rendering delivered to the web** and on **web applications**. This
-document shows how each generic concept translates to other contexts. The columns beyond those two types are
-**[extrapolated]**: they have not been applied yet.
+The method has been proven on **offline 3D rendering delivered to the web**, on **real-time 3D for the web** and on
+**web applications**. This document shows how each generic concept translates to other contexts. The other columns
+are **[extrapolated]**: they have not been applied yet.
 
 ## What never changes
 
@@ -12,17 +12,17 @@ distinction between checks and approval, the [definition of done](../quality/REA
 
 ## Translating the concepts
 
-| Generic concept | Offline rendering, web video [proven] | Web application [proven] | Motion design, 2D animation [extrapolated] | Game or real time [extrapolated] | Document, presentation, identity [extrapolated] |
-|---|---|---|---|---|---|
-| Production unit | Frame of a sequence | Feature, screen | Shot, sequence | Scene, level, effect | Page, slide, variant |
-| Final conditions | Display size, normal speed, final processing, encoded video played in the browser | Real browsers and devices, real data, CI | Final output, sound, target screen | Target hardware, frame rate, production build | Real print or screen format, final export |
-| Sample | One element, a few seconds of excerpt, a difficult frame | A user journey, a critical screen | A key shot | A room, an effect, a test scene | A typical page, a dense slide |
-| Minimal prototype | Subject, one effect element, one foreground element, one camera move | One route end to end, tested | Animatic | Vertical slice | Mock-up of one page with real content |
-| Elimination (diagnosis) | Switch off a light, paint a surface black, hide an element | Disable a module, Git bisect, test doubles | Hide a layer | Disable a system, a render pass | Remove a style, a font |
-| Fingerprint and resume | SHA-256 of sources and scripts in `VERSION.json` | Commits, CI, immutable migrations | Project versions, named renders | Versioned builds, hashed assets | Named exported versions |
-| Non-regression | Element-by-element composition, trajectories, flicker | Unit, integration and e2e tests, architecture contract | Frame-by-frame comparison | Automated tests, reference captures | Visual comparison of pages |
-| Complementary metrics | SSIM, VMAF, flicker, WCAG contrast, time per frame | Coverage, LCP, CLS, response time | Cadence, contrast | Frame time (ms), memory | Contrast, legibility, weight |
-| Costs to keep apart | Computation, weight, decoding, page smoothness | Development, build, performance, maintenance | Rendering, weight, playback | Production, memory, frame time, download | Production, printing, weight |
+| Generic concept | Offline rendering, web video [proven] | Web application [proven] | Real-time web 3D [proven] | Motion design, 2D animation [extrapolated] | Game [extrapolated] | Document, presentation, identity [extrapolated] |
+|---|---|---|---|---|---|---|
+| Production unit | Frame of a sequence | Feature, screen | Generated asset (glTF) and its feature inventory | Shot, sequence | Scene, level, effect | Page, slide, variant |
+| Final conditions | Display size, normal speed, final processing, encoded video played in the browser | Real browsers and devices, real data, CI | The delivered asset in the bench, same renderer as the reference, closest framing of the application, frame rate in motion | Final output, sound, target screen | Target hardware, frame rate, production build | Real print or screen format, final export |
+| Sample | One element, a few seconds of excerpt, a difficult frame | A user journey, a critical screen | One part (an appendage, an opening) at the closest framing | A key shot | A room, an effect, a test scene | A typical page, a dense slide |
+| Minimal prototype | Subject, one effect element, one foreground element, one camera move | One route end to end, tested | One part of each kind, rigged and moving, exported and captured in the bench | Animatic | Vertical slice | Mock-up of one page with real content |
+| Elimination (diagnosis) | Switch off a light, paint a surface black, hide an element | Disable a module, Git bisect, test doubles | Disable a part, a motion layer, a material pass | Hide a layer | Disable a system, a render pass | Remove a style, a font |
+| Fingerprint and resume | SHA-256 of sources and scripts in `VERSION.json` | Commits, CI, immutable migrations | Same configuration → same binary asset; versioned toolkit copy with checksums | Project versions, named renders | Versioned builds, hashed assets | Named exported versions |
+| Non-regression | Element-by-element composition, trajectories, flicker | Unit, integration and e2e tests, architecture contract | Feature inventory, motion signatures, atlas integrity, captures side by side with the reference | Frame-by-frame comparison | Automated tests, reference captures | Visual comparison of pages |
+| Complementary metrics | SSIM, VMAF, flicker, WCAG contrast, time per frame | Coverage, LCP, CLS, response time | Texels per pixel, edge length, wave and swing, frame cost | Cadence, contrast | Frame time (ms), memory | Contrast, legibility, weight |
+| Costs to keep apart | Computation, weight, decoding, page smoothness | Development, build, performance, maintenance | Generation, baking, asset weight, frame cost | Rendering, weight, playback | Production, memory, frame time, download | Production, printing, weight |
 
 ## How to adapt the workflow
 

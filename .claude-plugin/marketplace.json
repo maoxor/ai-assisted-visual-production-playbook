@@ -12,7 +12,7 @@
       "name": "visual-production",
       "source": "./",
       "description": "Skills from the AI-assisted visual production playbook: work-log, test-first-change, visual-iteration.",
-      "version": "2.1.0",
+      "version": "2.2.0",
       "license": "MIT"
     }
   ]

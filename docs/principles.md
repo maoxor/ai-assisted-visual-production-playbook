@@ -20,7 +20,9 @@ They never prove success and never become targets.
 expense of what it stood for.
 
 **How.** Every measurement comes with the capture or video to inspect. Write down what you see first, then what the
-measurement confirms or qualifies. Thresholds stay indicative; when they come from another source, say so.
+measurement confirms or qualifies. Thresholds stay indicative; when they come from another source, say so. A
+threshold is never moved to let a candidate pass: an instrument suspected to be wrong is tested on a case whose answer
+is known, fixed, and the fix recorded.
 
 **Anti-pattern.** Toning a treatment down because a measurement drops while the lead prefers the rich version
 ([A12](quality/anti-patterns.md#a12)).
