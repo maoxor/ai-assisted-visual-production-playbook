@@ -1,51 +1,50 @@
 # 10. Communication
 
-**Objectif.** Que la personne qui dirige voie, à chaque moment, ce qu'il faut pour décider, sans avoir à relancer.
+**Objective.** At every moment, the lead sees what they need to decide, without having to chase.
 
-## Montrer [éprouvé]
+## Show [proven]
 
-- **Ouvrir le résultat** (vidéo, page, image) dès qu'il est prêt, puis **vérifier qu'il s'est effectivement ouvert** ;
-  sinon, donner le chemin exact ([A19](../quality/anti-patterns.md#a19)).
-- **Montrer ce qui a été demandé** : si l'on attend l'œuvre animée, des images fixes ne suffisent pas
+- **Open the result** (video, page, image) as soon as it is ready, then **check that it actually opened**; otherwise
+  give the exact path ([A19](../quality/anti-patterns.md#a19)).
+- **Show what was asked for**: if the animated piece is expected, stills are not enough
   ([A1](../quality/anti-patterns.md#a1)).
-- **Montrer tôt** : un rendu court ou partiel vaut mieux qu'une attente silencieuse ; l'ouverture d'une page peut être
-  programmée dès que les premiers résultats sont prêts.
-- **Une page de revue locale** rassemble les vidéos, comparatifs et mesures d'une étape
+- **Show early**: a short or partial render is better than a silent wait; opening a page can be scheduled as soon as
+  the first results are ready.
+- **A local review page** gathers the videos, comparisons and measurements of a step
   ([`review_page.py`](../../tools/README.md#review_pagepy)).
-- **Publier en privé seulement**, et seulement avec l'accord de la personne qui dirige ; une œuvre tierce ne quitte
-  pas la machine sans accord.
+- **Share privately only**, and only with the lead's approval; a third party's artwork does not leave the machine
+  without approval.
 
-## Points d'avancement [éprouvé]
+## Status updates [proven]
 
-Un point contient :
+An update contains:
 
-1. **Ce qui fonctionne** (vérifié).
-2. **Ce qui reste à corriger.**
-3. **La prochaine action**, et le temps estimé si un calcul est en cours.
-4. **Ce qui attend la personne qui dirige**, le cas échéant (décision, validation).
+1. **What works** (verified).
+2. **What remains to fix.**
+3. **The next action**, and the estimated time if a computation is running.
+4. **What is waiting for the lead**, if anything (decision, approval).
 
-Il est **court** ([modèle](../../templates/status-update.md)). Pendant les longues tâches, on l'envoie **sans attendre
-la demande**.
+It is **short** ([template](../../templates/status-update.md)). During long tasks, send it **without waiting to be
+asked**.
 
-## Répondre à la question posée [éprouvé]
+## Answer the question asked [proven]
 
-| Question | Réponse attendue |
+| Question | Expected answer |
 |---|---|
-| « Combien de temps, et pourquoi ? » | Un chiffre, ses hypothèses, la cause principale |
-| « Ça sert à quoi ? » | Le rôle de l'étape en une ou deux phrases, et ce qui se passerait sans elle |
-| « Est-ce que ça marchera parfaitement ? » | Oui ou non, la preuve, la limite |
-| « Qu'as-tu choisi et pourquoi ? » | Le choix, les raisons, les alternatives écartées |
+| "How long, and why?" | A figure, its assumptions, the main cause |
+| "What is this for?" | The role of the step in one or two sentences, and what would happen without it |
+| "Will it work perfectly?" | Yes or no, the evidence, the limit |
+| "What did you choose and why?" | The choice, the reasons, the alternatives rejected |
 
-## Rester aligné sur l'objectif [éprouvé]
+## Stay aligned with the objective [proven]
 
-Quand la personne qui dirige demande de rappeler l'objectif du projet, elle vérifie que l'agent ne s'est pas égaré.
-L'objectif et le critère essentiel du cadrage doivent pouvoir être reformulés à tout moment ; on les relit avant chaque
-bilan.
+When the lead asks for the project's objective to be restated, they are checking that the agent has not drifted. The
+objective and key criterion from the brief must be restatable at any time; reread them before every report.
 
-## Forme [éprouvé]
+## Form [proven]
 
-- La langue de la personne qui dirige, avec une orthographe et des accents corrects.
-- Valeurs absolues sur la **dernière version** ; les versions passées seulement si elles sont demandées.
-- Côtés désignés du point de vue du spectateur, et dits explicitement (« à droite de l'image »).
-- Tableaux courts pour les comparatifs : profil, mesure, différence visible, recommandation.
-- Reconnaître un oubli ou un défaut sans détour, puis montrer la correction.
+- The lead's language, with correct spelling and diacritics.
+- Absolute values on the **latest version**; past versions only when asked.
+- Sides named from the viewer's point of view, and said explicitly ("on the right of the image").
+- Short tables for comparisons: profile, measurement, visible difference, recommendation.
+- Acknowledge an omission or defect plainly, then show the fix.

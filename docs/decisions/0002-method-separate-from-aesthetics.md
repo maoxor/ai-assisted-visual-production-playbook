@@ -1,29 +1,27 @@
-# 0002 — Séparer la méthode des choix esthétiques
+# 0002 — Keep the method separate from aesthetic choices
 
-- **Statut** : acceptée
-- **Date** : 2026-10-25
-- **Décidée par** : la personne qui dirige
+- **Status**: accepted
+- **Date**: 2026-10-25
+- **Decided by**: the lead
 
-## Contexte
+## Context
 
-Le référentiel doit permettre de réaliser un projet complètement différent, avec une autre direction artistique, en
-réutilisant le savoir-faire sans imposer les mêmes solutions. Les références et remarques d'un projet ne sont pas des
-solutions à reproduire ailleurs, et les leçons d'un projet sont des observations, pas des interdits généraux.
+The playbook must make it possible to carry out a completely different project, with another art direction, reusing
+the know-how without imposing the same solutions. A project's references and remarks are not solutions to reproduce
+elsewhere, and a project's lessons are observations, not general bans.
 
-## Décision
+## Decision
 
-- Les principes, le workflow, les listes de contrôle et les outils ne prescrivent **aucun style**.
-- Les choix esthétiques sont des décisions de chaque projet, consignées dans ce projet.
-- Ce qui se transmet en matière de direction artistique, ce sont des **mécanismes** : analyser la référence, attribuer
-  des rôles, proposer des variantes contrastées avec un contre-essai, montrer une vue annotée et un aperçu en mouvement,
-  écrire le choix.
+- The principles, workflow, checklists and tools prescribe **no style**.
+- Aesthetic choices are decisions of each project, recorded in that project.
+- What transfers in art direction are **mechanisms**: analyse the reference, assign roles, propose contrasting variants
+  with a counter-trial, show an annotated view and a preview in motion, write the choice down.
 
-## Conséquences
+## Consequences
 
-- Un nouveau projet repart de ses propres références.
-- Une préférence esthétique qui revient d'un projet à l'autre peut devenir une préférence de collaboration, jamais une
-  règle.
+- A new project starts again from its own references.
+- An aesthetic preference that recurs from one project to the next may become a collaboration default, never a rule.
 
-## Vérification
+## Verification
 
-Relecture de chaque contribution (modèle de demande de fusion) : un passage qui prescrit un style est retiré.
+Review of every contribution (pull request template): a passage that prescribes a style is removed.

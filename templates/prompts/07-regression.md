@@ -1,26 +1,24 @@
-# Diagnostiquer une régression
+# Diagnose a regression
 
 ```markdown
-Depuis la <version>, <défaut> est très visible ; il n'était pas perceptible en <version antérieure>. Identifie cette
-régression et corrige-la avant de poursuivre la production.
+Since <version>, <defect> is very visible; it was not perceptible in <earlier version>. Identify this regression and
+fix it before continuing the production.
 
-Compare les sorties et les données sources des deux versions sur des zones et des mouvements comparables. Détermine à
-quelle étape le problème apparaît : <génération, rendu, débruitage, redimensionnement, encodage, lecture>.
+Compare the outputs and source data of the two versions on comparable areas and motions. Determine at which stage the
+problem appears: <generation, rendering, denoising, resizing, encoding, playback>.
 
-Examine les changements introduits depuis <version antérieure> : <liste>. Distingue les variations normales des
-artefacts indésirables.
+Examine the changes introduced since <earlier version>: <list>. Separate normal variations from unwanted artefacts.
 
-Recherche des solutions dans la documentation officielle, les retours de praticiens et les ressources pertinentes.
-Teste les pistes sur un extrait représentatif, en isolant les causes plutôt qu'en modifiant plusieurs paramètres à la
-fois.
+Look for solutions in the official documentation, practitioners' feedback and relevant resources. Test the leads on a
+representative excerpt, isolating causes rather than changing several parameters at once.
 
-L'objectif est un résultat aussi propre et stable que possible, en conservant <netteté, textures, richesse>. Ne masque
-pas le problème par <un flou global / un traitement qui efface les détails>.
+The goal is a result as clean and stable as possible, keeping <sharpness, textures, richness>. Do not hide the problem
+with <a global blur / a treatment that erases details>.
 
-Présente un comparatif **<version antérieure> / actuelle / corrigée**, à vitesse normale, avec des gros plans des
-zones touchées, sur les sources et sur les livrables encodés, dans tous les formats. Indique la cause identifiée, les
-corrections retenues et leur coût avant de relancer la production.
+Present an **<earlier version> / current / fixed** comparison, at normal speed, with close-ups of the affected areas,
+on the sources and on the encoded deliverables, in every format. State the cause identified, the fixes kept and their
+cost before relaunching the production.
 ```
 
-Une fois la cause trouvée, les comparaisons suivantes se font sur la **dernière version**
+Once the cause is found, the following comparisons are made on the **latest version**
 ([A6](../../docs/quality/anti-patterns.md#a6)).

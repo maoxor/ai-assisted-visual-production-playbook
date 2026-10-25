@@ -1,45 +1,44 @@
-# Étude de faisabilité (sans implémentation)
+# Feasibility study (no implementation)
 
 ```markdown
-Étudie comment <transformer / réaliser> <objet de départ> en <résultat visé>, avec une qualité comparable à
-<références de niveau>. Cette première étape porte sur la recherche, la faisabilité et le plan de production : ne
-commence pas encore l'implémentation.
+Study how to <transform / build> <starting material> into <intended result>, with a quality comparable to
+<reference level>. This first step covers research, feasibility and the production plan: do not start the
+implementation yet.
 
-**Résultat recherché**
-- <éléments et leur organisation>
-- <ce qui doit être préservé>
-- <ce qui doit être contrôlable indépendamment>
-- <exigences de rendu, de mouvement, de stabilité>
+**Intended result**
+- <elements and their organization>
+- <what must be preserved>
+- <what must be controllable independently>
+- <rendering, motion and stability requirements>
 
-Signale les tensions éventuelles entre ces exigences et propose un compromis explicite.
+Flag any tension between these requirements and propose an explicit trade-off.
 
-**1. Examiner les données et les contraintes**
-Inspecte les fichiers, les références et les instructions locales. Si une ressource est inaccessible, dis-le sans
-inventer son contenu. Distingue ce qui est déjà séparé de ce qui est fusionné ; identifie les préparations
-nécessaires. Vérifie les outils réellement disponibles. Recense ce qui conditionne le choix technique : sortie,
-résolution, durée, plateforme, matériel, budget, droits. Avance sur des hypothèses explicites ; réserve les questions
-aux décisions qui changent réellement la solution.
+**1. Examine the data and the constraints**
+Inspect the files, references and local instructions. If a resource is inaccessible, say so without inventing its
+content. Separate what is already split from what is merged; identify the preparation required. Check which tools are
+actually available. List what drives the technical choice: output, resolution, duration, platform, hardware, budget,
+rights. Move forward on explicit assumptions; keep questions for decisions that really change the solution.
 
-**2. Rechercher les méthodes et ressources pertinentes**
-Recherche ciblée, dans plusieurs langues, menée toi-même sans sous-agents : publications et décompositions de
-production, documentation officielle, dépôts et scripts, retours de praticiens (forums, Reddit) comme pistes à
-vérifier. Distingue productions officielles, prestataires et créations de fans ; n'attribue pas une technique à un
-studio sans source directe. Pour chaque ressource retenue : usage concret, lien, limites, compatibilité ; pour les
-dépôts et skills : licence, maintenance, dépendances. N'installe rien à ce stade. Distingue faits documentés,
-déductions et hypothèses ; signale les pages inaccessibles.
+**2. Research relevant methods and resources**
+Targeted research, in several languages, done by yourself without sub-agents: publications and production breakdowns,
+official documentation, repositories and scripts, practitioners' feedback (forums, Reddit) as leads to verify.
+Distinguish official productions, contractors and fan creations; do not attribute a technique to a studio without a
+direct source. For each resource kept: concrete use, link, limits, compatibility; for repositories and skills: licence,
+maintenance, dependencies. Install nothing at this stage. Distinguish documented facts, deductions and hypotheses; flag
+inaccessible pages.
 
-**3. Comparer les approches et recommander**
-Compare au plus trois approches (<A>, <B>, <C>) selon : fidélité, qualité, contrôle artistique, amplitude possible,
-travail manuel, automatisation, performances, coût. Recommande une approche principale et une solution de repli. Ne
-recommande pas une pile complexe sans bénéfice concret.
+**3. Compare approaches and recommend**
+Compare at most three approaches (<A>, <B>, <C>) on: fidelity, quality, artistic control, possible amplitude, manual
+work, automation, performance, cost. Recommend a main approach and a fallback. Do not recommend a complex stack without
+a concrete benefit.
 
-**4. Préparer la production et sa validation**
-Plan ordonné : entrées, outil, résultat attendu et contrôle à chaque étape ; tâches automatisables séparées des
-interventions manuelles. Définis un prototype minimal qui vérifie les risques (<un exemplaire de chaque élément
-risqué>). Prévois les vérifications (référence sans effets, localité des effets, positions extrêmes, superpositions,
-contours, scintillement, raccords) et la mesure du coût.
+**4. Prepare production and its validation**
+An ordered plan: inputs, tool, expected result and check at each step; automatable tasks separated from manual
+interventions. Define a minimal prototype that checks the risks (<one instance of each risky element>). Plan the checks
+(reference without effects, locality of effects, extreme positions, overlaps, edges, flicker, seams) and the cost
+measurement.
 
-**Livrable** : diagnostic, comparatif compact, recommandation justifiée, ressources sélectionnées, plan, questions
-réellement bloquantes et la prochaine action concrète à valider. Arrête la recherche quand les décisions sont
-suffisamment étayées ; rends visibles les incertitudes.
+**Deliverable**: diagnosis, compact comparison, justified recommendation, selected resources, plan, truly blocking
+questions and the next concrete action to approve. Stop researching when the decisions are well enough supported; make
+the uncertainties visible.
 ```

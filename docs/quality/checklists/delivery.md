@@ -1,34 +1,33 @@
-# Livraison : avant d'annoncer « terminé »
+# Delivery: before announcing "done"
 
-Référence : [définition de « terminé »](../README.md#definition-of-done).
+Reference: [definition of done](../README.md#definition-of-done).
 
-## Livrables
+## Deliverables
 
-- [ ] Tous les formats demandés existent à l'emplacement final, replis compris (affiches, images fixes).
-- [ ] Chaque livrable s'ouvre ou se lit dans son environnement cible (décodage complet, lecture dans le navigateur ou
-      l'outil).
-- [ ] Noms de fichiers stables si une intégration existe déjà ; anciennes versions archivées à côté.
-- [ ] **Éléments résiduels** : aucune signature, aucun logo, texte provisoire, mention périmée, filigrane, réglage ou
-      fichier de debug, dans les livrables, la page et les scripts ([A3](../anti-patterns.md#a3)).
-- [ ] Crédits et attributions à jour (droits, licences).
+- [ ] Every requested format exists at its final location, fallbacks included (posters, stills).
+- [ ] Each deliverable opens or plays in its target environment (full decoding, playback in the browser or tool).
+- [ ] Stable file names if an integration already exists; old versions archived next to them.
+- [ ] **Leftovers**: no signature, logo, placeholder text, outdated mention, watermark, debug setting or file, in the
+      deliverables, the page and the scripts ([A3](../anti-patterns.md#a3)).
+- [ ] Credits and attributions up to date (rights, licences).
 
-## Preuves
+## Evidence
 
-- [ ] Contrôles de l'œuvre complète exécutés ; résultats cités.
-- [ ] Avant/après et vidéos de revue (en avant, œuvre entière, plusieurs tours si boucle).
-- [ ] Page de revue locale actualisée.
-- [ ] Réel et émulé distingués ; vérifications impossibles listées.
+- [ ] Whole-piece checks run; results quoted.
+- [ ] Before/after and review videos (forward, whole piece, several cycles if looping).
+- [ ] Local review page up to date.
+- [ ] Real and emulated kept apart; impossible checks listed.
 
-## Reproductibilité
+## Reproducibility
 
-- [ ] Sources, configuration, graines et scripts permettent de régénérer ; versions des outils notées.
-- [ ] Provenance, licence et empreinte de chaque ressource ajoutée.
-- [ ] README : ouvrir, modifier, régénérer, exporter.
+- [ ] Sources, configuration, seeds and scripts allow regeneration; tool versions recorded.
+- [ ] Provenance, licence and checksum of every added resource.
+- [ ] README: open, modify, regenerate, export.
 
-## Bilan
+## Report
 
-- [ ] Terminé / testé / limites, en trois parties.
-- [ ] Chaque demande de l'itération avec son état.
-- [ ] Choix retenus et leur raison, en une ligne chacun.
-- [ ] Emplacement des livrables et mode d'emploi (extrait de code, commande).
-- [ ] Enseignements génériques à reporter dans le référentiel notés.
+- [ ] Done / tested / limitations, in three parts.
+- [ ] Each request of the iteration with its status.
+- [ ] Choices made and their reason, one line each.
+- [ ] Location of the deliverables and how to use them (code snippet, command).
+- [ ] Generic lessons to bring back to the playbook noted.

@@ -1,41 +1,39 @@
-# 0007 — Le référentiel ne contient aucun travail ni livrable de projet
+# 0007 — The playbook contains no project work or deliverable
 
-- **Statut** : acceptée
-- **Date** : 2026-10-25
-- **Décidée par** : la personne qui dirige
+- **Status**: accepted
+- **Date**: 2026-10-25
+- **Decided by**: the lead
 
-## Contexte
+## Context
 
-Le référentiel doit documenter **comment réaliser les travaux**, sans exposer **les travaux eux-mêmes**. Il doit
-pouvoir être consulté, partagé ou publié sans révéler de réalisation, de livrable, de donnée de projet ni d'œuvre
-tierce.
+The playbook must document **how to do the work**, without exposing **the work itself**. It must be possible to read,
+share or publish it without revealing any production, deliverable, project data or third-party artwork.
 
-## Décision
+## Decision
 
-Le référentiel contient uniquement : principes, workflow, critères de qualité, bonnes pratiques, procédures, guides de
-domaine, outils génériques et testés, modèles, skills, décisions de méthode et actions d'amélioration.
+The playbook contains only: principles, workflow, quality criteria, good practices, procedures, domain guides, generic
+and tested tools, templates, skills, method decisions and improvement actions.
 
-Il ne contient jamais :
+It never contains:
 
-- de livrable, de rendu, d'image, de vidéo, de scène ou d'asset ;
-- de code livré à un client ou intégré dans un produit ;
-- de nom de projet, de client, d'œuvre, d'auteur ou de collaborateur ;
-- de chronologie, de chiffre, de mesure ou de réglage propre à un projet ;
-- de citation de demande ou de conversation ;
-- de chemin de poste, d'identifiant de compte ni de secret.
+- a deliverable, render, image, video, scene or asset;
+- code delivered to a client or integrated into a product;
+- a project, client, artwork, author or collaborator name;
+- a timeline, figure, measurement or setting specific to a project;
+- a quotation from a request or conversation;
+- a workstation path, account identifier or secret.
 
-Les exemples sont génériques. Un enseignement venu d'un projet est reformulé comme une règle indépendante de ce projet.
+Examples are generic. A lesson that comes from a project is rewritten as a rule independent of that project.
 
-## Conséquences
+## Consequences
 
-- Les bilans de projet ([modèle](../../templates/retrospective.md)) restent dans chaque projet ; seul ce qui est
-  générique remonte ici.
-- Les niveaux de maturité remplacent les citations de sources : la preuve reste dans le projet.
-- Un outil n'entre ici qu'une fois généralisé, sans dépendance à un projet, et testé sur des données synthétiques.
+- Project reports ([template](../../templates/retrospective.md)) stay in each project; only what is generic comes here.
+- Maturity levels replace source citations: the evidence stays in the project.
+- A tool enters only once generalized, without dependency on a project, and tested on synthetic data.
 
-## Vérification
+## Verification
 
-- `python3 scripts/check_repo.py` refuse les secrets, adresses électroniques, chemins de poste et fichiers média.
-- Une **liste de termes interdits** propre au poste (noms de projets, d'œuvres, de personnes), jamais versionnée,
-  peut être fournie avec `--deny-list` ou placée dans `.git/info/deny-list.txt` : le script la lit automatiquement.
-- Le modèle de demande de fusion et les modèles d'issues rappellent la règle.
+- `python3 scripts/check_repo.py` rejects secrets, email addresses, workstation paths and media files.
+- A workstation-specific **deny list** (project, artwork and person names), never versioned, can be passed with
+  `--deny-list` or placed in `.git/info/deny-list.txt`: the script reads it automatically.
+- The pull request and issue templates restate the rule.

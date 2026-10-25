@@ -1,44 +1,45 @@
-# Préférences de collaboration
+# Collaboration defaults
 
-Préférences par défaut entre la personne qui dirige et l'agent. Elles sont **[éprouvé]** et valables d'un projet à
-l'autre ; une consigne explicite du projet les remplace ([P15](../principles.md#p15)).
+Default preferences between the lead and the agent. They are **[proven]** and have held from one project to the next
+for the authors of this playbook. They are **defaults, not laws**: an explicit project instruction replaces them
+([P15](../principles.md#p15)). Keep the ones that suit you, change the others in your instruction register.
 
-| # | Préférence |
-|---|---|
-| C1 | **Langue de la personne qui dirige**, avec une orthographe et des accents corrects, dans les échanges et la documentation |
-| C2 | **Pas de sous-agents** : l'agent mène lui-même recherches et travaux ([décision 0003](../decisions/0003-no-subagents.md)) |
-| C3 | **Local par défaut** : rien de publié, téléversé ou déployé sans accord ; aucun achat ni abonnement |
-| C4 | **Autonomie sur les décisions réversibles**, sans redemander à chaque étape ([P12](../principles.md#p12)) |
-| C5 | **Montrer le résultat** : ouvrir rendus et pages dès qu'ils sont prêts, et vérifier l'ouverture |
-| C6 | **Vidéos de contrôle en avant, œuvre entière, dernière version** ([P8](../principles.md#p8)) |
-| C7 | **Points d'avancement courts** : ce qui marche, ce qui reste, la prochaine action |
-| C8 | **Conserver les versions précédentes** ; ne rien écraser |
-| C9 | **Le jugement visuel de la personne qui dirige l'emporte** sur les mesures de l'agent |
-| C10 | **Côtés désignés du point de vue du spectateur** |
-| C11 | **Ne pas toucher aux processus des autres projets** ni aux sessions parallèles |
-| C12 | **Identité Git du poste** : commits signés par l'identité configurée sur la machine, jamais par une identité reprise de commits existants |
-| C13 | **Pas de push ni de fusion sans demande** ; jamais de travail direct sur la branche principale |
-| C14 | **Pas de régénération du sujet par IA** quand une œuvre source existe ([décision 0004](../decisions/0004-preserve-the-source.md)) |
-| C15 | **Niveau visé : les meilleures références du domaine**, jugé sur le rendu et l'expérience |
+| # | Default | Why |
+|---|---|---|
+| C1 | **The lead's language**, with correct spelling and diacritics, in conversation and documentation | The lead reads everything |
+| C2 | **No sub-agents**: the agent does research and work itself ([decision 0003](../decisions/0003-no-subagents.md)) | Traceability of what was read and concluded |
+| C3 | **Local by default**: nothing published, uploaded or deployed without approval; no purchase or subscription | Rights, money and data are at stake ([P12](../principles.md#p12)) |
+| C4 | **Autonomy on reversible decisions**, without asking again at every step ([P12](../principles.md#p12)) | Asking constantly exhausts the lead |
+| C5 | **Show the result**: open renders and pages as soon as they are ready, and check that they opened | The lead judges on the evidence |
+| C6 | **Review videos forward, whole piece, latest version** ([P8](../principles.md#p8)) | Judgement in final conditions |
+| C7 | **Short status updates**: what works, what remains, the next action | Decisions without chasing |
+| C8 | **Keep previous versions**; overwrite nothing | Going back is frequent |
+| C9 | **The lead's visual judgement wins** over the agent's measurements | Metrics are not the goal ([P1](../principles.md#p1)) |
+| C10 | **Sides named from the viewer's point of view** | Removes left/right ambiguity |
+| C11 | **Do not touch other projects' processes** or parallel sessions | Shared machines |
+| C12 | **The workstation's Git identity**: commits authored with the identity configured on the machine, never one copied from existing commits | Correct attribution |
+| C13 | **No push or merge unless asked**; never work directly on the main branch | The lead controls what is shared |
+| C14 | **No AI regeneration of the subject** when a source artwork exists ([decision 0004](../decisions/0004-preserve-the-source.md)) | Fidelity and rights |
+| C15 | **Aim for the best references of the domain**, judged on the rendered result and the experience | Avoids timid proposals ([A20](anti-patterns.md#a20)) |
 
-## Extrait prêt à copier
+## Snippet ready to copy
 
-Pour appliquer ces préférences à tous les projets, copier ce bloc dans les instructions globales de Claude Code
-(`~/.claude/CLAUDE.md`, ou le dossier de configuration utilisé sur le poste). Le référentiel ne modifie pas ces
-fichiers lui-même.
+To apply these defaults to every project, copy this block into Claude Code's global instructions (`~/.claude/CLAUDE.md`)
+or into a project's `CLAUDE.md`, after removing the lines you do not want. The playbook never edits those files
+itself.
 
 ```markdown
-## Méthode de travail (référentiel : production-playbook)
+## Working method (playbook: ai-assisted-visual-production-playbook)
 
-- Répondre dans la langue de l'utilisateur, orthographe et accents corrects.
-- Mener soi-même les recherches et les travaux, sans sous-agents.
-- Rester en local : ne rien publier, téléverser, déployer ni acheter sans accord explicite.
-- Décider seul ce qui est réversible ; demander pour l'irréversible et l'extérieur.
-- « Vérifié » = commande exécutée et résultat cité ; distinguer mes contrôles de la validation de l'utilisateur.
-- Terminé = livrables finaux existants, ouverts et contrôlés ; un calcul lancé n'est pas une livraison.
-- Juger à la taille finale, à vitesse normale, sur la dernière version ; vidéos de contrôle en avant, œuvre entière.
-- Une variable à la fois ; échantillon avant généralisation ; coût mesuré avant production.
-- Corriger la cause, jamais masquer (flou global, test désactivé).
-- Conserver les versions précédentes ; séparer les sorties ; ne rien supprimer sans accord.
-- Tenir un journal et un registre des consignes ; points d'avancement courts ; ouvrir les résultats.
+- Answer in the user's language, with correct spelling and diacritics.
+- Do research and work yourself, without sub-agents.
+- Stay local: publish, upload, deploy or buy nothing without explicit approval.
+- Decide alone what is reversible; ask for what is irreversible or external.
+- "Verified" = command run and result quoted; separate my checks from the user's approval.
+- Done = final deliverables exist, open and were checked; a launched computation is not a delivery.
+- Judge at final size, normal speed, on the latest version; review videos forward, whole piece.
+- One variable at a time; sample before generalizing; cost measured before production.
+- Fix the cause, never mask it (global blur, disabled test).
+- Keep previous versions; separate outputs; delete nothing without approval.
+- Keep a log and an instruction register; short status updates; open the results.
 ```

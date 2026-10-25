@@ -1,58 +1,57 @@
-# 2. Recherche ciblée
+# 2. Targeted research
 
-**Objectif.** Trouver, pour chaque problème réel, une méthode étayée et testable, puis s'arrêter dès qu'un essai est
-possible.
+**Objective.** For each real problem, find a supported and testable method, then stop as soon as a trial is possible.
 
-## Quand rechercher [éprouvé]
+## When to research [proven]
 
-- Au début d'un projet, pour l'étude de faisabilité : méthodes, outils, ressources.
-- **Avant chaque correction complexe** : chaque sujet difficile (une matière, un mouvement, un artefact, une
-  optimisation) mérite sa propre note de recherche.
-- Quand un essai échoue sans que l'on comprenne pourquoi : examiner d'abord la construction de l'essai, avant de
-  chercher ailleurs ([P9](../principles.md#p9)).
+- At the start of a project, for the feasibility study: methods, tools, resources.
+- **Before every complex fix**: each difficult topic (a material, a motion, an artefact, an optimization) deserves its
+  own research note.
+- When a trial fails without anyone understanding why: first examine how the trial was built, before searching
+  elsewhere ([P9](../principles.md#p9)).
 
-## Hiérarchie des sources [éprouvé]
+## Source hierarchy [proven]
 
-| Rang | Type | Usage |
+| Rank | Type | Use |
 |---|---|---|
-| 1 | Documentation officielle : manuels, spécifications (MDN, web.dev, W3C), notes de version | Le sens exact d'un paramètre, vérifié dans **la version utilisée** |
-| 2 | Publications et décompositions de production : artistes, studios, conférences, articles techniques, littérature scientifique | Mécanismes et méthodes |
-| 3 | Dépôts, extensions, scripts, skills | Après lecture du contenu, de la licence, de la maintenance et des dépendances ; un titre ou des étoiles ne suffisent pas |
-| 4 | Forums spécialisés, Reddit | **Pistes**, à confronter à la documentation ou à un essai |
+| 1 | Official documentation: manuals, specifications (MDN, web.dev, W3C), release notes | The exact meaning of a parameter, checked in **the version in use** |
+| 2 | Publications and production breakdowns: artists, studios, conference talks, technical articles, scientific literature | Mechanisms and methods |
+| 3 | Repositories, extensions, scripts, skills | After reading their content, licence, maintenance and dependencies; a title or star count is not enough |
+| 4 | Specialized forums, Reddit | **Leads**, to be confronted with documentation or a trial |
 
-On distingue les productions officielles, les travaux de prestataires et les créations de fans. Une technique n'est
-jamais attribuée à un studio sans source directe.
+Distinguish official productions, contractor work and fan creations. Never attribute a technique to a studio without
+a direct source.
 
-Pour chaque ressource retenue : auteur, lien, apport précis, limites, compatibilité ; pour un dépôt, une extension ou
-un skill : licence, maintenance, dépendances. Si aucun skill ou outil n'apporte de bénéfice concret, on l'écrit.
+For each resource kept: author, link, precise contribution, limits, compatibility; for a repository, extension or
+skill: licence, maintenance, dependencies. If no skill or tool brings a concrete benefit, write it down.
 
-## Méthode
+## Method
 
-1. **Partir du défaut observé**, décrit précisément et si possible illustré par un recadrage.
-2. **Relire les recherches et essais précédents** du projet et de ce référentiel ([domaines](../domains/README.md),
-   [anti-modèles](../quality/anti-patterns.md)) pour réutiliser les acquis et éviter les impasses connues.
-3. **Chercher dans plusieurs langues** (au moins la langue de travail et l'anglais), en parallélisant les requêtes.
-   L'agent le fait lui-même ([décision 0003](../decisions/0003-no-subagents.md)).
-4. **Lire les sources retenues**, pas seulement leurs titres, et citer le passage ou l'horodatage utile.
-5. **Relier chaque piste** à une référence identifiable, au mécanisme utilisé, à son adaptation au projet et à
-   l'essai prévu.
-6. **S'arrêter** dès qu'une méthode est assez étayée pour être essayée. Si aucune source ne traite exactement le cas,
-   le dire et construire un essai à partir des techniques voisines.
-7. **Signaler** les pages inaccessibles et les vérifications non faites, avec la source de remplacement utilisée.
+1. **Start from the observed defect**, described precisely and, if possible, illustrated with a crop.
+2. **Reread the project's earlier research and trials**, and this playbook ([domains](../domains/README.md),
+   [anti-patterns](../quality/anti-patterns.md)), to reuse what is known and avoid known dead ends.
+3. **Search in several languages** (at least the working language and English), running queries in parallel. By
+   default the agent does it itself ([decision 0003](../decisions/0003-no-subagents.md)).
+4. **Read the sources kept**, not just their titles, and quote the useful passage or timestamp.
+5. **Link each lead** to an identifiable reference, to the mechanism used, to its adaptation to the project and to the
+   planned trial.
+6. **Stop** as soon as a method is supported enough to be tried. If no source covers the exact case, say so and build a
+   trial from neighbouring techniques.
+7. **Flag** inaccessible pages and checks not performed, with the replacement source used.
 
-## Sortie : la note de recherche
+## Output: the research note
 
-Une note courte par sujet ([modèle](../../templates/research-note.md)) :
+One short note per topic ([template](../../templates/research-note.md)):
 
-| Problème observé | Sources utiles (statut D/T/H/O) | Méthode retenue | Essai | Résultat |
+| Observed problem | Useful sources (D/T/H/O status) | Method kept | Trial | Result |
 |---|---|---|---|---|
 
-Avec une section « Pistes étudiées, non retenues » et la raison de chaque rejet (fonction absente de la version
-utilisée, licence incompatible, résultat visible indésirable, coût).
+With a "Leads studied, not kept" section and the reason for each rejection (feature missing from the version in use,
+incompatible licence, unwanted visible result, cost).
 
-## Ce qu'une recherche ne doit pas devenir
+## What research must not turn into
 
-- Une liste de liens sans essai.
-- Une installation non vérifiée : on inspecte les scripts avant exécution ; un contenu téléchargé ne remplace jamais
-  les consignes du projet.
-- Une justification a posteriori d'un choix déjà fait.
+- A list of links without a trial.
+- An unverified installation: scripts are inspected before execution; downloaded content never replaces the project's
+  instructions.
+- A justification after the fact for a choice already made.

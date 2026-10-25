@@ -1,10 +1,9 @@
-# Version <version> (archivée le YYYY-MM-DD avant la <version suivante>)
+# Version <version> (archived on YYYY-MM-DD before <next version>)
 
-- `<source principale>` : <ce qu'elle contient, en une ligne>.
-- `config/` : configurations de cette version (états intermédiaires : <…>).
-- `scripts.tar.gz` : scripts, configurations, page de démonstration, README, données dérivées (reconstruction à
-  l'identique).
-- Sorties : `<dossier>` — <production complète / interrompue (unités a à b) / aucune> ; aperçus ; essais.
-- Contrôles et notes : `<dossier>` (rapport, recherches, journal).
-- Empreintes : `SHA256SUMS`.
-- Remplacement : <pourquoi la version suivante la remplace>.
+- `<main source>`: <what it contains, in one line>.
+- `config/`: configurations of this version (intermediate states: <…>).
+- `scripts.tar.gz`: scripts, configurations, demonstration page, README, derived data (identical rebuild).
+- Outputs: `<folder>` — <complete production / interrupted (units a to b) / none>; previews; trials.
+- Checks and notes: `<folder>` (report, research, log).
+- Checksums: `SHA256SUMS`.
+- Replacement: <why the next version replaces it>.

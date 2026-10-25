@@ -1,43 +1,41 @@
 ---
 name: work-log
-description: Ouvrir, reprendre ou clore un travail long (plusieurs étapes ou sessions) avec son journal dans docs/work-logs/. À utiliser au début d'une tâche en plusieurs étapes, à la reprise après une interruption ou une compaction du contexte, et à la fin du travail.
+description: Open, resume or close a long task (several steps or sessions) with its log in docs/work-logs/. Use at the start of a multi-step task, when resuming after an interruption or a context compaction, and at the end of the work.
 ---
 
-# Travail long et reprise fiable
+# Long task and reliable resume
 
-Un chantier, c'est une branche (s'il y a un dépôt Git) et un journal `docs/work-logs/YYYY-MM-DD-sujet.md` (modèle :
-`docs/work-logs/_template.md`). Le journal, `git log` et le registre des consignes (`docs/instruction-register.md`)
-doivent suffire à reprendre sans l'historique de la conversation.
+A workstream is a branch (if there is a Git repository) and a log `docs/work-logs/YYYY-MM-DD-topic.md` (template:
+`docs/work-logs/_template.md`, or `templates/work-log.md` of the ai-assisted-visual-production-playbook repository if
+the project has none). The log, `git log` and the instruction register (`docs/instruction-register.md`) must be enough
+to resume without the conversation history.
 
-## Reprendre (toujours en premier)
+## Resume (always first)
 
-1. État réel : `git status`, `git branch --show-current`, `git log --oneline -15` ; processus actifs (calculs,
-   serveurs) ; espace disque. Ne jamais toucher aux processus d'autres projets.
-2. Lire le journal du chantier (le plus récent de `docs/work-logs/`, ou celui de la branche) et le registre des
-   consignes.
-3. Vérifier l'état réel avant de continuer : relancer les contrôles de « Validation » du journal ; une case cochée
-   sans preuve est à revérifier.
-4. Reprendre à « Prochaines actions ». Si le journal contredit les fichiers, les fichiers font foi : corriger le
-   journal.
+1. Real state: `git status`, `git branch --show-current`, `git log --oneline -15`; active processes (computations,
+   servers); disk space. Never touch other projects' processes.
+2. Read the workstream's log (the most recent in `docs/work-logs/`, or the branch's) and the instruction register.
+3. Check the real state before continuing: rerun the checks in the log's "Validation" section; a box ticked without
+   evidence has to be verified again.
+4. Resume at "Next actions". If the log contradicts the files, the files win: correct the log.
 
-## Ouvrir
+## Open
 
-1. Branche dédiée depuis la branche principale (`type/sujet-court`) ; archiver l'état courant si le projet n'a pas de
-   Git.
-2. Copier `docs/work-logs/_template.md` ; remplir objectif, critère essentiel, périmètre, référence initiale
-   (résultats mesurés des contrôles avant toute modification).
-3. Découper le plan en étapes vérifiables, chacune avec son critère de fin.
-4. Reporter dans le registre les consignes de la demande (actives, remplacées).
+1. A dedicated branch from the main branch (`type/short-topic`); archive the current state if the project has no Git.
+2. Copy the template; fill in objective, key criterion, scope, initial baseline (measured results of the checks before
+   any change).
+3. Split the plan into verifiable steps, each with its exit criterion.
+4. Report the request's instructions in the register (active, replaced).
 
-## Tenir à jour (à chaque étape terminée, avant chaque commit)
+## Keep it up to date (at each completed step, before each commit)
 
-- Statut, décisions prises (et pourquoi), commits, validations exécutées avec leurs résultats, prochaines actions.
-- Distinguer **vérifié** (commande lancée, résultat cité), **hypothèse** et **à faire** ; distinguer mes contrôles
-  de la validation de l'utilisateur.
-- Rester concis : le détail vit dans les fichiers, les tests et les messages de commit.
+- Status, decisions taken (and why), commits, checks run with their results, next actions.
+- Separate **verified** (command run, result quoted), **hypothesis** and **to do**; separate my checks from the
+  user's approval.
+- Stay concise: details live in the files, the tests and the commit messages.
 
-## Clore
+## Close
 
-- Statut « terminé » ; bilan : livré, vérifié (réel ou émulé), limites ; chaque demande avec son état.
-- Reporter ce qui doit durer ailleurs (décisions, `CLAUDE.md`, et les enseignements génériques dans le référentiel de
-  méthode) : le journal est une trace, pas une source de règles.
+- Status "done"; report: delivered, verified (real or emulated), limitations; every request with its status.
+- Move what must last elsewhere (decisions, `CLAUDE.md`, and the generic lessons in the method playbook): the log is a
+  trace, not a source of rules.

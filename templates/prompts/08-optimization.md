@@ -1,38 +1,38 @@
-# Réduire le coût de production et de diffusion
+# Reduce production and distribution cost
 
 ```markdown
-<Constat : les temps annoncés ne permettent pas d'itérer.> **Résous d'abord ce problème de production avant de
-lancer un nouveau calcul long.**
+<Observation: the announced times do not allow iteration.> **Solve this production problem first, before launching a
+new long computation.**
 
-Rappel de l'objectif : <…>. Le livrable de validation est **un véritable extrait de <durée> de la production finale**
-(<n> unités consécutives), avec les réglages et le traitement envisagés pour la production complète. Des images fixes
-ou un aperçu dégradé ne permettent pas cette validation.
+Reminder of the objective: <…>. The validation deliverable is **a real <duration> excerpt of the final production**
+(<n> consecutive units), with the settings and processing planned for the full production. Stills or a degraded preview
+do not allow this validation.
 
-## 1. Identifier les causes réelles du coût
-Inspecte toute la chaîne. Vérifie l'utilisation effective du matériel (accélérateur, replis), le coût des éléments
-(<transparences, matériaux, géométries, lumières…>), les réglages (<échantillons, suréchantillonnage, rebonds…>), la
-mémoire, les temps de compilation, les écritures disque et les reconstructions inutiles. Mesure quelques unités
-représentatives, dont une difficile ; distingue démarrage et régime établi ; attribue les dépenses par des tests
-isolés. Aucun réglage n'est intouchable : son utilité doit être démontrée visuellement.
+## 1. Identify the real causes of the cost
+Inspect the whole pipeline. Check the actual use of the hardware (accelerator, fallbacks), the cost of the elements
+(<transparency, materials, geometry, lights…>), the settings (<samples, supersampling, bounces…>), memory, compilation
+times, disk writes and unnecessary rebuilds. Measure a few representative units, including a difficult one; separate
+start-up from steady state; attribute the expenses with isolated tests. No setting is untouchable: its usefulness must
+be demonstrated visually.
 
-## 2. Rechercher
-Documentation officielle, dépôts, forums, retours de production comparables, sans sous-agents.
+## 2. Research
+Official documentation, repositories, forums, comparable production feedback, without sub-agents.
 
-## 3. Comparer des solutions mesurées
-Quelques profils cohérents sur les mêmes unités et un court passage exigeant : temps, mémoire, netteté, détails,
-stabilité, compatibilité. Explore aussi les changements de méthode (remplacer, simplifier, supprimer l'invisible,
-répartir entre calcul et post-traitement). Ne fige pas ce qui doit évoluer ; pas d'interpolation non vérifiée ; pas de
-flou global. Tableau court : temps mesurés, gain, différences visibles, recommandation.
+## 3. Compare measured solutions
+A few consistent profiles on the same units and a short demanding passage: time, memory, sharpness, details,
+stability, compatibility. Also explore method changes (replace, simplify, remove what is invisible, split between
+computation and post-processing). Do not freeze what must evolve; no unverified interpolation; no global blur. A short
+table: measured times, gain, visible differences, recommendation.
 
-## 4. Distinguer calcul et diffusion
-Traite séparément : temps de production, poids et transfert, décodage et lecture. Exports adaptés aux tailles
-affichées et aux appareils ; comparatif des codecs sur les passages difficiles ; intégration réelle testée (démarrage,
-raccords, images perdues, réseau contraint, affiche, repli). Distingue appareils physiques et émulation.
+## 4. Separate computation and distribution
+Handle separately: production time, weight and transfer, decoding and playback. Exports suited to the displayed sizes
+and the devices; a codec comparison on the difficult passages; real integration tested (start, seams, dropped frames,
+constrained network, poster, fallback). Separate physical devices from emulation.
 
-## 5. Produire l'extrait demandé
-Choisis le meilleur compromis mesuré ; estimation actualisée pour l'extrait et pour le tout ; produis l'extrait avec
-les paramètres de livraison sur un passage qui permet une décision artistique. Livre : extraits lisibles, accès aux
-sources, réglages et temps constatés, comparatif qualité / performance, limites, page d'aperçu. Conserve les versions
-précédentes. Ne lance pas la production complète avant ma validation de l'extrait ; poursuis de façon autonome
-l'analyse, les essais et leur réalisation.
+## 5. Produce the requested excerpt
+Choose the best measured trade-off; an updated estimate for the excerpt and for the whole; produce the excerpt with the
+delivery parameters on a passage that allows an artistic decision. Deliver: playable excerpts, access to the sources,
+settings and observed times, quality / performance comparison, limitations, preview page. Keep previous versions. Do
+not launch the full production before I approve the excerpt; continue autonomously with the analysis, trials and their
+implementation.
 ```

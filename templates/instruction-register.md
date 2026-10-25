@@ -1,39 +1,39 @@
-# Registre des consignes — <nom du projet>
+# Instruction register — <project name>
 
-Relu au début de chaque reprise et avant chaque bilan ou lancement long. Une consigne nouvelle et explicite remplace
-l'ancienne : déplacer l'ancienne dans « Remplacées », avec la date et la référence.
+Reviewed at the start of every resume and before every report or long launch. A new, explicit instruction replaces the
+old one: move the old one to "Replaced", with the date and the reference.
 
-## Contraintes durables
+## Durable constraints
 
-| Depuis | Consigne | Source (date de la demande) |
+| Since | Instruction | Source (date of the request) |
 |---|---|---|
-| YYYY-MM-DD | Rester en local ; ne rien publier ni téléverser sans accord | |
-| YYYY-MM-DD | Travailler sans sous-agents | |
-| YYYY-MM-DD | Conserver les versions précédentes | |
+| YYYY-MM-DD | Stay local; publish or upload nothing without approval | |
+| YYYY-MM-DD | Work without sub-agents | |
+| YYYY-MM-DD | Keep previous versions | |
 
-## Consignes actives
+## Active instructions
 
-| Depuis | Consigne | Portée | Source |
+| Since | Instruction | Scope | Source |
 |---|---|---|---|
 | | | | |
 
-## Remplacées
+## Replaced
 
-| Du … au … | Ancienne consigne | Remplacée par | Traces à vérifier (textes, mentions, réglages) | Source |
+| From … to … | Old instruction | Replaced by | Traces to check (texts, mentions, settings) | Source |
 |---|---|---|---|---|
 | | | | | |
 
-Exemple de forme : « conserver la signature de l'auteur » remplacée par « la retirer, l'accord est obtenu ». Traces à
-vérifier : incrustation dans les images, mention dans la page, crédits.
+Example of form: "keep the author's signature" replaced by "remove it, approval obtained". Traces to check: overlay in
+the frames, mention in the page, credits.
 
-## Demandes de l'itération en cours
+## Requests of the current iteration
 
-| # | Demande (formulation courte) | État : fait / essai écarté (raison) / manquant | Preuve |
+| # | Request (short wording) | Status: done / trial rejected (reason) / missing | Evidence |
 |---|---|---|---|
 | 1 | | | |
 
-## Décisions de la personne qui dirige
+## Decisions of the lead
 
-| Date | Décision (formulation d'origine) | Conséquence |
+| Date | Decision (original wording) | Consequence |
 |---|---|---|
 | | | |

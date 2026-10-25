@@ -1,40 +1,40 @@
-# Chantier : <sujet>
+# Workstream: <topic>
 
-- **Branche** : `type/sujet-court` (depuis `main` @ <commit>), ou archive de départ s'il n'y a pas de Git
-- **Ouvert le** : YYYY-MM-DD
-- **Statut** : en cours | en pause | terminé
+- **Branch**: `type/short-topic` (from `main` @ <commit>), or a starting archive if there is no Git
+- **Opened on**: YYYY-MM-DD
+- **Status**: in progress | paused | done
 
-## Objectif et périmètre
+## Objective and scope
 
-Ce qui est attendu ; critère essentiel ; ce qui est explicitement hors périmètre.
+What is expected; key criterion; what is explicitly out of scope.
 
-## Référence initiale (mesurée avant toute modification)
+## Initial baseline (measured before any change)
 
-| Contrôle | Commande | Résultat |
+| Check | Command | Result |
 |---|---|---|
 | | | |
 
 ## Plan
 
-- [ ] Étape 1 — critère de fin : …
+- [ ] Step 1 — exit criterion: …
 
-## Décisions
+## Decisions
 
-- YYYY-MM-DD : décision — raison (prise par : l'agent / la personne qui dirige).
+- YYYY-MM-DD: decision — reason (taken by: the agent / the lead).
 
-## Journal
+## Log
 
-- YYYY-MM-DD : fait, commit `abc1234`, vérifié par … (résultat).
+- YYYY-MM-DD: done, commit `abc1234`, verified by … (result).
 
-## Validation (dernière exécution)
+## Validation (last run)
 
-| Contrôle | Résultat | Réel / émulé |
+| Check | Result | Real / emulated |
 |---|---|---|
 
-## Prochaines actions
+## Next actions
 
 1. …
 
-## Questions ouvertes
+## Open questions
 
 - …

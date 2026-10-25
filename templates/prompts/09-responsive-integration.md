@@ -1,26 +1,24 @@
-# Intégration responsive : rotation, tablettes, écran partagé
+# Responsive integration: rotation, tablets, split screen
 
 ```markdown
-Vérifie que notre intégration couvre aussi **la rotation de l'écran sur mobile et l'affichage sur tablette**, en
-tenant compte du cadrage, du chargement et des performances.
+Check that our integration also covers **screen rotation on mobile and display on tablets**, taking framing, loading
+and performance into account.
 
-Définis puis teste le comportement dans chaque situation : téléphone portrait et paysage ; tablette portrait et
-paysage ; rotation pendant le chargement ou la lecture ; redimensionnement et écran partagé.
+Define and then test the behaviour in each situation: phone portrait and landscape; tablet portrait and landscape;
+rotation during loading or playback; resizing and split screen.
 
-Choisis les variantes selon les dimensions et le rapport d'aspect de la zone affichée, plutôt que sur une distinction
-« mobile ou bureau ». Vérifie si les variantes existantes suffisent ou si une variante intermédiaire est réellement
-nécessaire.
+Choose the variants from the dimensions and aspect ratio of the displayed area, rather than from a "mobile or desktop"
+distinction. Check whether the existing variants are enough or whether an intermediate variant is really needed.
 
-Préserve la composition : <éléments importants> visibles, espace pour l'interface, pas d'étirement, recadrage
-maîtrisé.
+Preserve the composition: <important elements> visible, room for the interface, no stretching, controlled cropping.
 
-Lors d'une rotation : pas d'écran noir, pas de changements répétés de source, pas de téléchargements inutiles ni de
-redémarrage perturbant. Si un changement est nécessaire, transition propre en conservant la position <dans la boucle>.
+During a rotation: no black screen, no repeated source changes, no unnecessary downloads or disruptive restart. If a
+change is needed, a clean transition keeping the position <in the loop>.
 
-Adapte la définition et le débit aux capacités : un appareil à haute densité ne doit pas recevoir automatiquement le
-fichier le plus lourd. Prévois un repli fixe.
+Adapt resolution and bitrate to capabilities: a high-density device must not automatically receive the heaviest file.
+Provide a still fallback.
 
-Indique précisément ce qui est déjà couvert, ce qui manque et ce qui reste à tester. Tableau des formats, cadrages et
-sources retenus ; vérifie fluidité et réactivité avant, pendant et après la rotation. Distingue appareils physiques et
-émulation.
+State precisely what is already covered, what is missing and what remains to test. A table of the formats, framings
+and sources kept; check smoothness and responsiveness before, during and after rotation. Separate physical devices
+from emulation.
 ```

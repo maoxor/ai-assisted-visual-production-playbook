@@ -1,61 +1,60 @@
-# 4. Itération sur preuves
+# 4. Evidence-based iteration
 
-**Objectif.** Améliorer le résultat par des changements dont l'effet est démontré, sans régression, et corriger les
-défauts à leur cause. C'est le cœur de la méthode.
+**Objective.** Improve the result through changes whose effect is demonstrated, without regression, and fix defects at
+their cause. This is the core of the method.
 
-## La boucle
+## The loop
 
 ```mermaid
 flowchart LR
-    A[Défaut ou demande] --> B[Référence de l'état actuel<br/>mêmes cadrage et réglages]
-    B --> C[Hypothèse de cause]
-    C --> D[Essai isolé<br/>une variable]
-    D --> E[Avant/après<br/>taille et vitesse identiques]
-    E -->|pas mieux| C
-    E -->|mieux| F[Non-régression<br/>et coût]
-    F --> G[Intégration<br/>configuration, puis régénération]
-    G --> H[Journal : n°, essai, résultat, retenu ?]
+    A[Defect or request] --> B[Reference of the current state<br/>same framing and settings]
+    B --> C[Hypothesis about the cause]
+    C --> D[Isolated trial<br/>one variable]
+    D --> E[Before/after<br/>identical size and speed]
+    E -->|not better| C
+    E -->|better| F[Non-regression<br/>and cost]
+    F --> G[Integration<br/>configuration, then regeneration]
+    G --> H[Log: no., trial, result, kept?]
 ```
 
-## Règles [éprouvé]
+## Rules [proven]
 
-1. **Produire d'abord une référence de l'état actuel**, avec les mêmes réglages que l'essai. Si elle doit être
-   reconstruite, vérifier qu'elle redonne le même résultat (écart mesuré proche de zéro).
-2. **Une variable à la fois** ([P6](../principles.md#p6)). Les essais portent des noms courts (`e1`, `e2`…) et sont
-   produits par un banc qui applique des **modifications nommées** à une copie en mémoire de l'état de référence ; la
-   référence n'est jamais touchée.
-3. **Diagnostiquer par extinction** quand la cause n'est pas évidente
+1. **First produce a reference of the current state**, with the same settings as the trial. If it has to be rebuilt,
+   check that it gives the same result (measured difference close to zero).
+2. **One variable at a time** ([P6](../principles.md#p6)). Trials have short names (`e1`, `e2`…) and are produced by a
+   bench that applies **named modifications** to an in-memory copy of the reference state; the reference is never
+   touched.
+3. **Diagnose by elimination** when the cause is not obvious
    ([technique](../domains/offline-3d-rendering.md#diagnosis-by-elimination)).
-4. **Travailler sur un échantillon** ([P7](../principles.md#p7)) : un élément représentatif ou un recadrage en qualité
-   finale ; pour juger un mouvement, ajouter un court mouvement de caméra ou d'interaction.
-5. **Comparer à cadrage, taille et vitesse identiques**, côte à côte et libellé :
-   - **référence / avant / après** quand une cible existe ;
-   - **essai actuel / nouvel essai** en itération ;
-   - **vue de diagnostic, puis rendu dans le traitement final** ;
-   - **œuvre entière, en plus des gros plans** : un détail juste en gros plan peut déséquilibrer l'ensemble.
-6. **Comparer plusieurs amplitudes ou dosages** plutôt qu'une seule valeur (×0,6, ×1, ×1,3, par exemple), et choisir à
-   vitesse normale et à la taille finale.
-7. **Examiner la construction quand un essai échoue**, au lieu de pousser son intensité. Si une déformation ne peut pas
-   croître sans étirer, chercher un autre moyen de produire l'effet perçu (ombre, couleur, timing).
-8. **Vérifier ce que montre le résultat, pas ce que dit le paramètre** : contrôleur, déformation, texture évaluée,
-   scène reconstruite, image rendue. Un paramètre peut être sans effet dans certaines conditions
-   ([A9](../quality/anti-patterns.md#a9)).
-9. **Vérifier qu'un changement est perceptible avant de le présenter** ([A5](../quality/anti-patterns.md#a5)).
-10. **Contrôler la non-régression** : reste de la composition inchangé (comparaison élément par élément), zones
-    protégées respectées, coût stable.
-11. **Intégrer dans la configuration**, puis régénérer. Archiver la configuration en vigueur avant tout changement.
-12. **Noter dans le journal** : numéro, essai, constat, retenu ou écarté et pourquoi
-    ([modèle](../../templates/experiment-log.md)).
+4. **Work on a sample** ([P7](../principles.md#p7)): a representative element or a crop at final quality; to judge
+   motion, add a short camera or interaction move.
+5. **Compare at identical framing, size and speed**, side by side and labelled:
+   - **reference / before / after** when a target exists;
+   - **current trial / new trial** while iterating;
+   - **diagnostic view, then render with the final processing**;
+   - **whole piece, in addition to close-ups**: a detail that is right in close-up can unbalance the whole.
+6. **Compare several amplitudes or dosages** rather than a single value (×0.6, ×1, ×1.3, for example), and choose at
+   normal speed and final size.
+7. **Examine how a failed trial was built** instead of pushing its intensity. If a deformation cannot grow without
+   stretching, look for another way to produce the perceived effect (shadow, colour, timing).
+8. **Check what the result shows, not what the parameter says**: controller, deformation, evaluated texture, rebuilt
+   scene, rendered image. A parameter can have no effect under some conditions ([A9](../quality/anti-patterns.md#a9)).
+9. **Check that a change is perceptible before presenting it** ([A5](../quality/anti-patterns.md#a5)).
+10. **Check for regressions**: the rest of the composition unchanged (element-by-element comparison), protected areas
+    respected, cost stable.
+11. **Integrate into the configuration**, then regenerate. Archive the configuration in force before any change.
+12. **Write it in the log**: number, trial, finding, kept or rejected and why
+    ([template](../../templates/experiment-log.md)).
 
-## Signaux d'alerte
+## Warning signs
 
-- « Je ne vois aucune différence » : l'essai a été jugé en vue de diagnostic, pas à la taille finale.
-- Une mesure de temps aberrante : la refaire avant de conclure (préparation au premier passage, machine occupée).
-- Un défaut découvert sur une version déjà montrée : le dire explicitement et montrer la version corrigée.
-- Un malentendu possible sur une consigne : reformuler ce que l'on a compris dans le bilan
+- "I can't see any difference": the trial was judged in a diagnostic view, not at final size.
+- An aberrant timing: measure again before concluding (warm-up on the first pass, busy machine).
+- A defect discovered on a version already shown: say so explicitly and show the fixed version.
+- A possible misunderstanding of an instruction: restate what you understood in the report
   ([A17](../quality/anti-patterns.md#a17)).
 
-## Critère de fin d'une itération
+## Exit criterion of an iteration
 
-Avant/après produit dans les conditions finales ; défaut corrigé à sa cause ; aucune régression détectée ; coût connu ;
-journal à jour ; chaque demande de l'itération listée avec son état (fait, essai écarté avec sa raison, manquant).
+Before/after produced in final conditions; defect fixed at its cause; no regression detected; cost known; log up to
+date; each request of the iteration listed with its status (done, trial rejected with its reason, missing).

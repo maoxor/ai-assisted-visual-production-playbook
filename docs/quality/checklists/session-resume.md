@@ -1,14 +1,13 @@
-# Reprise : début de session, nouvelle version, après interruption
+# Resume: start of a session, new version, after an interruption
 
-- [ ] État réel relevé : `git status` et `git log` s'il y a un dépôt, processus actifs (calculs, serveurs), espace
-      disque, alimentation.
-- [ ] Processus des autres projets ou sessions identifiés, et **laissés intacts**.
-- [ ] Journal le plus récent lu ; registre des consignes lu (consignes actives et remplacées).
-- [ ] Objectif et critère essentiel du projet reformulables en une phrase.
-- [ ] Contrôles de la dernière « Validation » relancés ; toute case sans preuve revérifiée.
-- [ ] Si le journal contredit les fichiers : les fichiers font foi, le journal est corrigé.
-- [ ] Tâches devenues obsolètes arrêtées proprement, sans perdre leurs résultats utiles ; processus enfants orphelins
-      vérifiés.
-- [ ] Pour une nouvelle version : version actuelle archivée (sources, configuration, scripts, `README`, empreintes),
-      nouvelle version identifiable, sorties séparées.
-- [ ] Prochaine action choisie dans « Prochaines actions ».
+- [ ] Real state recorded: `git status` and `git log` if there is a repository, active processes (computations,
+      servers), disk space, power.
+- [ ] Processes of other projects or sessions identified, and **left untouched**.
+- [ ] Most recent log read; instruction register read (active and replaced instructions).
+- [ ] Project objective and key criterion restatable in one sentence.
+- [ ] Checks of the last "Validation" rerun; every box without evidence verified again.
+- [ ] If the log contradicts the files: the files win, the log is corrected.
+- [ ] Obsolete tasks stopped cleanly, without losing their useful results; orphan child processes checked.
+- [ ] For a new version: current version archived (sources, configuration, scripts, `README`, fingerprints), new
+      version identifiable, outputs separated.
+- [ ] Next action chosen from "Next actions".

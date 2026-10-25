@@ -1,58 +1,58 @@
-# 9. Continuité : reprendre sans la conversation
+# 9. Continuity: resume without the conversation
 
-**Objectif.** Permettre à n'importe qui de reprendre le travail exactement où il en est, sans relire la conversation :
-une autre session, une autre personne, ou soi-même après une interruption ou une compaction du contexte.
+**Objective.** Allow anyone to resume the work exactly where it stands without rereading the conversation: another
+session, another person, or yourself after an interruption or a context compaction.
 
-## Les supports de la continuité
+## What carries continuity
 
-| Support | Contenu | Maturité |
+| Medium | Content | Maturity |
 |---|---|---|
-| **Journal d'essais** | Entrées numérotées : essai, constat, retenu ou écarté, raison ; regroupées par itération avec la demande qui l'a déclenchée ([modèle](../../templates/experiment-log.md)) | [éprouvé] |
-| **Journal de chantier** | État, décisions, validations exécutées, prochaines actions, questions ouvertes ([modèle](../../templates/work-log.md), skill [`work-log`](../../skills/work-log/SKILL.md)) | [éprouvé] |
-| **Versions archivées** | État complet avant chaque nouvelle version, avec un `README` qui dit quoi et pourquoi ([modèle](../../templates/archived-version-readme.md)) | [éprouvé] |
-| **Configurations archivées** | Configuration en vigueur copiée avant chaque changement important | [éprouvé] |
-| **Registre des consignes** | Contraintes durables, consignes actives et remplacées, demandes et leur état ([modèle](../../templates/instruction-register.md)) | [éprouvé] |
-| **Mémoire de l'agent** | Préférences durables de la personne qui dirige : une règle, sa raison, comment l'appliquer | [éprouvé] |
-| **Historique Git** | Commits atomiques dont le message explique le pourquoi et la preuve | [éprouvé] |
+| **Experiment log** | Numbered entries: trial, finding, kept or rejected, reason; grouped by iteration with the request that triggered it ([template](../../templates/experiment-log.md)) | [proven] |
+| **Work log** | Status, decisions, checks run, next actions, open questions ([template](../../templates/work-log.md), [`work-log`](../../skills/work-log/SKILL.md) skill) | [proven] |
+| **Archived versions** | Complete state before each new version, with a `README` saying what and why ([template](../../templates/archived-version-readme.md)) | [proven] |
+| **Archived configurations** | Configuration in force copied before every significant change | [proven] |
+| **Instruction register** | Durable constraints, active and replaced instructions, requests and their status ([template](../../templates/instruction-register.md)) | [proven] |
+| **Agent memory** | The lead's durable preferences: a rule, its reason, how to apply it | [proven] |
+| **Git history** | Atomic commits whose message explains the why and the evidence | [proven] |
 
-## Reprendre (toujours en premier) [éprouvé]
+## Resume (always first) [proven]
 
-1. État réel : `git status` et `git log` s'il y a un dépôt ; processus actifs ; calculs en cours ; espace disque.
-2. Lire le journal le plus récent et le registre des consignes.
-3. **Vérifier avant de continuer** : relancer les contrôles du journal ; une case cochée sans preuve est à revérifier.
-   Si le journal contredit les fichiers, les fichiers font foi et l'on corrige le journal.
-4. Arrêter proprement les tâches devenues obsolètes (production d'une version dépassée, finalisation automatique
-   associée), en conservant leurs résultats utiles et sans toucher aux autres travaux.
-5. Reprendre à « Prochaines actions ».
+1. Real state: `git status` and `git log` if there is a repository; active processes; running computations; disk
+   space.
+2. Read the most recent log and the instruction register.
+3. **Verify before continuing**: rerun the checks listed in the log; a box ticked without evidence has to be checked
+   again. If the log contradicts the files, the files win and the log is corrected.
+4. Cleanly stop the tasks that have become obsolete (production of an outdated version, its automatic finalization),
+   keeping their useful results and without touching other work.
+5. Resume at "Next actions".
 
-La [liste de reprise](../quality/checklists/session-resume.md) détaille ces points.
+The [resume checklist](../quality/checklists/session-resume.md) details these points.
 
-## Ouvrir une nouvelle version [éprouvé]
+## Open a new version [proven]
 
-1. Archiver la version actuelle : sources, configurations, scripts, `README`, empreintes.
-2. Créer une version identifiable, lue par tous les scripts depuis la configuration (par exemple
-   `project.version`), d'où ils dérivent leurs chemins.
-3. Séparer ses sorties : calculs, caches, rapports.
-4. Conserver ce qui fonctionne ; ne faire évoluer l'architecture que là où le nouvel objectif l'exige.
+1. Archive the current version: sources, configurations, scripts, `README`, fingerprints.
+2. Create an identifiable version, read by every script from the configuration (for example `project.version`), from
+   which they derive their paths.
+3. Separate its outputs: computations, caches, reports.
+4. Keep what works; change the architecture only where the new objective requires it.
 
-## Tenir à jour
+## Keep it up to date
 
-À chaque étape terminée : statut, décisions et raisons, validations exécutées avec leurs résultats, prochaines
-actions. On distingue *vérifié*, *hypothèse* et *à faire*. Le journal reste concis : le détail vit dans les fichiers,
-les tests et les messages de commit.
+At each completed step: status, decisions and reasons, checks run with their results, next actions. Separate
+*verified*, *hypothesis* and *to do*. The log stays concise: details live in the files, the tests and the commit
+messages.
 
-## Clore
+## Close
 
-On passe le statut à « terminé » et l'on rédige le bilan. Ce qui doit durer est reporté ailleurs : décisions du
-projet, règles dans son `CLAUDE.md`, enseignements génériques dans ce référentiel. **Le journal est une trace, pas une
-source de règles.**
+Set the status to "done" and write the report. What must last goes elsewhere: project decisions, rules in its
+`CLAUDE.md`, generic lessons in this playbook. **The log is a trace, not a source of rules.**
 
-## Mémoire de l'agent, projet ou référentiel ?
+## Agent memory, project or playbook?
 
-| Va dans la mémoire ou les documents du projet | Va dans ce référentiel |
+| Goes into the project's memory or documents | Goes into this playbook |
 |---|---|
-| Préférence propre à un projet (un choix esthétique) | Préférence valable pour tous les projets (vidéos de contrôle lues en avant) |
-| État d'un travail en cours, chiffres, mesures | Méthode, principe, enseignement générique |
-| Chemin, identifiant, artefact, livrable | Modèle, outil, procédure réutilisable |
+| A preference specific to one project (an aesthetic choice) | A preference valid for every project (review videos played forward) |
+| Status of ongoing work, figures, measurements | Method, principle, generic lesson |
+| Path, identifier, artefact, deliverable | Template, tool, reusable procedure |
 
-Les préférences transversales sont regroupées dans [les préférences de collaboration](../quality/collaboration.md).
+Cross-project preferences are gathered in the [collaboration defaults](../quality/collaboration.md).

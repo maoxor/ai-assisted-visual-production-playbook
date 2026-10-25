@@ -1,41 +1,40 @@
-# Vidéo pour une page web
+# Video for a web page
 
-Détails et justifications : [guide vidéo web](../../domains/web-background-video.md).
+Details and reasons: [web video guide](../../domains/web-background-video.md).
 
 ## Exports
 
-- [ ] Variantes par **cadrage** et par **définition réellement affichée**, pas seulement « mobile / bureau ».
-- [ ] Codecs : un format efficace (AV1), un format pour Apple (HEVC, pré-compensé si nécessaire), un repli universel
+- [ ] Variants per **framing** and per **resolution actually displayed**, not just "mobile / desktop".
+- [ ] Codecs: an efficient format (AV1), a format for Apple (HEVC, pre-compensated if needed), a universal fallback
       (H.264).
-- [ ] Débits ou CRF choisis sur un comparatif mesuré (VMAF ou autre) sur les passages difficiles, **sur la séquence
-      finale**.
-- [ ] Une seule image-clé par boucle si la scène scintille, ou un choix justifié.
-- [ ] Métadonnées couleur cohérentes ; rendu des couleurs vérifié dans WebKit.
-- [ ] Noirs sans aplats en escalier ; microdétails et mouvements préservés (revue côte à côte).
-- [ ] Raccord de boucle encodé mesuré : pas de saut visible au retour à la première image.
-- [ ] Chaque fichier décodé en entier (nombre d'images attendu).
-- [ ] Affiches (première image) dans les formats modernes et en repli ; poids dans le budget.
+- [ ] Bitrates or CRF chosen from a measured comparison (VMAF or other) on the difficult passages, **on the final
+      sequence**.
+- [ ] A single keyframe per loop if the scene flickers, or a justified choice.
+- [ ] Consistent colour metadata; colour rendering checked in WebKit.
+- [ ] Blacks without banding; micro-details and motion preserved (side-by-side review).
+- [ ] Encoded loop seam measured: no visible jump when returning to the first frame.
+- [ ] Each file fully decoded (expected frame count).
+- [ ] Posters (first frame) in modern formats and a fallback; weight within budget.
 
-## Intégration
+## Integration
 
-- [ ] La page est utilisable et belle **sans** la vidéo ; l'affiche est l'élément principal (LCP).
-- [ ] Vidéo chargée après les ressources prioritaires ; démarrage seulement si la lecture peut se faire sans attente.
-- [ ] `muted`, `playsinline`, `loop` ; lecture automatique refusée → affiche, puis lecture au premier geste.
-- [ ] `prefers-reduced-motion` → image fixe, aucune vidéo téléchargée.
-- [ ] Bouton pause (WCAG 2.2.2 : animation de plus de 5 s) ; choix mémorisé.
-- [ ] Pause hors de l'écran et onglet masqué ; reprise au retour.
-- [ ] Rotation, redimensionnement, écran partagé : pas d'écran noir, une seule nouvelle requête, position dans la
-      boucle conservée, pas d'aller-retour de variante.
-- [ ] Appareils tactiles plafonnés à une définition raisonnable ; pas de fichier le plus lourd par défaut.
-- [ ] Serveur de test avec **requêtes partielles** (sinon Safari et iOS refusent le MP4).
-- [ ] Échecs (vidéo introuvable, codec refusé) : l'affiche reste, aucune erreur de script.
+- [ ] The page is usable and good-looking **without** the video; the poster is the main element (LCP).
+- [ ] Video loaded after the priority resources; started only if playback can happen without stalling.
+- [ ] `muted`, `playsinline`, `loop`; autoplay refused → poster, then playback on the first gesture.
+- [ ] `prefers-reduced-motion` → still image, no video downloaded.
+- [ ] Pause button (WCAG 2.2.2: animation longer than 5 s); choice remembered.
+- [ ] Paused off screen and when the tab is hidden; resumed on return.
+- [ ] Rotation, resizing, split screen: no black screen, a single new request, position in the loop kept, no
+      variant ping-pong.
+- [ ] Touch devices capped at a reasonable resolution; never the heaviest file by default.
+- [ ] Test server with **range requests** (otherwise Safari and iOS refuse the MP4).
+- [ ] Failures (video not found, codec refused): the poster stays, no script error.
 
 ## Tests
 
-- [ ] Matrice réel / émulé écrite ; ce qui n'est pas testable est listé.
-- [ ] Images perdues, intervalles aux raccords, attentes, tâches longues, CLS, octets téléchargés : mesurés dans chaque
-      moteur.
-- [ ] **Chaque codec livré lu au moins une fois** par un moteur, y compris le repli (forcer le codec si nécessaire).
-- [ ] Tests refaits sur les **exports définitifs**, pas seulement sur des exports provisoires.
-- [ ] Résultats sous charge distingués d'une machine libre ; perte attribuée à l'environnement seulement avec une
-      preuve (un A/B sur d'anciens exports, par exemple).
+- [ ] Real / emulated matrix written; what cannot be tested is listed.
+- [ ] Dropped frames, intervals at the seams, stalls, long tasks, CLS, bytes downloaded: measured in each engine.
+- [ ] **Each delivered codec played at least once** by an engine, fallback included (force the codec if needed).
+- [ ] Tests rerun on the **final exports**, not only on provisional ones.
+- [ ] Results under load kept apart from an idle machine; a loss blamed on the environment only with evidence (an A/B
+      on older exports, for example).

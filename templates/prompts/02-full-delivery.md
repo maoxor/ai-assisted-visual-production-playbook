@@ -1,44 +1,44 @@
-# Passer de l'étude à une livraison complète
+# From the study to a complete delivery
 
 ```markdown
-Poursuis à partir de ton étude et mène maintenant le projet jusqu'à une livraison complète, vérifiée et reproductible.
-Ne t'arrête pas à une nouvelle recherche, à un plan ou au prototype.
+Continue from your study and now take the project to a complete, verified and reproducible delivery. Do not stop at
+new research, a plan or the prototype.
 
-**Décisions de travail**
-- Approche retenue : <…>. Sources : <…> ; référence de composition et de matière : <…> (ne reproduis pas ses défauts).
-- Livrables : <formats, durée, cadence, résolutions, replis>. Ajuste-les seulement si les mesures révèlent une
-  contrainte réelle, et explique le compromis.
-- <Contraintes sur le sujet>. <Questions de droits : isole-les des travaux réalisables ; ne publie rien.>
-- Travaille sans sous-agents.
+**Working decisions**
+- Approach chosen: <…>. Sources: <…>; reference for composition and material: <…> (do not reproduce its defects).
+- Deliverables: <formats, duration, frame rate, resolutions, fallbacks>. Adjust them only if measurements reveal a real
+  constraint, and explain the trade-off.
+- <Constraints on the subject>. <Rights questions: isolate them from the work that can be done; publish nothing.>
+- Work without sub-agents.
 
-**1. Reprendre et vérifier l'existant** — inspecte projet, instructions, ressources, outils ; reprends sans écraser
-les sources ; vérifie dans les fichiers les valeurs dont dépend l'implémentation (un compte rendu peut être tronqué).
+**1. Take stock of and verify the existing work** — inspect the project, instructions, resources, tools; resume
+without overwriting the sources; check in the files the values the implementation depends on (a report may be
+truncated).
 
-**2. Installer les ressources réellement utiles** — je t'autorise à installer les outils gratuits, dépendances,
-modèles et ressources nécessaires, isolés au projet. Pour chaque ajout : provenance, licence, compatibilité, utilité ;
-inspecte les scripts avant exécution ; consigne version, source, licence et rôle. Aucun achat, abonnement, envoi vers
-un service externe ni changement système destructif sans mon accord.
+**2. Install the resources that are really useful** — I authorize you to install the free tools, dependencies, models
+and resources needed, isolated to the project. For each addition: provenance, licence, compatibility, usefulness;
+inspect scripts before running them; record version, source, licence and role. No purchase, subscription, upload to an
+external service or destructive system change without my approval.
 
-**3. Prototype, puis production** — prototype court (<éléments risqués>) ; vérifie fidélité, localité, superpositions,
-bruit, stabilité temporelle, coût. Puis production : <exigences de composition, de matière, de mouvement, de marges>,
-paramètres regroupés et nommés clairement.
+**3. Prototype, then production** — a short prototype (<risky elements>); check fidelity, locality, overlaps, noise,
+temporal stability, cost. Then production: <composition, material, motion and margin requirements>, parameters grouped
+and clearly named.
 
-**4. Itérer sur des preuves** — produis et inspecte ; corrige avant d'augmenter résolution et durée. Vérifie :
-fidélité, localité des effets, superpositions, bords aux positions extrêmes, animation, boucle complète sans image
-dupliquée, encodage. Les métriques complètent l'inspection visuelle ; pas de seuils arbitraires comme preuves. Mesure
-un échantillon représentatif avant le calcul complet ; prévois la reprise après interruption et surveille le disque.
+**4. Iterate on evidence** — produce and inspect; fix before increasing resolution and duration. Check: fidelity,
+locality of effects, overlaps, edges at extreme positions, animation, complete loop without a duplicated frame,
+encoding. Metrics complement visual inspection; no arbitrary thresholds as evidence. Measure a representative sample
+before the full computation; plan for resuming after an interruption and watch the disk.
 
-**5. Finaliser** — livre : sources avec dépendances regroupées ; scripts et configuration avec graines ; livrables
-dans tous les formats (un format largement compatible et un format complémentaire si son intérêt est mesuré) ; replis ;
-captures de contrôle et bilan des tests réellement exécutés ; README (ouvrir, modifier, régénérer, exporter ; sources
-et licences). Intègre dans <site existant / page de démonstration locale> et teste <lecture muette, playsinline,
-chargement, affiche, prefers-reduced-motion>. Ne déploie pas publiquement.
+**5. Finalize** — deliver: sources with bundled dependencies; scripts and configuration with seeds; deliverables in
+every format (a widely compatible format and a complementary format if its benefit is measured); fallbacks; check
+captures and a report of the tests actually run; a README (open, modify, regenerate, export; sources and licences).
+Integrate into <existing site / local demonstration page> and test <muted playback, playsinline, loading, poster,
+prefers-reduced-motion>. Do not deploy publicly.
 
-**Mode d'exécution** — prends les décisions réversibles à partir de la référence, sans me redemander. Points
-d'avancement courts : ce qui fonctionne, ce qui reste, la prochaine action. En cas d'échec : cause, solution, puis
-alternative ; ne répète pas une approche infructueuse. Si un blocage nécessite vraiment mon intervention, pose une
-question précise et poursuis les tâches indépendantes.
+**Execution mode** — take reversible decisions from the reference, without asking me again. Short status updates:
+what works, what remains, the next action. On failure: cause, solution, then alternative; do not repeat an approach
+that failed. If a blocker really needs my intervention, ask a precise question and continue with independent tasks.
 
-Le travail est terminé lorsque les fichiers finaux existent, s'ouvrent et ont été contrôlés. Une commande lancée, un
-calcul en cours ou un prototype ne constituent pas une livraison. Distingue terminé, testé et limites.
+The work is done when the final files exist, open and have been checked. A launched command, a running computation or
+a prototype is not a delivery. Separate done, tested and limitations.
 ```

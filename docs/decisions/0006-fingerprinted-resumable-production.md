@@ -1,29 +1,28 @@
-# 0006 — Toute production longue est reprenable et protégée par une empreinte
+# 0006 — Every long production is resumable and protected by a fingerprint
 
-- **Statut** : acceptée
-- **Date** : 2026-10-25
-- **Décidée par** : la personne qui dirige (exigence), l'agent (mise en œuvre)
+- **Status**: accepted
+- **Date**: 2026-10-25
+- **Decided by**: the lead (requirement), the agent (implementation)
 
-## Contexte
+## Context
 
-Les productions longues sont souvent interrompues (changement de version, correction tardive, mise en veille, machine
-partagée). Reprendre sur la seule présence des fichiers mélange des unités calculées à partir d'états différents, ce
-qui produit des livrables faux et difficiles à détecter.
+Long productions are often interrupted (version change, late fix, sleep, shared machine). Resuming on the mere presence
+of files mixes units computed from different states, which produces wrong deliverables that are hard to detect.
 
-## Décision
+## Decision
 
-- Chaque production écrit l'empreinte de ses dépendances (sources, configurations, scripts, version du logiciel,
-  profil de qualité) à côté de ses sorties.
-- À la reprise, si l'empreinte diffère, les sorties existantes sont **déplacées** dans `_stale/`, jamais supprimées.
-- Une unité n'est faite que si son fichier est complet ; les unités sont produites par paquets ; l'espace disque est
-  vérifié avant chaque paquet.
-- Pendant le calcul, on ne modifie aucune dépendance.
+- Every production writes the fingerprint of its dependencies (sources, configurations, scripts, software version,
+  quality profile) next to its outputs.
+- On resume, if the fingerprint differs, the existing outputs are **moved** to `_stale/`, never deleted.
+- A unit is done only if its file is complete; units are produced in batches; disk space is checked before every
+  batch.
+- No dependency is modified during the computation.
 
-## Conséquences
+## Consequences
 
-- Toute modification d'une dépendance pendant une production l'arrête au paquet suivant : c'est voulu.
-- L'alimentation et la mise en veille de la machine font partie des préalables ([A15](../quality/anti-patterns.md#a15)).
+- Any change to a dependency during a production stops it at the next batch: that is intended.
+- Power supply and sleep settings are part of the prerequisites ([A15](../quality/anti-patterns.md#a15)).
 
-## Vérification
+## Verification
 
-Outil testé : [`fingerprint.py`](../../tools/README.md#fingerprintpy) (tests `test_ensure_*` et `test_pending_*`).
+Tested tool: [`fingerprint.py`](../../tools/README.md#fingerprintpy) (tests `test_ensure_*` and `test_pending_*`).

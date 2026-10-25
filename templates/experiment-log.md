@@ -1,25 +1,25 @@
-# <version> — Journal des essais (<sujet>)
+# <version> — Experiment log (<topic>)
 
-Banc d'essai : <outil, réglages communs (qualité, cadrage, unité de référence)>. Les modifications nommées viennent
-de <fichier>. Les planches sont dans <dossier>.
+Test bench: <tool, common settings (quality, framing, reference unit)>. Named modifications come from <file>. Contact
+sheets are in <folder>.
 
-Ces observations sont les miennes ; elles ne valent pas validation de votre part.
+These observations are mine; they are not your approval.
 
-## YYYY-MM-DD — itération 1 : <demande d'origine>
+## YYYY-MM-DD — iteration 1: <original request>
 
-1. **<Titre court>** (`<noms des essais>`).
-   - Constat : <ce que l'on voit, à quelle taille, dans quelles conditions>.
-   - Cause (diagnostic par extinction si utile) : <…>.
-   - Essais : e1 <…> ; e2 <…>.
-   - **Retenu : e2** — raison. / **Écarté** — raison.
-2. **Erreur trouvée, corrigée.** <ce qui était faux, depuis quand, ce qui a été refait>.
+1. **<Short title>** (`<trial names>`).
+   - Finding: <what is seen, at which size, under which conditions>.
+   - Cause (diagnosis by elimination if useful): <…>.
+   - Trials: e1 <…>; e2 <…>.
+   - **Kept: e2** — reason. / **Rejected** — reason.
+2. **Error found, fixed.** <what was wrong, since when, what was redone>.
 
-## Contrôles
+## Checks
 
-- Non-régression : <composition, éléments inchangés, zones protégées>.
-- Mesures (complément) : <valeurs absolues, version actuelle>.
-- Coût : <temps par unité avant / après, conditions de mesure>.
+- Non-regression: <composition, unchanged elements, protected areas>.
+- Measurements (complement): <absolute values, current version>.
+- Cost: <time per unit before / after, measurement conditions>.
 
-## Non fait
+## Not done
 
-- <ce qui attend l'avis de la personne qui dirige, ou une autre étape>.
+- <what awaits the lead's opinion, or another step>.

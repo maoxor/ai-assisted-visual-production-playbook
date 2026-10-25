@@ -1,60 +1,59 @@
-# Outillage : rôle, usage, contribution à la qualité
+# Tooling: role, use, contribution to quality
 
-Outils employés avec la méthode, leur rôle et ce qu'ils apportent à la qualité. Vérifier les versions disponibles au
-début de chaque projet : celles indiquées ici sont des repères, pas des exigences.
+Tools used with the method, their role and what they bring to quality. Check the available versions at the start of
+each project: the versions given here are landmarks, not requirements.
 
-| Document | Contenu |
+| Document | Content |
 |---|---|
-| Ce fichier | Inventaire, provenance et licences, machine partagée |
-| [`claude-code.md`](claude-code.md) | Configuration et usage de Claude Code : instructions, mémoire, skills, hooks, permissions |
-| [`../../tools/`](../../tools/README.md) | Scripts réutilisables et testés |
-| [`../../skills/`](../../skills/README.md) | Skills prêts à installer |
+| This file | Inventory, provenance and licensing, shared machine |
+| [`claude-code.md`](claude-code.md) | Configuring and using Claude Code: instructions, memory, skills, plugin, hooks, permissions |
+| [`../../tools/`](../../tools/README.md) | Reusable, tested scripts |
+| [`../../skills/`](../../skills/README.md) | Skills ready to install |
 
-## Inventaire [éprouvé]
+## Inventory [proven]
 
-| Outil | Rôle | Quand | Contribution à la qualité |
+| Tool | Role | When | Contribution to quality |
 |---|---|---|---|
-| **Claude Code** | Agent : recherche, code, essais, contrôles, documentation | Tout le projet | Exécute et vérifie ; tient journaux et mémoire |
-| **Blender** (version LTS) | Génération de scène par script Python, rendu Cycles sur GPU, débruitage OIDN | Construction, essais, production | Matériaux physiques, réfraction réelle de l'état animé, reproductible par script |
-| **Python** et **uv** | Préparation, contrôles, post-traitement, encodage, tests ; environnement figé (`uv.lock`) | Partout | Reproductibilité ; outils de mesure sur mesure |
-| **numpy, OpenCV, Pillow, scikit-image** | Mesures d'image, flux optique (DIS), réduction de taille | Contrôles, stabilisation | Mesures objectives en complément de l'œil |
-| **ꟻLIP** (`flip-evaluator`) | Différence perceptuelle entre images | Fidélité | Plus proche de la perception que le PSNR |
-| **PyTorch, transformers** | Inférence locale de modèles de segmentation et de profondeur | Préparation | Masques et profondeur sans régénérer l'image |
-| **ffmpeg** (libsvtav1, libx265, libx264, libvmaf) | Encodage, vidéos de revue, VMAF, XPSNR | Revue, exports | Exports mesurés ; comparatifs côte à côte |
-| **Playwright** (Chrome, WebKit, Firefox) | Tests de page : lecture, images perdues, rotation, émulations | Intégration | Lecture réelle mesurée ; réel et émulé distingués |
-| **pytest, Vitest, ruff, ESLint, import-linter** | Tests et contrats d'architecture | Développement | Non-régression automatique |
-| **GitHub Actions** | CI : lint, tests, e2e, migrations, audit, secrets | Chaque push | Contrôles indépendants de l'agent |
-| **gitleaks** | Détection de secrets | CI | Aucun secret publié |
-| **Simulateurs iOS (Xcode), émulateurs Android** | Tests mobiles proches du réel | Intégration mobile | Comportements Safari iOS et Chrome Android |
-| **caffeinate, pmset, nohup** (macOS) | Empêcher la veille, attendre le secteur, détacher les calculs | Production longue | Calculs qui survivent aux interruptions |
+| **Claude Code** | Agent: research, code, trials, checks, documentation | The whole project | Runs and verifies; keeps logs and memory |
+| **Blender** (LTS version) | Scene generation by Python script, Cycles rendering on GPU, OIDN denoising | Build, trials, production | Physical materials, real refraction of the animated state, reproducible by script |
+| **Python** and **uv** | Preparation, checks, post-processing, encoding, tests; locked environment (`uv.lock`) | Everywhere | Reproducibility; tailor-made measurement tools |
+| **numpy, OpenCV, Pillow, scikit-image** | Image measurements, optical flow (DIS), downscaling | Checks, stabilization | Objective measurements alongside the eye |
+| **ꟻLIP** (`flip-evaluator`) | Perceptual difference between images | Fidelity | Closer to perception than PSNR |
+| **PyTorch, transformers** | Local inference of segmentation and depth models | Preparation | Masks and depth without regenerating the image |
+| **ffmpeg** (libsvtav1, libx265, libx264, libvmaf) | Encoding, review videos, VMAF, XPSNR | Review, exports | Measured exports; side-by-side comparisons |
+| **Playwright** (Chrome, WebKit, Firefox) | Page tests: playback, dropped frames, rotation, emulation | Integration | Real playback measured; real and emulated kept apart |
+| **pytest, Vitest, ruff, ESLint, import-linter** | Tests and architecture contracts | Development | Automatic non-regression |
+| **GitHub Actions** | CI: lint, tests, e2e, migrations, audit, secrets | Every push | Checks independent of the agent |
+| **gitleaks** | Secret detection | CI | No secret published |
+| **iOS simulators (Xcode), Android emulators** | Mobile tests close to real | Mobile integration | Safari iOS and Chrome Android behaviours |
+| **caffeinate, pmset, nohup** (macOS) | Prevent sleep, wait for mains power, detach computations | Long production | Computations that survive interruptions |
 
 <a id="provenance-and-licensing"></a>
 
-## Provenance et licences [éprouvé]
+## Provenance and licensing [proven]
 
-Avant d'ajouter un outil, un modèle, une texture, un dépôt, un MCP ou un skill :
+Before adding a tool, model, texture, repository, MCP server or skill:
 
-1. **Provenance** : source officielle, version stable, dépendances maintenues.
-2. **Licence** compatible avec l'usage prévu, vérifiée sur la variante exacte.
-3. **Compatibilité** avec la machine (architecture, GPU, mémoire).
-4. **Utilité concrète** démontrée : un MCP, un skill ou un modèle ne s'ajoute que s'il apporte un gain mesurable ; des
-   scripts suffisent souvent.
-5. **Inspection des scripts** avant exécution.
-6. **Consignation** : version ou commit, source, licence, rôle, empreintes (manifeste de provenance, `SHA256SUMS`,
-   tableau du README).
+1. **Provenance**: official source, stable version, maintained dependencies.
+2. **Licence** compatible with the intended use, checked on the exact variant.
+3. **Compatibility** with the machine (architecture, GPU, memory).
+4. **Concrete usefulness** demonstrated: an MCP server, skill or model is added only if it brings a measurable gain;
+   scripts are often enough.
+5. **Inspection of scripts** before running them.
+6. **Record**: version or commit, source, licence, role, checksums (provenance manifest, `SHA256SUMS`, README table).
 
-Ce qui a été **envisagé puis écarté** se note aussi, avec la raison (fonction absente de la version utilisée, licence
-non commerciale, bénéfice nul).
+What was **considered then rejected** is recorded too, with the reason (feature missing from the version in use,
+non-commercial licence, no benefit).
 
 <a id="shared-machine"></a>
 
-## Machine partagée [éprouvé]
+## Shared machine [proven]
 
-Quand plusieurs projets ou sessions partagent la même machine :
+When several projects or sessions share the same machine:
 
-- ne **jamais** tuer les processus d'un autre projet ou d'une autre session ;
-- faire passer les calculs lourds d'apprentissage automatique par un **verrou commun** (par exemple `flock` sur un
-  fichier partagé), car plusieurs inférences simultanées peuvent épuiser la mémoire et arrêter la machine ;
-- avant de conclure qu'un calcul est lent, vérifier qui tient le verrou et la charge (`uptime`) ; signaler les mesures
-  faites sous charge ;
-- après l'arrêt d'un script, vérifier qu'aucun processus enfant (moteur de rendu, navigateur) n'est resté orphelin.
+- **never** kill the processes of another project or session;
+- route heavy machine-learning computations through a **common lock** (for example `flock` on a shared file), because
+  several simultaneous inferences can exhaust memory and bring the machine down;
+- before concluding that a computation is slow, check who holds the lock and the load (`uptime`); flag measurements made
+  under load;
+- after stopping a script, check that no child process (render engine, browser) was left orphaned.

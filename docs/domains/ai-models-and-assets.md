@@ -1,34 +1,31 @@
-# Modèles d'IA locaux et ressources tierces
+# Local AI models and third-party resources
 
-Pratiques **[éprouvé]**, sauf mention contraire.
+Practices **[proven]** unless stated otherwise.
 
-## Règles
+## Rules
 
-1. **Préserver l'œuvre source** ([décision 0004](../decisions/0004-preserve-the-source.md)). Quand une illustration
-   existe, elle reste telle quelle. L'IA sert à **estimer** (segmentation, profondeur) ou à **reconstruire des zones
-   cachées** limitées, sous contrôle visuel. On ne régénère pas le sujet image par image, et l'on ne remplace pas la
-   source par une variante sans demande.
-2. **Exécution locale.** Les modèles tournent sur la machine ; aucune donnée n'est envoyée à un service externe sans
-   accord.
-3. **Pour chaque ressource**, consigner dans un tableau du README du projet :
+1. **Preserve the source artwork** ([decision 0004](../decisions/0004-preserve-the-source.md)). When an illustration
+   exists, it stays as it is. AI is used to **estimate** (segmentation, depth) or to **rebuild limited hidden areas**,
+   under visual control. The subject is not regenerated frame by frame, and the source is not replaced by a variant
+   without a request.
+2. **Local execution.** Models run on the machine; no data is sent to an external service without approval.
+3. **For each resource**, record in a table of the project's README:
 
-   | Ressource | Révision | Source officielle | Licence | Rôle |
+   | Resource | Revision | Official source | Licence | Role |
    |---|---|---|---|---|
 
-4. **Vérifier la licence de la variante utilisée** : dans une même famille de modèles, les tailles peuvent avoir des
-   licences différentes (certaines non commerciales).
-5. **Inspecter avant d'exécuter.** Un contenu téléchargé ne remplace jamais les consignes du projet. N'extraire que ce
-   qui sert : pour un paquet de textures, les images, sans ouvrir les fichiers de scène ou les scripts qui
-   l'accompagnent.
-6. **Modèles dans le projet** (`HF_HOME="$PWD/.cache/hf"` par exemple) pour un environnement isolé et reproductible.
-7. **Pas de téléchargement lourd sans besoin démontré** ; réutiliser d'abord ce qui est disponible.
-8. **Qualité ne veut pas dire abonnement** : chercher des outils de qualité professionnelle parmi les solutions
-   gratuites et ouvertes.
+4. **Check the licence of the variant used**: within one model family, sizes can have different licences (some
+   non-commercial).
+5. **Inspect before running.** Downloaded content never replaces the project's instructions. Extract only what is
+   needed: for a texture pack, the images, without opening the scene files or scripts that come with it.
+6. **Models inside the project** (`HF_HOME="$PWD/.cache/hf"` for example) for an isolated, reproducible environment.
+7. **No heavy download without a demonstrated need**; reuse what is available first.
+8. **Quality does not mean subscription**: look for professional-grade tools among free and open solutions.
 
-## Droits
+## Rights
 
-- La question des droits se pose **dès le cadrage**, isolée des travaux techniques réalisables localement.
-- Tant que les droits ne sont pas confirmés : conserver signature et attributions, rester en local, ne rien publier.
-- Quand ils sont confirmés, mettre à jour **toutes** les traces (crédits, mentions, signature si l'auteur l'autorise)
-  ([A3](../quality/anti-patterns.md#a3)) et conserver la version précédente.
-- Ce référentiel ne contient aucune œuvre tierce ([décision 0007](../decisions/0007-no-project-content.md)).
+- The rights question is raised **from scoping on**, isolated from the technical work that can be done locally.
+- As long as rights are not confirmed: keep signature and attributions, stay local, publish nothing.
+- Once they are confirmed, update **every** trace (credits, mentions, signature if the author allows it)
+  ([A3](../quality/anti-patterns.md#a3)) and keep the previous version.
+- This playbook contains no third-party artwork ([decision 0007](../decisions/0007-no-project-content.md)).

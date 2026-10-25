@@ -1,27 +1,40 @@
-# Production Playbook
+# AI-assisted visual production playbook
 
-Référentiel de méthode générique : principes, workflow, qualité, guides, outils, modèles, skills. Il ne contient aucun
-projet. Documentation en français, accents corrects ; noms (fichiers, identifiants, branches) en anglais.
+A generic method and toolkit: principles, workflow, quality, domain guides, templates, skills, Python tools. It
+contains no project. Everything is written in English.
 
-<!-- Chargé à chaque session : rester court. -->
+<!-- Loaded in every session: keep it short. -->
 
-## Utiliser ce référentiel depuis un autre projet
+## Map
 
-- Démarrer un projet : `python3 scripts/new_project.py <chemin> --name "<nom>"`, puis
-  [`GETTING_STARTED.md`](GETTING_STARTED.md).
-- Principes : [`docs/principles.md`](docs/principles.md) ; listes de contrôle :
-  [`docs/quality/checklists/`](docs/quality/checklists/README.md).
+| Path | Content |
+|---|---|
+| `docs/` | The method (principles, workflow, quality, domains, tooling, decisions) |
+| `templates/`, `skills/` | Copied into projects by `scripts/new_project.py`; `skills/` is also the plugin's skill folder |
+| `tools/` | Standalone Python CLIs, copied into projects; tests in `tests/` |
+| `examples/demo.py` | End-to-end demonstration on synthetic frames |
+| `scripts/` | `check_repo.py` (repository checks), `new_project.py` (scaffolder) |
+| `.claude-plugin/` | Plugin and marketplace manifests |
 
-## Modifier ce référentiel
+## Verify (before concluding a task)
 
-- Lire [`CONTRIBUTING.md`](CONTRIBUTING.md). Toute pratique porte un niveau : **[éprouvé]**, **[extrapolé]** ou
-  **[proposé]**. Ne jamais présenter comme éprouvé ce qui ne l'est pas.
-- **Aucun contenu de projet** ([décision 0007](docs/decisions/0007-no-project-content.md)) : ni livrable, ni nom, ni
-  chiffre, ni citation ; reformuler en règle générique.
-- Méthode ≠ esthétique : aucun style prescrit.
-- Aucun secret, aucun asset, aucune donnée personnelle.
-- Vérifier avant de conclure, et citer les résultats :
-  `python3 scripts/check_repo.py` et
-  `uv run --no-project --python 3.12 --with numpy --with opencv-python-headless --with pytest pytest tools/tests -q`.
-- Git : branche dédiée, commits `type(portée): description`, pas de push ni de fusion sans demande ; identité Git du
-  poste.
+```bash
+python3 scripts/check_repo.py
+uv run pytest
+claude plugin validate .        # when the manifests or skills change
+```
+
+Never call something verified without running these commands; quote their results.
+
+## Rules
+
+- Read [`CONTRIBUTING.md`](CONTRIBUTING.md). Every practice carries a level: **[proven]**, **[extrapolated]** or
+  **[proposed]**; never present as proven what is not.
+- **No project content** ([decision 0007](docs/decisions/0007-no-project-content.md)): no deliverable, name, figure or
+  quotation; rewrite as a generic rule.
+- Method, not aesthetics: no style is prescribed.
+- No secret, asset or personal data.
+- Tools stay standalone scripts (no cross-project paths); a change to a tool comes with a test on synthetic data and an
+  update of `tools/README.md`.
+- Keep the version consistent in `CHANGELOG.md`, `pyproject.toml` and `.claude-plugin/plugin.json`.
+- Git: dedicated branch, `type(scope): description` commits, no push or merge unless asked.

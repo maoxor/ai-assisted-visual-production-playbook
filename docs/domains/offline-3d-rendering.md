@@ -1,147 +1,143 @@
-# Rendu 3D précalculé
+# Offline 3D rendering
 
-Pratiques **[éprouvé]** avec Blender (Cycles, GPU, débruitage OIDN), transposables à tout moteur de rendu précalculé,
-sauf mention contraire.
+Practices **[proven]** with Blender (Cycles, GPU, OIDN denoising), transferable to any offline renderer unless stated
+otherwise.
 
-## Architecture d'un projet de rendu reproductible
+## Architecture of a reproducible rendering project
 
 ```
-config/*.toml                  paramètres nommés : composition, matériaux, mouvement, qualité, encodage
-scripts/prep/                  préparation des données (segmentation, profondeur, calques)
-scripts/build/                 génère la scène depuis la configuration
-scripts/render/                rend une unité ou un paquet
-scripts/post/                  réduction à la taille finale, stabilisation
-scripts/qa/                    contrôles, comparatifs, pages de revue
-scenes/<scene>_<version>.*     scène générée, textures empaquetées
-renders/<version>/…            sorties séparées par version (hors de Git)
-qa/<version>/…                 journaux, mesures, comparatifs, rapports
-archive/<version>/             état complet de chaque version passée
+config/*.toml                  named parameters: composition, materials, motion, quality, encoding
+scripts/prep/                  data preparation (segmentation, depth, layers)
+scripts/build/                 generates the scene from the configuration
+scripts/render/                renders one unit or one batch
+scripts/post/                  reduction to final size, stabilization
+scripts/qa/                    checks, comparisons, review pages
+scenes/<scene>_<version>.*     generated scene, packed textures
+renders/<version>/…            outputs separated by version (outside Git)
+qa/<version>/…                 logs, measurements, comparisons, reports
+archive/<version>/             complete state of every past version
 ```
 
-- **La scène est générée**, jamais retouchée à la main : une modification durable passe par la configuration, puis par
-  la régénération.
-- **La version courante** est lue dans la configuration (`project.version`) ; tous les scripts en dérivent leurs
-  chemins, ce qui évite de mélanger les sorties.
-- **Surcharge sans modifier la configuration** (`build --set 'clé=valeur'`) : c'est la base des variantes et des essais.
-- **Le fichier de scène s'ouvre sans exécuter de script** : pilotes d'animation en expressions simples, textures
-  empaquetées, contrôleurs exposés comme propriétés nommées.
-- **Gestion des couleurs neutre** (« Standard » dans Blender) quand une texture source doit être restituée telle
-  quelle : une transformation de vue filmique la modifierait.
+- **The scene is generated**, never retouched by hand: a lasting change goes through the configuration, then
+  regeneration.
+- **The current version** is read from the configuration (`project.version`); every script derives its paths from it,
+  which prevents outputs from mixing.
+- **Override without editing the configuration** (`build --set 'key=value'`): the basis of variants and trials.
+- **The scene file opens without running a script**: animation drivers as simple expressions, packed textures,
+  controllers exposed as named properties.
+- **Neutral colour management** ("Standard" in Blender) when a source texture must be reproduced as is: a filmic view
+  transform would alter it.
 
 <a id="reproducibility"></a>
 
-## Reproductibilité
+## Reproducibility
 
-- Toute la géométrie procédurale dérive d'**une graine de projet** ; chaque élément a sa sous-graine, dérivée d'une
-  valeur stable (nom, numéro, CRC32), **jamais** de `hash()` ([A11](../quality/anti-patterns.md#a11)).
-- **La numérotation sert de graine** : ajouter un élément ne doit pas renuméroter les autres ; les numéros existants
-  sont réservés.
-- Un élément de référence peut être **figé** (sa géométrie relue depuis la référence), puis vérifié identique au bit
-  près.
-- Révisions des modèles d'IA et versions des dépendances figées (fichier de verrouillage, manifeste des modèles).
-- Chaque ressource externe a sa provenance, sa licence et ses empreintes (`SHA256SUMS`, manifeste de provenance).
+- All procedural geometry derives from **one project seed**; each element has its sub-seed, derived from a stable value
+  (name, number, CRC32), **never** from `hash()` ([A11](../quality/anti-patterns.md#a11)).
+- **Numbering acts as a seed**: adding an element must not renumber the others; existing numbers are reserved.
+- A reference element can be **frozen** (its geometry read back from the reference), then checked bit-for-bit
+  identical.
+- AI model revisions and dependency versions pinned (lock file, model manifest).
+- Every external resource has its provenance, licence and checksums (`SHA256SUMS`, provenance manifest).
 
-## Banc d'essai
+## Test bench
 
-- **Recadrages en qualité finale** sur la scène chargée : bien plus rapide que l'image entière, suffisant pour juger
-  une matière.
-- **Modifications nommées** appliquées à une copie en mémoire ; la scène de référence n'est jamais modifiée par un
-  essai.
-- **Planches** générées automatiquement : colonnes libellées, même cadrage.
-- **Variantes nommées** sauvegardées à part, promues ensuite comme scène principale par copie (l'ancienne étant
-  conservée).
-- **Court mouvement de caméra** sur image figée (petite ellipse, quelques dizaines de positions) pour voir si les
-  reflets révèlent le relief ; mesure associée : écart-type temporel dans l'élément.
-- **Vue de trois quarts** en matière neutre, avec une caméra partagée entre variantes, pour comprendre les volumes.
+- **Crops at final quality** on the loaded scene: much faster than the full frame, enough to judge a material.
+- **Named modifications** applied to an in-memory copy; the reference scene is never modified by a trial.
+- **Contact sheets** generated automatically: labelled columns, same framing.
+- **Named variants** saved separately, then promoted to main scene by copy (the old one being kept).
+- **Short camera move** on a frozen frame (small ellipse, a few dozen positions) to see whether reflections reveal the
+  relief; associated measurement: temporal standard deviation within the element.
+- **Three-quarter view** in a neutral material, with a camera shared between variants, to understand volumes.
 
 <a id="diagnosis-by-elimination"></a>
 
-## Diagnostic par extinction
+## Diagnosis by elimination
 
-Méthode pour tout défaut lumineux d'origine inconnue :
+A method for any lighting defect of unknown origin:
 
-1. Rendre la zone en qualité finale : c'est la référence.
-2. Neutraliser **une** cause possible à la fois :
-   - une source de lumière ou une partie de l'environnement ;
-   - une surface peinte en noir ;
-   - un élément caché ;
-   - un type de rayon coupé (transmission, réflexion) ;
-   - une face passée en réfraction pure.
-3. La cause est celle dont la neutralisation fait disparaître le défaut.
-4. Corriger **localement** (réglage par élément) plutôt que globalement si la cause sert ailleurs.
+1. Render the area at final quality: this is the reference.
+2. Neutralize **one** possible cause at a time:
+   - a light source or part of the environment;
+   - a surface painted black;
+   - a hidden element;
+   - a ray type cut off (transmission, reflection);
+   - a face switched to pure refraction.
+3. The cause is the one whose neutralization makes the defect disappear.
+4. Fix **locally** (per-element setting) rather than globally if the cause is useful elsewhere.
 
-Les défauts typiques ainsi résolus : liserés continus sur des arêtes, bandes claires élargies par le flou de
-profondeur de champ, plages grises dues au reflet d'une source sur une surface courbe, stries renvoyées par des
-facettes inclinées, dominantes colorées venues d'une source secondaire.
+Typical defects solved this way: continuous edge lines, light bands widened by depth of field, grey patches caused by a
+light reflected on a curved surface, streaks returned by tilted facets, colour casts from a secondary source.
 
-## Matériaux transparents
+## Transparent materials
 
-- **Vérifier dans le moteur le sens de chaque paramètre** : la transmission du shader n'est pas la lumière
-  effectivement transmise. Un petit banc de calibration mesure ce qui passe réellement ; certains paramètres sont sans
-  effet dans certaines conditions ([A9](../quality/anti-patterns.md#a9)).
-- **Un verre sombre devant un fond sombre ne montre que ses reflets** : pour qu'il garde une information de surface,
-  lui donner quelque chose à refléter (lumières localisées, grains brillants, fissures internes).
-- **Les arêtes fines et intermittentes viennent de l'éclairage** (sources étroites, technique dite *white-line*) et
-  d'un micro-chanfrein, pas d'un épaississement ; un plancher d'intensité produit un cadre continu.
-- **La liaison de lumière** (*light linking*) donne à un élément un éclairage propre qui n'éclaire rien d'autre.
-- **Épaisseur et relief se découplent** : exprimer le relief en fraction de la taille de la face, pas de l'épaisseur,
-  sinon amincir aplatit tout.
-- **Teinte spéculaire sur diélectrique** : elle tend vers le blanc aux incidences rasantes ; un reflet coloré à tous
-  les angles demande un mélange spéculaire masqué.
-- **La profondeur de champ décide de ce qui se voit** : à grande ouverture, les détails brillants deviennent des
-  pastilles floues ; il faut choisir l'ouverture d'après la référence.
-- **Contrôles de géométrie automatiques** : orientation par le volume signé, fermeture (arêtes non manifold), côté des
-  faces, auto-intersections ([A13](../quality/anti-patterns.md#a13)).
+- **Check the meaning of each parameter in the engine**: shader transmission is not the light actually transmitted. A
+  small calibration bench measures what really goes through; some parameters have no effect under some conditions
+  ([A9](../quality/anti-patterns.md#a9)).
+- **Dark glass in front of a dark background shows only its reflections**: for it to keep surface information, give it
+  something to reflect (localized lights, glints, internal cracks).
+- **Thin, intermittent edges come from the lighting** (narrow sources, the so-called *white-line* technique) and from a
+  micro-bevel, not from thickening; an intensity floor produces a continuous frame.
+- **Light linking** gives an element its own lighting that lights nothing else.
+- **Decouple thickness and relief**: express relief as a fraction of the face size, not of the thickness, otherwise
+  thinning flattens everything.
+- **Specular tint on a dielectric** tends towards white at grazing angles; a coloured reflection at every angle needs a
+  masked specular mix.
+- **Depth of field decides what is visible**: at a wide aperture, bright details become blurry discs; choose the
+  aperture from the reference.
+- **Automatic geometry checks**: orientation from the signed volume, closure (non-manifold edges), face side,
+  self-intersections ([A13](../quality/anti-patterns.md#a13)).
 
-## Scintillement : diagnostic et traitement
+## Flicker: diagnosis and treatment
 
-**Mesure.** Accélération temporelle de la luminance, A(t) = I(t+1) − 2·I(t) + I(t−1) ; on compte les pixels qui
-s'allument puis s'éteignent, à la taille finale, sur les images sources puis sur les vidéos encodées
+**Measurement.** Temporal acceleration of luminance, A(t) = I(t+1) − 2·I(t) + I(t−1); count the pixels that light up
+then go dark, at final size, on the source frames then on the encoded videos
 ([`flicker.py`](../../tools/README.md#flickerpy)).
 
-**Mécanisme typique.** Un pixel d'intensité moyenne à l'écran est la moyenne de quelques reflets très intenses (des
-dizaines ou centaines de fois le blanc d'affichage). Seuls quelques échantillons sur des centaines les touchent, et ce
-nombre change d'une image à l'autre. Le débruiteur traite chaque image séparément : il ne peut rien.
+**Typical mechanism.** A pixel of medium on-screen intensity is the average of a few very intense reflections (tens or
+hundreds of times display white). Only a few samples out of hundreds hit them, and that number changes from one frame
+to the next. The denoiser processes each frame separately: it can do nothing.
 
-**Localiser l'étape.** Comparer rendu, débruitage, réduction de taille, encodage et lecture. Si l'encodage ne
-scintille pas plus que les images sources, le défaut naît au rendu.
+**Locate the stage.** Compare rendering, denoising, downscaling, encoding and playback. If the encoding does not
+flicker more than the source frames, the defect originates in rendering.
 
-**Leviers, du plus fidèle au plus destructif :**
+**Levers, from the most faithful to the most destructive:**
 
-| Levier | Effet | Coût ou perte |
+| Lever | Effect | Cost or loss |
 |---|---|---|
-| Plafond d'échantillons relevé (seuil adaptatif inchangé) | Réduit le scintillement des arêtes ; image moyenne identique | Temps multiplié sur la zone |
-| **Stabilisation temporelle compensée en mouvement, limitée aux pics** | Forte réduction ; vidéos plus légères | Quelques dixièmes de seconde par image ; aucun flou spatial |
-| Rendu suréchantillonné (200 %) | Réduction modérée | Temps ×4 |
-| Graine fixe | Faible | Le bruit restant reste figé à l'écran |
-| Écrêtage, sources moins intenses | Efficace | Ternit et amincit les traits voulus : relève de la direction artistique |
-| Débruitage temporel, moyenne d'images | À éviter | Traînées sur les reflets ; détails effacés |
+| Higher sample ceiling (adaptive threshold unchanged) | Reduces edge flicker; identical average image | Time multiplied on the area |
+| **Motion-compensated temporal stabilization, limited to spikes** | Strong reduction; lighter videos | A few tenths of a second per frame; no spatial blur |
+| Supersampled render (200 %) | Moderate reduction | Time ×4 |
+| Fixed seed | Weak | The remaining noise stays frozen on screen |
+| Clamping, less intense sources | Effective | Dulls and thins the intended strokes: an art direction decision |
+| Temporal denoising, frame averaging | Avoid | Trails on reflections; details erased |
 
-Combinaison recommandée : un plafond raisonnable, puis la stabilisation
-([`stabilize.py`](../../tools/README.md#stabilizepy)), validée par une mesure avant/après et une inspection à 200 %.
+Recommended combination: a reasonable ceiling, then stabilization
+([`stabilize.py`](../../tools/README.md#stabilizepy)), validated by a before/after measurement and an inspection at
+200 %.
 
-## Coût de rendu
+## Rendering cost
 
-- **Mesurer avant d'optimiser.** Quand l'échantillonnage sur le GPU domine (cas fréquent), seuls comptent le nombre de
-  pixels, le nombre d'échantillons et le coût d'un échantillon (rebonds dans les matériaux transparents, complexité
-  des matériaux).
-- **Leviers habituels**, à mesurer un par un :
-  - plancher d'échantillons adaptatifs abaissé (souvent sans perte) ;
-  - seuil adaptatif relevé (surveiller les zones sombres) ;
-  - plafond d'échantillons abaissé ;
-  - détails invisibles à la taille finale supprimés ;
-  - suréchantillonnage réduit (perte de netteté à mesurer) ;
-  - rebonds limités à ce qui est visible.
-- **Suréchantillonner puis réduire** (125 à 150 %, réduction Lanczos en lumière linéaire) peut donner une netteté que
-  le débruitage seul n'atteint pas ; le gain se démontre à chaque projet.
-- **Coût de construction** à suivre aussi : nombre de faces, mémoire au pic, temps de construction.
-- La **première image** d'un processus inclut la préparation de la scène : elle ne compte pas dans le régime établi.
+- **Measure before optimizing.** When GPU sampling dominates (a frequent case), only the number of pixels, the number
+  of samples and the cost of a sample (bounces in transparent materials, material complexity) matter.
+- **Usual levers**, to be measured one by one:
+  - lower minimum adaptive samples (often without loss);
+  - higher adaptive threshold (watch the dark areas);
+  - lower sample ceiling;
+  - details invisible at final size removed;
+  - less supersampling (loss of sharpness to measure);
+  - bounces limited to what is visible.
+- **Supersample then downscale** (125 to 150 %, Lanczos reduction in linear light) can give a sharpness that
+  denoising alone does not reach; the gain is demonstrated on each project.
+- **Build cost** to track too: face count, peak memory, build time.
+- The **first frame** of a process includes scene preparation: it does not count in the steady state.
 
-## Boucle parfaite
+## Perfect loop
 
-- Tous les mouvements sont **périodiques sur la période exacte**, avec raccord en position **et** en vitesse.
-- **Pas d'image terminale dupliquée** : l'image N n'est pas rendue, puisque c'est l'image 0.
-- Contrôle de la scène : l'état à la période est égal à l'état initial (transformations et déformations à écart nul).
-- Contrôle des images : l'écart dernière → première image est du même ordre que l'écart moyen entre deux images
-  consécutives ([`loop_check.py`](../../tools/README.md#loop_checkpy)).
-- Stabilisation **en boucle fermée** : l'image 0 a pour voisine la dernière image.
+- Every motion is **periodic over the exact period**, matching in position **and** velocity.
+- **No duplicated final frame**: frame N is not rendered, since it is frame 0.
+- Scene check: the state at the period equals the initial state (transformations and deformations at zero
+  difference).
+- Frame check: the last → first frame difference is of the same order as the mean difference between two consecutive
+  frames ([`loop_check.py`](../../tools/README.md#loop_checkpy)).
+- Stabilization **as a closed loop**: frame 0 has the last frame as its neighbour.

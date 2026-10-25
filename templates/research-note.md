@@ -1,33 +1,33 @@
-# <Sujet> — méthodes : sources, défaut traité, essai, résultat
+# <Topic> — methods: sources, defect addressed, trial, result
 
-Date : YYYY-MM-DD. Recherche menée sans sous-agent. Réutilise : <notes précédentes du projet ou du référentiel>.
+Date: YYYY-MM-DD. Research done without sub-agents. Reuses: <earlier notes of the project or the playbook>.
 
-Légende : **D** documenté (source citée) · **T** testé dans le projet · **H** hypothèse · **O** observation sur nos
-résultats.
+Legend: **D** documented (source quoted) · **T** tested in the project · **H** hypothesis · **O** observation on our
+results.
 
-## Problème observé
+## Observed problem
 
-<Description précise, recadrage si possible, taille et conditions d'observation.>
+<Precise description, crop if possible, size and viewing conditions.>
 
-## Méthodes retenues
+## Methods kept
 
-| # | Source (auteur, lien, passage ou horodatage) | Défaut traité | Essai | Résultat |
+| # | Source (author, link, passage or timestamp) | Defect addressed | Trial | Result |
 |---|---|---|---|---|
 | 1 | **D** | | | **T** |
 
-## Pistes étudiées, non retenues
+## Leads studied, not kept
 
-- **<Piste>** : raison (absente de la version utilisée, licence, coût, sans bénéfice visible…).
+- **<Lead>**: reason (missing from the version in use, licence, cost, no visible benefit…).
 
-## Ressources (dépôts, extensions, skills)
+## Resources (repositories, extensions, skills)
 
-| Ressource | Auteur | Licence | Maintenance | Dépendances | Apport concret | Décision |
+| Resource | Author | Licence | Maintenance | Dependencies | Concrete contribution | Decision |
 |---|---|---|---|---|---|---|
 | | | | | | | |
 
-Si aucune ressource n'apporte de bénéfice concret, l'écrire.
+If no resource brings a concrete benefit, write it down.
 
-## Sources consultées le YYYY-MM-DD
+## Sources consulted on YYYY-MM-DD
 
-- <lien> — <ce qui y a été lu>.
-- Inaccessibles : <lien> — raison.
+- <link> — <what was read there>.
+- Inaccessible: <link> — reason.

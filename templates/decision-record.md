@@ -1,26 +1,26 @@
-# NNNN — Titre de la décision
+# NNNN — Title of the decision
 
-- **Statut** : proposée | acceptée | remplacée par NNNN
-- **Date** : YYYY-MM-DD
-- **Décidée par** : <la personne qui dirige / l'agent sur délégation>
+- **Status**: proposed | accepted | replaced by NNNN
+- **Date**: YYYY-MM-DD
+- **Decided by**: <the lead / the agent by delegation>
 
-## Contexte
+## Context
 
-Le problème, les contraintes, les faits vérifiés (avec références : fichiers, commits, mesures, demandes datées).
+The problem, the constraints, the verified facts (with references: files, commits, measurements, dated requests).
 
-## Options considérées
+## Options considered
 
-| Option | Avantages | Inconvénients | Mesures |
+| Option | Advantages | Drawbacks | Measurements |
 |---|---|---|---|
 
-## Décision
+## Decision
 
-Ce qui est décidé, en termes vérifiables.
+What is decided, in verifiable terms.
 
-## Conséquences
+## Consequences
 
-Ce que cela implique, y compris les coûts et les limites acceptées.
+What it implies, including the costs and the accepted limitations.
 
-## Vérification
+## Verification
 
-Comment la décision est contrôlée (test, contrôle automatique, liste de contrôle), ou pourquoi elle ne peut pas l'être.
+How the decision is checked (test, automatic check, checklist), or why it cannot be.

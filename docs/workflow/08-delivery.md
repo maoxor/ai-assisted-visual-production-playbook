@@ -1,49 +1,48 @@
-# 8. Livraison
+# 8. Delivery
 
-**Objectif.** Remettre des livrables qui existent, s'ouvrent et ont été contrôlés, avec un bilan qui permet de les
-utiliser et de les reproduire.
+**Objective.** Hand over deliverables that exist, open and have been checked, with a report that makes them usable
+and reproducible.
 
-## Ce qui est livré [éprouvé]
+## What is delivered [proven]
 
-- **Les sources reproductibles** : projet et dépendances regroupées, scripts de génération, de calcul et d'export,
-  configuration et graines.
-- **Les livrables finaux** dans tous les formats cibles, avec leurs **replis** (images fixes, affiches, versions
-  dégradées).
-- **L'intégration** testée dans l'environnement cible, ou une page de démonstration locale minimale.
-- **Les preuves** : captures de contrôle, avant/après, vidéos de revue, page de revue actualisée.
-- **Un rapport court** : contrôles réellement exécutés, défauts corrigés, limites restantes
-  ([modèle](../../templates/delivery-report.md)).
-- **Un README** : ouvrir, modifier, régénérer, exporter ; sources et licences des ressources ajoutées.
+- **Reproducible sources**: project and bundled dependencies, generation, computation and export scripts,
+  configuration and seeds.
+- **Final deliverables** in every target format, with their **fallbacks** (stills, posters, degraded versions).
+- **The integration**, tested in the target environment, or a minimal local demonstration page.
+- **The evidence**: check captures, before/after, review videos, an up-to-date review page.
+- **A short report**: checks actually run, defects fixed, remaining limitations
+  ([template](../../templates/delivery-report.md)).
+- **A README**: open, modify, regenerate, export; sources and licences of added resources.
 
-## Le bilan final [éprouvé]
+## The final report [proven]
 
-Il distingue toujours :
+It always separates:
 
-1. **Terminé** : ce qui existe à l'emplacement final.
-2. **Testé** : ce qui a été vérifié, comment, avec quels résultats, dans quels environnements (réel ou émulé).
-3. **Limites** : ce qui n'a pas pu être fait ou vérifié, avec la raison et la manière de le faire.
+1. **Done**: what exists at its final location.
+2. **Tested**: what was verified, how, with which results, in which environments (real or emulated).
+3. **Limitations**: what could not be done or verified, with the reason and how to do it.
 
-Il reprend aussi les choix retenus et leur raison, en une ligne chacun.
+It also restates the choices made and their reason, one line each.
 
 <a id="delivery-under-time-pressure"></a>
 
-## Livraison sous contrainte de temps [éprouvé]
+## Delivery under time pressure [proven]
 
-Quand la personne qui dirige n'a plus de temps et demande tout de suite ce qui est prêt :
+When the lead has run out of time and asks for whatever is ready now:
 
-- livrer immédiatement ce qui est **prêt et vérifié**, à un emplacement clair, avec l'extrait d'intégration à copier ;
-- dire en une ligne ce qui n'est pas testé ;
-- reprendre ensuite les travaux en cours sans casser ce qui a été livré : **mêmes noms de fichiers**, anciennes
-  versions archivées à côté, annonce explicite quand de nouveaux fichiers remplacent les anciens.
+- deliver immediately what is **ready and verified**, in a clear location, with the integration snippet to copy;
+- say in one line what is not tested;
+- then resume the ongoing work without breaking what was delivered: **same file names**, old versions archived next to
+  them, an explicit announcement when new files replace the old ones.
 
-## Après la livraison
+## After delivery
 
-- **Retour d'expérience** : bilan dans le projet ([modèle](../../templates/retrospective.md)), puis report des
-  enseignements **génériques** dans ce référentiel ([`CONTRIBUTING.md`](../../CONTRIBUTING.md#after-each-project)).
-- **Nettoyage proposé, pas imposé** : les fichiers intermédiaires régénérables peuvent être supprimés, mais on le
-  propose au lieu de le faire.
+- **Retrospective**: a report in the project ([template](../../templates/retrospective.md)), then the **generic**
+  lessons brought back to this playbook ([`CONTRIBUTING.md`](../../CONTRIBUTING.md#after-each-project)).
+- **Clean-up proposed, not imposed**: regenerable intermediate files may be deleted, but propose it instead of doing
+  it.
 
-## Critère de fin
+## Exit criterion
 
-La [définition de « terminé »](../quality/README.md#definition-of-done) est satisfaite ; le bilan est rendu ;
-l'emplacement des livrables est indiqué ; l'utilisation est expliquée (extrait de code, commande).
+The [definition of done](../quality/README.md#definition-of-done) is met; the report is delivered; the location of the
+deliverables is given; usage is explained (code snippet, command).

@@ -1,57 +1,56 @@
-# Brief — <nom du projet>
+# Brief — <project name>
 
-- **Date** : YYYY-MM-DD
-- **Personne qui dirige** : <rôle>
-- **Statut** : cadrage | en production | livré
+- **Date**: YYYY-MM-DD
+- **Lead**: <role>
+- **Status**: scoping | in production | delivered
 
-## Objectif
+## Objective
 
-<Une phrase : ce que l'on produit, pour qui, où ce sera vu ou utilisé.>
+<One sentence: what is produced, for whom, where it will be seen or used.>
 
-## Critère essentiel
+## Key criterion
 
-<La phrase qui permettra de juger chaque itération. Exemple de forme : « même sans effets, le sujet doit paraître
-vivant ; avec tous les éléments, l'ensemble doit former une composition cohérente ».>
+<The sentence against which every iteration will be judged. Example of form: "even without effects, the subject must
+feel alive; with every element, the whole must form a coherent composition".>
 
-## Références
+## References
 
-| Référence | Ce qu'elle apporte | Ce qu'il ne faut PAS reproduire |
+| Reference | What it brings | What must NOT be reproduced |
 |---|---|---|
 | | | |
 
-## Livrables attendus
+## Expected deliverables
 
-| Livrable | Formats | Conditions finales (taille, durée, plateforme) | Replis |
+| Deliverable | Formats | Final conditions (size, duration, platform) | Fallbacks |
 |---|---|---|---|
 | | | | |
 
-## Contraintes
+## Constraints
 
-- Plateforme, matériel, logiciels disponibles (vérifiés le YYYY-MM-DD) :
-- Délais :
-- Budget : aucun achat ni abonnement sans accord.
-- Droits et licences (sources tierces, publication) :
-- Diffusion : local uniquement tant que non autorisé.
+- Platform, hardware, available software (checked on YYYY-MM-DD):
+- Deadlines:
+- Budget: no purchase or subscription without approval.
+- Rights and licences (third-party sources, publication):
+- Distribution: local only until authorized.
 
-## Existant inspecté
+## Existing work inspected
 
-<Fichiers, versions, processus en cours, résultats précédents : vérifiés dans les fichiers, pas d'après un compte
-rendu.>
+<Files, versions, running processes, earlier results: checked in the files, not from a report.>
 
-## Hypothèses de travail
+## Working assumptions
 
-1. <hypothèse> — conséquence si elle est fausse :
+1. <assumption> — consequence if it is wrong:
 
-## Tensions du cahier des charges
+## Tensions in the requirements
 
-<Exigences qui se contredisent, et le compromis proposé.>
+<Requirements that contradict each other, and the proposed trade-off.>
 
-## Questions réellement bloquantes
+## Truly blocking questions
 
-- <question> — ce qui avance en attendant :
+- <question> — what moves forward meanwhile:
 
-## Risques et prototype minimal
+## Risks and minimal prototype
 
-| Risque | Contrôle qui peut échouer | Résultat |
+| Risk | Check that can fail | Result |
 |---|---|---|
 | | | |

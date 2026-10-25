@@ -1,46 +1,46 @@
-# <version> — Rapport de livraison
+# <version> — Delivery report
 
-Date : YYYY-MM-DD. Ces contrôles sont les miens ; la validation de la personne qui dirige est indiquée à part.
+Date: YYYY-MM-DD. These checks are mine; the lead's approval is stated separately.
 
-## Livré (emplacements)
+## Delivered (locations)
 
-| Livrable | Emplacement | Formats | Poids |
+| Deliverable | Location | Formats | Weight |
 |---|---|---|---|
 
-Utilisation : <extrait de code ou commande>.
+Usage: <code snippet or command>.
 
-## Ce qui change par rapport à la version précédente
+## What changes compared with the previous version
 
-### 1. <Sujet>
+### 1. <Topic>
 
-- **Problème** : <…>
-- **Méthode** (sources) : <…>
-- **Essais comparés** : <…> → **retenu** : <…> (raison).
-- **Contrôle** : <mesure et capture>.
+- **Problem**: <…>
+- **Method** (sources): <…>
+- **Trials compared**: <…> → **kept**: <…> (reason).
+- **Check**: <measurement and capture>.
 
-## Demandes et leur état
+## Requests and their status
 
-| Demande | État | Preuve |
+| Request | Status | Evidence |
 |---|---|---|
 
-## Contrôles exécutés
+## Checks run
 
-| Contrôle | Commande ou méthode | Résultat | Réel / émulé |
+| Check | Command or method | Result | Real / emulated |
 |---|---|---|---|
 
-## Validation de la personne qui dirige
+## The lead's approval
 
-<Donnée le … (formulation) / attendue sur : …>
+<Given on … (wording) / expected on: …>
 
-## Limites restantes
+## Remaining limitations
 
-- **<Limite>** : raison, impact, comment la lever.
+- **<Limitation>**: reason, impact, how to lift it.
 
-## Reproduire
+## Reproduce
 
-<Commandes de régénération, versions des outils, graine, configuration archivée.>
+<Regeneration commands, tool versions, seed, archived configuration.>
 
-## Ressources ajoutées (provenance et licences)
+## Added resources (provenance and licences)
 
-| Ressource | Version | Source | Licence | Rôle |
+| Resource | Version | Source | Licence | Role |
 |---|---|---|---|---|

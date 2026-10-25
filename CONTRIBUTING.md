@@ -1,79 +1,98 @@
-# Contribuer
+# Contributing
 
-Ce référentiel s'enrichit par **petits ajouts génériques**, pas par réécriture. Git et GitHub servent à tracer quand
-et pourquoi chaque règle a changé.
+Thank you for helping. This playbook grows through **small, generic additions**, not rewrites. Git and GitHub record
+when and why each rule changed. By contributing, you agree that your contribution is released under the
+[MIT license](LICENSE) and that you follow the [code of conduct](CODE_OF_CONDUCT.md).
 
-## Règles de rédaction
+## Ways to contribute
 
-1. **Aucun contenu de projet** ([décision 0007](docs/decisions/0007-no-project-content.md)) : ni livrable, ni asset,
-   ni nom de projet, de client, d'œuvre ou de personne, ni chiffre, réglage, chronologie ou citation propres à un
-   projet. Un enseignement est reformulé comme une règle indépendante de son origine.
-2. **Niveau de maturité obligatoire** pour toute pratique : **[éprouvé]**, **[extrapolé]** ou **[proposé]**.
-   `scripts/check_repo.py` vérifie sa présence dans les documents qui l'exigent.
-3. **Ne rien inventer** : une pratique non appliquée est [proposé], jamais [éprouvé].
-4. **Méthode ≠ esthétique** ([décision 0002](docs/decisions/0002-method-separate-from-aesthetics.md)) : aucun style
-   prescrit.
-5. **Une règle, une source** : les autres documents y renvoient par un lien.
-6. **Noms en anglais** : fichiers, dossiers, identifiants, options, branches, étiquettes. La documentation est rédigée
-   en français, avec les accents corrects.
-7. **Aucun secret ni donnée personnelle** : ni jeton, ni adresse électronique, ni chemin de poste.
-8. **Liens relatifs** et ancres stables (`<a id="…">` en anglais pour les sections citées ailleurs).
+| You have… | Do this |
+|---|---|
+| A lesson from a project (a mistake fixed, a practice that worked) | Open a **Lesson learned** issue, in generic form |
+| A proposal to change a principle, step, checklist, tool or template | Open a **Method change** issue, then a pull request |
+| Found a gap (an untested practice, a missing check) | Open a **Gap** issue; it may become a line in [`ROADMAP.md`](ROADMAP.md) |
+| A bug in a tool or script | Open an issue with the command, the input description and the output |
+| A new tool | Read [Adding a tool](tools/README.md#adding-a-tool), then open a pull request |
+
+## Writing rules
+
+1. **No project content** ([decision 0007](docs/decisions/0007-no-project-content.md)): no deliverable, asset, project,
+   client, artwork or person name, and no figure, setting, timeline or quotation specific to a project. A lesson is
+   rewritten as a rule that stands on its own.
+2. **Every practice carries a maturity level**: **[proven]**, **[extrapolated]** or **[proposed]**. `scripts/check_repo.py`
+   checks that the documents that need one have one.
+3. **Invent nothing**: a practice that was never applied is [proposed], never [proven].
+4. **Method, not aesthetics** ([decision 0002](docs/decisions/0002-method-separate-from-aesthetics.md)): no style is
+   prescribed.
+5. **One rule, one source**: other documents link to it.
+6. **English** for documentation, file names, identifiers, options, branches and labels.
+7. **No secret and no personal data**: no token, email address or workstation path.
+8. **Relative links** and stable anchors (`<a id="…">`) for sections cited elsewhere.
 
 <a id="after-each-project"></a>
 
-## Après chaque projet
+## After each project
 
-1. **Retour d'expérience dans le projet** : remplir `docs/RETROSPECTIVE.md`
-   ([modèle](templates/retrospective.md)). Il ne vient pas ici.
-2. **Anti-modèles** : chaque erreur corrigée devient une entrée générique de
-   [`anti-patterns.md`](docs/quality/anti-patterns.md) (symptôme, coût, prévention).
-3. **Principes, workflow, guides** : préciser ou corriger ; une pratique [extrapolé] ou [proposé] appliquée avec succès
-   passe à [éprouvé].
-4. **Outils** : un script utile à un deuxième projet est généralisé dans [`tools/`](tools/README.md), **avec ses tests
-   sur données synthétiques**.
-5. **Préférences** : une préférence de la personne qui dirige confirmée d'un projet à l'autre va dans
+1. **Retrospective in the project**: fill in `docs/RETROSPECTIVE.md` ([template](templates/retrospective.md)). It does
+   not come here.
+2. **Anti-patterns**: each corrected mistake becomes a generic entry in
+   [`anti-patterns.md`](docs/quality/anti-patterns.md) (symptom, cost, prevention).
+3. **Principles, workflow, guides**: clarify or correct; an [extrapolated] or [proposed] practice applied successfully
+   becomes [proven].
+4. **Tools**: a script useful to a second project is generalized into [`tools/`](tools/README.md), **with tests on
+   synthetic data**.
+5. **Defaults**: a lead preference confirmed from one project to the next can go into
    [`collaboration.md`](docs/quality/collaboration.md).
-6. **Décision de méthode** si un choix structurant change ([décisions](docs/decisions/README.md)).
-7. **Version** : [`CHANGELOG.md`](CHANGELOG.md), puis une étiquette Git.
-8. **Relecture de confidentialité** : `python3 scripts/check_repo.py`, avec la liste de termes interdits du poste.
+6. **Method decision** if a structural choice changes ([decisions](docs/decisions/README.md)).
+7. **Version**: [`CHANGELOG.md`](CHANGELOG.md), then a Git tag.
+8. **Confidentiality review**: `python3 scripts/check_repo.py`, with your own deny list (see below).
 
-## Pendant un projet
+## Development setup
 
-- Un enseignement important n'attend pas la fin : issue **« Lesson learned »** (forme générique).
-- Une proposition de changement : issue **« Method change »**.
-- Une lacune de la méthode : issue **« Gap »**, et une ligne dans [`ROADMAP.md`](ROADMAP.md).
+```bash
+git clone https://github.com/maoxor/ai-assisted-visual-production-playbook.git
+cd ai-assisted-visual-production-playbook
+uv run pytest                    # or: python -m pip install numpy opencv-python-headless pytest && python -m pytest
+python3 scripts/check_repo.py
+```
 
-## Git et GitHub
+Optional, for the plugin manifests: `claude plugin validate .`
 
-- **Branche** par contribution (`docs/<sujet>`, `tools/<sujet>`, `ci/<sujet>`), puis une demande de fusion avec le
-  modèle de description. Fusion sur `main` par la personne qui dirige, ou à sa demande.
-- **Commits** `type(portée): description`. Types : `docs`, `feat` (outil, modèle, skill), `fix`, `test`, `ci`,
-  `chore`. Portées : `principles`, `workflow`, `quality`, `domains`, `tooling`, `decisions`, `templates`, `skills`,
-  `tools`, `scripts`.
-- **Corps du commit** : pourquoi, ce qui change pour un futur projet, preuve (tests, vérification).
-- **Identité Git** : celle configurée sur le poste.
-- **Étiquettes** `vX.Y.Z` à chaque version.
-- **Libellés d'issues** : `lesson-learned`, `method-change`, `gap`.
+## Pull requests
+
+- **One branch per contribution**: `docs/<topic>`, `tools/<topic>`, `ci/<topic>`, `fix/<topic>`.
+- **Commits** follow `type(scope): description`. Types: `docs`, `feat` (tool, template, skill), `fix`, `test`, `ci`,
+  `chore`, `refactor`. Scopes: `principles`, `workflow`, `quality`, `domains`, `tooling`, `decisions`, `templates`,
+  `skills`, `tools`, `scripts`, `examples`, `plugin`.
+- **Commit body**: why, what changes for a future project, evidence (tests, checks).
+- Fill in the pull request template. CI must be green.
+- **Issue labels**: `lesson-learned`, `method-change`, `gap`.
 
 <a id="versioning"></a>
 
-## Versions
+## Versioning
 
-Inspiré de semver :
+Inspired by semantic versioning, applied to the method:
 
-- **majeure** : un principe ajouté, retiré ou changé de sens, ou une décision remplacée ;
-- **mineure** : une étape, un guide, un outil, un modèle ou un skill ajoutés ;
-- **correctif** : précision, correction, lien.
+- **major**: a principle added, removed or changed in meaning, a decision replaced, or a breaking change in a tool's
+  command line;
+- **minor**: a step, guide, tool, template or skill added;
+- **patch**: clarification, correction, link.
 
-## Vérifier avant de proposer
+The version appears in `CHANGELOG.md`, `pyproject.toml` and `.claude-plugin/plugin.json`; each release has a
+`vX.Y.Z` tag.
+
+## Checking before you propose
 
 ```bash
-python3 scripts/check_repo.py                                   # liens, ancres, maturité, structure, confidentialité
-python3 scripts/check_repo.py --deny-list ~/chemin/termes.txt   # avec une liste de termes interdits du poste
-uv run --no-project --python 3.12 --with numpy --with opencv-python-headless --with pytest pytest tools/tests -q
+python3 scripts/check_repo.py                                  # links, anchors, maturity, structure, confidentiality
+python3 scripts/check_repo.py --deny-list ~/path/terms.txt     # plus your own forbidden terms
+uv run pytest
 ```
 
-Sans option, `check_repo.py` lit aussi `.git/info/deny-list.txt` s'il existe : un fichier local, jamais versionné,
-avec un terme par ligne (`#` pour les commentaires).
+Without the option, `check_repo.py` also reads `.git/info/deny-list.txt` if it exists: a local file, never versioned,
+one term per line (`#` starts a comment). Put there the names of your projects, clients and colleagues so that they
+can never slip into a contribution.
 
-La CI (`.github/workflows/ci.yml`) exécute les mêmes contrôles, sans liste locale, à chaque push.
+CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs the same checks, without any deny list, on every push
+and pull request.

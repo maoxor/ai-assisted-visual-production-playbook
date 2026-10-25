@@ -1,32 +1,32 @@
-# Feuille de route
+# Roadmap
 
-Actions à entreprendre pour renforcer la méthode. Chaque action terminée est retirée par un commit qui dit comment,
-et le niveau de maturité concerné est mis à jour.
+Actions planned to strengthen the method. Each completed action is removed by a commit that says how, and the maturity
+level concerned is updated. Larger items are tracked as **Gap** issues.
 
-## Éprouver ce qui est proposé ou extrapolé
+## Prove what is proposed or extrapolated
 
-| Action | Pourquoi | Critère de fin |
+| Action | Why | Done when |
 |---|---|---|
-| Appliquer la méthode à un projet de **motion design**, de **jeu ou temps réel**, ou de **document** | Ces colonnes de [l'adaptation](docs/workflow/adapting.md) sont [extrapolé] | Une colonne passe à [éprouvé], avec les ajustements reportés |
-| Utiliser le skill [`visual-iteration`](skills/visual-iteration/SKILL.md) sur un vrai travail visuel | Rédigé à partir de pratiques éprouvées, jamais utilisé tel quel | Skill corrigé d'après l'usage ; maturité [éprouvé] |
-| Créer un vrai projet avec [`new_project.py`](scripts/new_project.py) | Testé seulement dans des dossiers temporaires et en CI | Squelette ajusté d'après l'usage réel |
-| Utiliser la section « Méthode appliquée » du [modèle de `CLAUDE.md`](templates/project-claude-md.md) dès la première session | [proposé] | Effet constaté sur la répétition des consignes |
+| Apply the method to a **motion design**, **game or real-time**, or **document** project | These columns of the [adaptation guide](docs/workflow/adapting.md) are [extrapolated] | One column becomes [proven], with the adjustments reported |
+| Use the [`visual-iteration`](skills/visual-iteration/SKILL.md) skill on real visual work | Written from proven practices, never used as is | Skill corrected from use; maturity [proven] |
+| Create a real project with [`new_project.py`](scripts/new_project.py) | Tested only in temporary folders and CI | Skeleton adjusted from real use |
+| Use the "Applied method" section of the [`CLAUDE.md` template](templates/project-claude-md.md) from the first session | [proposed] | Observed effect on repeated instructions |
 
-## Combler des manques
+## Fill gaps
 
-| Action | Pourquoi | Critère de fin |
+| Action | Why | Done when |
 |---|---|---|
-| Écrire et tester les **hooks pour projets de rendu** (archives en lecture seule, dépendances d'une production en cours, fichiers volumineux) | Décrits dans [Claude Code](docs/tooling/claude-code.md#hooks), jamais écrits | Hooks dans `skills/` ou `tools/`, avec leurs tests en CI |
-| Définir une **procédure de test sur appareils physiques** (téléphones, tablettes) | Les tests de lecture vidéo n'ont été faits qu'en émulation | Procédure ajoutée au [guide vidéo web](docs/domains/web-background-video.md) et à la liste de contrôle |
-| Vérifier la **compensation de couleur Apple** sur iPhone et iPad réels | Constat fait seulement sous macOS | Résultat consigné dans le guide vidéo web |
-| Généraliser un **banc de tests de lecture vidéo** (Playwright) dans `tools/` | Le banc reste à construire à chaque projet | Outil générique testé |
-| Généraliser un **banc d'essai à modifications nommées** pour Blender | Le principe est décrit, pas outillé | Outil générique testé sur une scène synthétique |
-| Documenter le **temps humain et le budget** dans le cadrage | Aucun repère d'estimation dans la méthode | Section ajoutée au [brief](templates/project-brief.md) |
-| Décrire les **rôles à plusieurs personnes** (collaborateurs, relecteurs) | La méthode décrit un duo personne qui dirige / agent | Section ajoutée aux préférences de collaboration |
+| Write and test **hooks for rendering projects** (read-only archives, dependencies of a running production, large files) | Described in [Claude Code](docs/tooling/claude-code.md#hooks), never written | Hooks shipped with tests in CI |
+| Define a **test procedure on physical devices** (phones, tablets) | Video playback tests were only run in emulation | Procedure added to the [web video guide](docs/domains/web-background-video.md) and its checklist |
+| Check **Apple colour compensation** on real iPhones and iPads | Observed on macOS only | Result recorded in the web video guide |
+| Generalize a **video playback test bench** (Playwright) into `tools/` | The bench is rebuilt for each project | Generic tool, tested |
+| Generalize a **named-modification test bench** for Blender | The principle is described, not tooled | Generic tool tested on a synthetic scene |
+| Document **human time and budget** in scoping | The method has no estimation guidance | Section added to the [brief](templates/project-brief.md) |
+| Describe **multi-person roles** (collaborators, reviewers) | The method describes a lead/agent pair | Section added to the collaboration defaults |
 
-## Outillage du référentiel
+## Repository tooling
 
-| Action | Pourquoi | Critère de fin |
+| Action | Why | Done when |
 |---|---|---|
-| Ajouter un **hook pre-commit local** qui lance `check_repo.py` avec la liste de termes interdits | La CI ne connaît pas la liste locale | Hook documenté dans `CONTRIBUTING.md` |
-| Ajouter une **licence** si le dépôt devient public | Dépôt privé à sa création | Fichier `LICENSE` choisi par la personne qui dirige |
+| Add a local **pre-commit hook** running `check_repo.py` with the deny list | CI does not know local deny lists | Hook documented in `CONTRIBUTING.md` |
+| Test the **plugin installation** from the public repository | Manifests are validated locally (`claude plugin validate`); installation from GitHub requires a public repository | Installation verified and documented |

@@ -1,16 +1,15 @@
-# Exploration créative ouverte
+# Open creative exploration
 
 ```markdown
-**Aucun comportement n'est imposé à <élément>.** Observe sa forme, sa matière apparente et son intégration.
-Recherche des références et imagine plusieurs façons de <lui donner vie / enrichir l'ambiance> qui renforcent
-<l'identité du sujet>. Ne pars pas d'une liste d'effets imposée.
+**No behaviour is imposed on <element>.** Observe its shape, apparent material and integration. Look for references
+and imagine several ways to <bring it to life / enrich the atmosphere> that reinforce <the subject's identity>. Do not
+start from an imposed list of effects.
 
-Propose quelques directions distinctes. Pour chacune : une référence, son intérêt visuel, son articulation avec
-l'existant, son coût probable de réalisation et de <rendu / exécution>. Choisis la technique après avoir défini l'effet
-recherché.
+Propose a few distinct directions. For each: a reference, its visual interest, how it fits with the existing work, its
+likely production and <render / execution> cost. Choose the technique after defining the intended effect.
 
-Réalise de courts essais des plus prometteuses. Évalue-les en gros plan et dans l'œuvre complète, à la taille finale.
-Privilégie une ambiance cohérente et des mouvements intentionnels, sans surcharger ni détourner l'attention du sujet.
+Run short trials of the most promising ones. Evaluate them in close-up and in the whole piece, at final size. Favour a
+coherent atmosphere and intentional motion, without overloading or pulling attention away from the subject.
 
-Pour cette étape : livre les propositions et leurs aperçus comparatifs ; ne lance pas la production complète.
+For this step: deliver the proposals and their comparative previews; do not launch the full production.
 ```

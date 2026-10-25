@@ -1,15 +1,15 @@
-# Point d'avancement (modèle de message)
+# Status update (message template)
 
-Court : dix lignes au plus. Le résultat est ouvert ou lié.
+Short: ten lines at most. The result is opened or linked.
 
 ```
-**Fonctionne (vérifié)** : <ce qui est fait et contrôlé, avec la preuve en quelques mots>.
-**Reste** : <ce qui est à corriger ou à produire>.
-**En cours** : <calcul, étape, avancement n/N, fin estimée à HH:MM (hypothèse)>.
-**Prochaine action** : <une seule>.
-**Vous attend** : <décision ou validation précise, ou « rien »>.
-**À voir** : <chemin ou lien du résultat, déjà ouvert>.
+**Works (verified)**: <what is done and checked, with the evidence in a few words>.
+**Remains**: <what is to fix or to produce>.
+**In progress**: <computation, step, progress n/N, estimated end at HH:MM (assumption)>.
+**Next action**: <only one>.
+**Waiting for you**: <a precise decision or approval, or "nothing">.
+**To see**: <path or link of the result, already opened>.
 ```
 
-Répondre d'abord à la question posée s'il y en a une (« combien de temps ? » : un chiffre, ses hypothèses, la cause
-principale). Côtés désignés du point de vue du spectateur ; valeurs de la dernière version.
+Answer the question asked first, if there is one ("how long?": a figure, its assumptions, the main cause). Sides named
+from the viewer's point of view; values of the latest version.

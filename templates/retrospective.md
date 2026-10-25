@@ -1,43 +1,43 @@
-# Retour d'expérience — <nom du projet>
+# Retrospective — <project name>
 
-Ce document **reste dans le projet**. Seuls les enseignements génériques, reformulés sans référence au projet, sont
-reportés dans le référentiel `production-playbook` (sa décision 0007).
+This document **stays in the project**. Only the generic lessons, rewritten without any reference to the project, are
+brought back to the `ai-assisted-visual-production-playbook` repository (its decision 0007).
 
-- **Période** : du YYYY-MM-DD au YYYY-MM-DD
-- **Type** : <rendu précalculé, application web, motion design…>
-- **Historique disponible** : <Git, journaux, rapports>
+- **Period**: from YYYY-MM-DD to YYYY-MM-DD
+- **Type**: <offline rendering, web application, motion design…>
+- **Available history**: <Git, logs, reports>
 
-## Objectif et critère essentiel
+## Objective and key criterion
 
-## Chronologie
+## Timeline
 
-| Date | Étape ou version | Déclencheur (demande, défaut) | Résultat |
+| Date | Step or version | Trigger (request, defect) | Result |
 |---|---|---|---|
 
-## Ce qui a marché
+## What worked
 
-- <pratique> — preuve — généralisable ? (principe ou étape du workflow concerné)
+- <practice> — evidence — generalizable? (principle or workflow step concerned)
 
-## Ce qui a coûté cher
+## What cost a lot
 
-- <erreur ou détour> — effet — correction — règle générique
+- <mistake or detour> — effect — fix — generic rule
 
-## Décisions propres au projet (à ne pas reprendre par défaut)
+## Project-specific decisions (not to be reused by default)
 
-| Domaine | Décision | Raison |
+| Domain | Decision | Reason |
 |---|---|---|
 
-## Chiffres utiles
+## Useful figures
 
-<Coûts mesurés, poids, temps, avec leurs conditions de mesure.>
+<Measured costs, weights, times, with their measurement conditions.>
 
-## Ce qui n'a pas pu être vérifié
+## What could not be verified
 
-## Report dans le référentiel (forme générique uniquement)
+## Brought back to the playbook (generic form only)
 
-- [ ] Anti-modèles ajoutés ou précisés
-- [ ] Principes ou étapes du workflow précisés ; niveau de maturité mis à jour
-- [ ] Outil généralisé dans `tools/`, avec des tests sur données synthétiques
-- [ ] Décision de méthode si un choix structurant a changé
-- [ ] `CHANGELOG.md` et version
-- [ ] Relecture : aucun nom, chiffre, livrable ni citation du projet dans ce qui est reporté
+- [ ] Anti-patterns added or clarified
+- [ ] Principles or workflow steps clarified; maturity level updated
+- [ ] Tool generalized into `tools/`, with tests on synthetic data
+- [ ] Method decision if a structural choice changed
+- [ ] `CHANGELOG.md` and version
+- [ ] Review: no project name, figure, deliverable or quotation in what is brought back

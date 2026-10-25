@@ -1,21 +1,20 @@
-# Livraison urgente
+# Urgent delivery
 
-Demande type :
-
-```markdown
-Je n'ai plus de temps : livre-moi maintenant ce qui est prêt, uniquement les <livrables> utilisables dans <cible>.
-```
-
-Puis, une fois la livraison faite :
+Typical request:
 
 ```markdown
-Reprends les travaux en cours ; on utilise ce que tu as livré en attendant.
+I am out of time: deliver now what is ready, only the <deliverables> usable in <target>.
 ```
 
-Réponse attendue de l'agent ([livraison sous contrainte](../../docs/workflow/08-delivery.md#delivery-under-time-pressure)) :
+Then, once the delivery is made:
 
-1. Livrer **immédiatement** ce qui est prêt **et vérifié**, dans un dossier clair, avec l'extrait d'intégration à
-   copier.
-2. Dire en une ligne ce qui n'est pas testé.
-3. Reprendre ensuite les travaux sans casser l'intégration : **mêmes noms de fichiers**, anciennes versions archivées
-   à côté, annonce explicite quand de nouveaux fichiers remplacent les anciens.
+```markdown
+Resume the ongoing work; we are using what you delivered in the meantime.
+```
+
+Expected response from the agent ([delivery under time pressure](../../docs/workflow/08-delivery.md#delivery-under-time-pressure)):
+
+1. Deliver **immediately** what is ready **and verified**, in a clear folder, with the integration snippet to copy.
+2. Say in one line what is not tested.
+3. Then resume the work without breaking the integration: **same file names**, old versions archived next to them, an
+   explicit announcement when new files replace the old ones.

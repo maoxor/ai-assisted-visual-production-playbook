@@ -1,84 +1,79 @@
-# Animation 2,5D d'un sujet à partir d'une image unique
+# 2.5D animation of a subject from a single image
 
-Pratiques **[éprouvé]**, sauf mention contraire.
+Practices **[proven]** unless stated otherwise.
 
-## Objectif et limite fondamentale
+## Objective and fundamental limit
 
-Donner vie à une illustration existante (respiration, micro-expressions, éléments secondaires) **sans régénérer le
-sujet** et sans trahir son identité, son anatomie, ses proportions ni ses détails
-([décision 0004](../decisions/0004-preserve-the-source.md)). La vue est unique : on n'invente pas une rotation qui
-révélerait un profil absent ; les amplitudes restent dans ce que la vue peut supporter.
+Bring an existing illustration to life (breathing, micro-expressions, secondary elements) **without regenerating the
+subject** and without betraying its identity, anatomy, proportions or details
+([decision 0004](../decisions/0004-preserve-the-source.md)). There is a single view: do not invent a rotation that
+would reveal a profile absent from the source; amplitudes stay within what the view can support.
 
-## Méthode : calques projetés depuis la caméra
+## Method: layers projected from the camera
 
-1. **Découper ce qui doit bouger, et seulement cela** : la plaque (corps et fond), la tête, les éléments secondaires.
-   Chaque découpe ajoutée doit apporter un bénéfice.
-2. **Masques précis**, surtout sur les contours sombres et les raccords : segmentation assistée par points, puis
-   correction manuelle.
-3. **Profondeur relative** estimée par un modèle local pour donner un relief à chaque calque (vérifier la licence de
-   la variante utilisée : [guide IA](ai-models-and-assets.md)).
-4. **Maillages placés sur les rayons de la caméra de repos** : au repos, la caméra voit exactement l'image source.
-   Quand le sujet bouge, la texture reste attachée à la géométrie, sans glisser, et les effets placés devant (verre,
-   reflets) réagissent à l'état animé.
-5. **Reconstruire seulement les zones cachées qui seront révélées**, par reflet de la texture voisine ou par copie
-   d'exemplaires ; résoudre les bords pour que l'état de repos recompose la source.
-6. **Contrôleurs nommés** et multiplicateurs par famille de mouvement : 0 donne l'état de repos, 1 le réglage normal, 3
-   l'exagération pour le diagnostic.
+1. **Cut out what must move, and only that**: the plate (body and background), the head, the secondary elements. Each
+   added cut-out must bring a benefit.
+2. **Precise masks**, especially on dark contours and junctions: point-assisted segmentation, then manual correction.
+3. **Relative depth** estimated by a local model to give each layer relief (check the licence of the variant used:
+   [AI guide](ai-models-and-assets.md)).
+4. **Meshes placed along the rest camera's rays**: at rest, the camera sees exactly the source image. When the subject
+   moves, the texture stays attached to the geometry, without sliding, and the effects placed in front (glass,
+   reflections) react to the animated state.
+5. **Rebuild only the hidden areas that will be revealed**, by mirroring the neighbouring texture or copying samples;
+   resolve the edges so that the rest state recomposes the source.
+6. **Named controllers** and multipliers per motion family: 0 gives the rest state, 1 the normal setting, 3 an
+   exaggeration for diagnosis.
 
-## Déformer sans étirer : champs à ancres
+## Deforming without stretching: anchored fields
 
-- Une zone se déplace **d'un bloc** grâce à des noyaux à plateau, sans étirement ; l'étirement local est mesuré et
-  plafonné.
-- Des **ancres** (déplacement nul sur une zone ou une ligne) fixent ce qui ne doit pas bouger : centre et volume des
-  lèvres, arête du nez, attaches.
-- **Corriger la construction, pas l'amplitude** : si une zone « gonfle », c'est souvent qu'un mouvement voisin déplace
-  ses bords ; des ancres règlent le problème sans réduire l'amplitude.
-- **Quand la géométrie ne peut pas aller plus loin, utiliser l'ombre** : une ouverture (narine, pli) qui ne peut pas
-  s'agrandir sans étirer la peau devient lisible par l'assombrissement de son sillon.
-- **Plis animés** : sur une texture autoéclairée, seule la couleur peut porter l'approfondissement d'un pli ; des
-  cartes de plis se creusent avec le poids du mouvement.
+- An area moves **as a block** thanks to plateau kernels, without stretching; local stretching is measured and capped.
+- **Anchors** (zero displacement on an area or line) hold what must not move: centre and volume of the lips, bridge of
+  the nose, attachment points.
+- **Fix the construction, not the amplitude**: if an area "swells", a neighbouring motion is often moving its edges;
+  anchors solve the problem without reducing the amplitude.
+- **When geometry cannot go further, use shading**: an opening (nostril, crease) that cannot grow without stretching
+  the skin becomes readable by darkening its furrow.
+- **Animated creases**: on a self-lit texture, only colour can carry the deepening of a crease; crease maps deepen with
+  the weight of the motion.
 
-## Rythme et hiérarchie du mouvement
+## Rhythm and hierarchy of motion
 
-- **Le torse porte le souffle** ; le cou, la base du visage et les épaules suivent avec des **décalages** et des
-  **amplitudes** différents ; la tête suit moins, pour rester posée.
-- **Courbe de respiration dessinée par phases** plutôt qu'une sinusoïde : inspiration active, maintien, expiration à
-  rappel élastique, pause. Plusieurs respirations de durées et d'amplitudes différentes dans la boucle, avec raccord
-  exact.
-- **Canaux précalculés par élément**, une clé par image : chaque élément lit sa propre courbe.
-- **Micro-expressions ponctuelles**, réparties dans la boucle, jamais simultanées ni répétées à chaque respiration.
-- **Pas d'agitation permanente** : la pause à chaque cycle est essentielle.
-- **Comparer plusieurs rythmes dans l'œuvre complète** et choisir sur la présence, à vitesse normale.
+- **The torso carries the breath**; the neck, the lower face and the shoulders follow with different **offsets** and
+  **amplitudes**; the head follows less, to stay settled.
+- **A breathing curve drawn in phases** rather than a sine wave: active inhalation, hold, exhalation with an elastic
+  return, pause. Several breaths of different durations and amplitudes in the loop, with an exact seam.
+- **Precomputed channels per element**, one key per frame: each element reads its own curve.
+- **Occasional micro-expressions**, spread over the loop, never simultaneous nor repeated at every breath.
+- **No constant agitation**: the pause in each cycle is essential.
+- **Compare several rhythms in the whole piece** and choose on presence, at normal speed.
 
-## Éléments graphiques animés (tracés, signes, inscriptions)
+## Animated graphic elements (strokes, signs, inscriptions)
 
-1. **Isoler** la couche d'encre (alpha et couleur prémultipliée) pour que l'état de repos restitue la source à
-   l'identique ; reconstruire le support dessous, teinte recalée sur le voisinage.
-2. **Vectoriser** : squelette, puis traits orientés dans le sens d'écriture.
-3. **Animer la forme**, pas seulement la lumière : la lumière accompagne, elle ne remplace pas le changement de forme.
-4. **Comparer plusieurs directions** (réécriture le long des traits, recomposition) et retenir celle dont **chaque
-   état intermédiaire est un dessin net**.
-5. **Structurer la séquence** : intention, transformation, tenue, retour ; comparer plusieurs rythmes à la taille
-   finale.
-6. **Précalculer** dans un atlas lu aux coordonnées de la surface, pour que l'élément reste attaché pendant les
-   mouvements ; les reflets montrent la même animation.
+1. **Isolate** the ink layer (alpha and premultiplied colour) so that the rest state reproduces the source exactly;
+   rebuild the support underneath, its hue matched to the surroundings.
+2. **Vectorize**: skeleton, then strokes oriented in the writing direction.
+3. **Animate the shape**, not just the light: light accompanies a change of shape; it does not replace it.
+4. **Compare several directions** (rewriting along the strokes, recomposition) and keep the one whose **every
+   intermediate state is a clean drawing**.
+5. **Structure the sequence**: intent, transformation, hold, return; compare several rhythms at final size.
+6. **Precompute** into an atlas read at the surface's coordinates, so that the element stays attached during motion;
+   reflections show the same animation.
 
-## Contrôles
+## Checks
 
-- **Gros plan sans effets, caméra fixe**, sur toute la boucle, à vitesse normale : réel, figé, exagéré ×3, ralenti.
-- **Audit du rig** : ce que le rig anime réellement ; vérifier déformations et matériaux animés, pas seulement les
-  matrices des objets.
-- **Flux optique par zone** et planches repos / pic / différence, mouvement par mouvement.
-- **Zones protégées** suivies sur leur position animée, pas sur des coordonnées fixes.
-- **Perceptibilité** : le mouvement se lit à vitesse normale et à la taille finale ; le ralenti ne sert qu'au
-  diagnostic.
+- **Close-up without effects, fixed camera**, over the whole loop, at normal speed: real, frozen, exaggerated ×3, slow
+  motion.
+- **Rig audit**: what the rig actually animates; check deformations and animated materials, not just object matrices.
+- **Optical flow per area** and rest / peak / difference contact sheets, motion by motion.
+- **Protected areas** tracked on their animated position, not on fixed coordinates.
+- **Perceptibility**: the motion reads at normal speed and final size; slow motion is only for diagnosis.
 
-## Ce qui échoue souvent
+## What often fails
 
-| Essai | Pourquoi |
+| Trial | Why |
 |---|---|
-| Rotation marquée de la tête | Révèle un profil absent de la source |
-| Grande déformation géométrique d'une ouverture | Étire la peau ; préférer l'ombre |
-| Frémissement permanent d'éléments secondaires | Agitation qui détourne l'attention du sujet |
-| Lueur interne décorative | Tache lumineuse sans rôle |
-| Recomposition libre d'un tracé | États intermédiaires confus |
+| Marked head rotation | Reveals a profile absent from the source |
+| Large geometric deformation of an opening | Stretches the skin; prefer shading |
+| Constant quivering of secondary elements | Agitation that pulls attention away from the subject |
+| Decorative inner glow | A light blotch without a role |
+| Free recomposition of a stroke | Confusing intermediate states |

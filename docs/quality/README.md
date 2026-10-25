@@ -1,70 +1,68 @@
-# Qualité : comment juger, quand s'arrêter
+# Quality: how to judge, when to stop
 
-Ce dossier rend explicites les **critères d'évaluation** et les **mécanismes** qui permettent d'atteindre puis de
-maintenir un niveau de qualité élevé.
+This folder makes explicit the **evaluation criteria** and the **mechanisms** that reach and then maintain a high level
+of quality.
 
-| Document | Rôle |
+| Document | Role |
 |---|---|
-| Ce fichier | Définition de « terminé », grille d'évaluation, mécanismes de qualité |
-| [`checklists/`](checklists/README.md) | Listes de contrôle par moment : reprise, revue visuelle, avant production, vidéo web, livraison |
-| [`anti-patterns.md`](anti-patterns.md) | Erreurs classiques, avec leur prévention |
-| [`collaboration.md`](collaboration.md) | Préférences de collaboration par défaut entre la personne qui dirige et l'agent |
+| This file | Definition of done, evaluation grid, quality mechanisms |
+| [`checklists/`](checklists/README.md) | Checklists per moment: resume, visual review, pre-production, web video, delivery |
+| [`anti-patterns.md`](anti-patterns.md) | Classic mistakes, with their prevention |
+| [`collaboration.md`](collaboration.md) | Default collaboration preferences between the lead and the agent |
 
 <a id="definition-of-done"></a>
 
-## Définition de « terminé » [éprouvé]
+## Definition of done [proven]
 
-Un travail est terminé quand **toutes** les conditions suivantes sont vraies :
+Work is done when **all** of the following are true:
 
-1. Les livrables existent à leur emplacement définitif, dans tous les formats demandés, replis compris.
-2. Ils **s'ouvrent ou se lisent** dans leur environnement cible : fichier décodé en entier, lecture vérifiée dans le
-   navigateur ou l'outil.
-3. Les contrôles prévus ont été **exécutés** et leurs résultats sont cités.
-4. Chaque demande de l'itération a un état : fait, essai écarté (raison) ou manquant ([P15](../principles.md#p15)).
-5. Aucun élément résiduel ne subsiste : signature, logo, texte provisoire, fichier de debug, réglage d'essai.
-6. Les sources permettent de **régénérer** le résultat (configuration, graines, scripts, versions).
-7. La version précédente est **conservée**.
-8. Le bilan distingue *terminé*, *testé* (réel ou émulé) et *limites*.
-9. Les enseignements génériques sont reportés dans ce référentiel, ou notés comme à reporter.
+1. The deliverables exist at their final location, in every requested format, fallbacks included.
+2. They **open or play** in their target environment: file fully decoded, playback verified in the browser or tool.
+3. The planned checks have been **run** and their results are quoted.
+4. Each request of the iteration has a status: done, trial rejected (reason) or missing ([P15](../principles.md#p15)).
+5. No leftover remains: signature, logo, placeholder text, debug file, trial setting.
+6. The sources make it possible to **regenerate** the result (configuration, seeds, scripts, versions).
+7. The previous version is **kept**.
+8. The report separates *done*, *tested* (real or emulated) and *limitations*.
+9. The generic lessons are brought back to this playbook, or noted as to be brought back.
 
-Ne sont **pas** terminés : une commande lancée, un calcul en cours, un prototype, un plan, une scène reconstruite sans
-rendu final, un export non lu.
+**Not** done: a launched command, a running computation, a prototype, a plan, a rebuilt scene without a final render,
+an export that was never played.
 
-## Grille d'évaluation [éprouvé]
+## Evaluation grid [proven]
 
-Pour juger une proposition ou une itération, dans l'ordre de priorité : l'apparence et le mouvement d'abord, les
-mesures ensuite.
+To judge a proposal or an iteration, in order of priority: appearance and motion first, measurements second.
 
-| # | Critère | Question | Comment le vérifier |
+| # | Criterion | Question | How to check |
 |---|---|---|---|
-| 1 | **Intention** | Le résultat sert-il l'objectif et le critère essentiel du cadrage ? | Relire le cadrage ; regarder le résultat à la taille finale |
-| 2 | **Sujet** | Le sujet reste-t-il le centre ? Son identité est-elle préservée ? | Comparaison avec la source ; vue sans effets |
-| 3 | **Perceptibilité** | Chaque amélioration se voit-elle dans les conditions finales, à vitesse normale ? | Vidéo côte à côte, avant/après, œuvre entière |
-| 4 | **Cohérence** | Les éléments appartiennent-ils au même monde (plans, lumières, matières, rythmes) ? | Vue d'ensemble ; recherche des éléments qui paraissent rapportés |
-| 5 | **Richesse sans confusion** | La matière est-elle riche sans brouiller les zones de lecture ? | Gros plans des zones sensibles ; contrôle fonctionnel (lisibilité) |
-| 6 | **Variété intentionnelle** | Évite-t-on la répétition mécanique (mosaïque, oscillations identiques, motifs réguliers) ? | Inspection en mouvement ; comparaison des éléments entre eux |
-| 7 | **Propreté** | Y a-t-il des artefacts (scintillement, bords, trous, halos, texture qui glisse, résidus) ? | Contrôles automatiques et inspection à 100 % et 200 % |
-| 8 | **Stabilité** | Le résultat tient-il en mouvement et au raccord de boucle ? | Plusieurs tours de boucle ; mesure du scintillement |
-| 9 | **Coût** | Le coût (production, poids, lecture) est-il connu et justifié ? | Profil de coût, poids, tests de lecture |
-| 10 | **Reproductibilité** | Peut-on régénérer exactement ce résultat ? | Empreinte, configuration archivée, graines |
+| 1 | **Intent** | Does the result serve the brief's objective and key criterion? | Reread the brief; look at the result at final size |
+| 2 | **Subject** | Does the subject stay at the centre? Is its identity preserved? | Comparison with the source; view without effects |
+| 3 | **Perceptibility** | Is each improvement visible in final conditions, at normal speed? | Side-by-side video, before/after, whole piece |
+| 4 | **Coherence** | Do the elements belong to the same world (planes, lights, materials, rhythms)? | Overview; look for elements that feel pasted on |
+| 5 | **Richness without confusion** | Is the material rich without blurring reading areas? | Close-ups of sensitive areas; functional check (legibility) |
+| 6 | **Intentional variety** | Is mechanical repetition avoided (mosaic, identical oscillations, regular patterns)? | Inspection in motion; comparison of elements with each other |
+| 7 | **Cleanliness** | Are there artefacts (flicker, edges, holes, halos, sliding texture, leftovers)? | Automatic checks and inspection at 100 % and 200 % |
+| 8 | **Stability** | Does the result hold in motion and at the loop seam? | Several loop cycles; flicker measurement |
+| 9 | **Cost** | Is the cost (production, weight, playback) known and justified? | Cost profile, weight, playback tests |
+| 10 | **Reproducibility** | Can this exact result be regenerated? | Fingerprint, archived configuration, seeds |
 
-Pour une **direction artistique**, seuls les critères 1 à 6 sont décisifs, et le jugement de la personne qui dirige
-l'emporte ([direction artistique](../workflow/05-art-direction.md)).
+For **art direction**, only criteria 1 to 6 are decisive, and the lead's judgement wins
+([art direction](../workflow/05-art-direction.md)).
 
-## Mécanismes qui produisent la qualité
+## Mechanisms that produce quality
 
-| Mécanisme | Contribution | Où |
+| Mechanism | Contribution | Where |
 |---|---|---|
-| Référence de l'état actuel avant tout essai | Rend l'effet de chaque changement mesurable | [Itération](../workflow/04-evidence-based-iteration.md) |
-| Une variable à la fois, diagnostic par extinction | Trouve la vraie cause ; évite les corrections qui se masquent | [Itération](../workflow/04-evidence-based-iteration.md) |
-| Échantillon avant généralisation | Itérations rapides ; coût vérifié avant multiplication | [P7](../principles.md#p7) |
-| Comparatif à cadrage, taille et vitesse identiques | Décision visuelle juste, sans biais de présentation | [Validation](../workflow/07-validation.md) |
-| Variantes contrastées et contre-essai | Révèle la préférence réelle de la personne qui dirige | [Direction artistique](../workflow/05-art-direction.md) |
-| Configuration déclarative, régénération | Aucune retouche perdue ; essais combinables | [P11](../principles.md#p11) |
-| Empreinte des dépendances | Aucun mélange de versions ; reprise sûre | [Production](../workflow/06-production.md#fingerprint-and-resume) |
-| Contrôles de non-régression | Une correction locale ne casse pas l'ensemble | [Itération](../workflow/04-evidence-based-iteration.md) |
-| Profil de coût | Cycle d'itération praticable ; réglages justifiés | [Production](../workflow/06-production.md#cost-profile) |
-| Journal numéroté | Mémoire des impasses ; reprise fiable | [Continuité](../workflow/09-continuity.md) |
-| Registre des consignes | Aucune demande oubliée ; consignes à jour | [P15](../principles.md#p15) |
-| Bilan terminé / testé / limites | Confiance ; décisions éclairées | [Livraison](../workflow/08-delivery.md) |
-| Garde-fous automatiques (hooks, CI) | Contrôles qui ne dépendent pas de la bonne volonté de l'agent | [Claude Code](../tooling/claude-code.md#hooks) |
+| Reference of the current state before any trial | Makes the effect of each change measurable | [Iteration](../workflow/04-evidence-based-iteration.md) |
+| One variable at a time, diagnosis by elimination | Finds the real cause; avoids corrections that mask each other | [Iteration](../workflow/04-evidence-based-iteration.md) |
+| Sample before generalization | Fast iterations; cost checked before it is multiplied | [P7](../principles.md#p7) |
+| Comparison at identical framing, size and speed | A fair visual decision, without presentation bias | [Validation](../workflow/07-validation.md) |
+| Contrasting variants and counter-trial | Reveals the lead's real preference | [Art direction](../workflow/05-art-direction.md) |
+| Declarative configuration, regeneration | No retouch lost; trials can be combined | [P11](../principles.md#p11) |
+| Fingerprint of dependencies | No mixing of versions; safe resume | [Production](../workflow/06-production.md#fingerprint-and-resume) |
+| Non-regression checks | A local fix does not break the whole | [Iteration](../workflow/04-evidence-based-iteration.md) |
+| Cost profile | A practical iteration cycle; justified settings | [Production](../workflow/06-production.md#cost-profile) |
+| Numbered log | Memory of dead ends; reliable resume | [Continuity](../workflow/09-continuity.md) |
+| Instruction register | No request forgotten; instructions up to date | [P15](../principles.md#p15) |
+| Done / tested / limitations report | Trust; informed decisions | [Delivery](../workflow/08-delivery.md) |
+| Automatic guardrails (hooks, CI) | Checks that do not depend on the agent's goodwill | [Claude Code](../tooling/claude-code.md#hooks) |

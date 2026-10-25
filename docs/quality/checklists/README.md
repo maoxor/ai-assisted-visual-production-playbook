@@ -1,13 +1,13 @@
-# Listes de contrôle
+# Checklists
 
-Ces listes servent à des moments précis. Elles sont **génériques** : on les copie dans le journal du projet, puis on
-adapte chaque ligne au domaine ([adapter](../../workflow/adapting.md)). Une case ne se coche qu'avec une preuve :
-commande, résultat ou fichier.
+These checklists serve specific moments. They are **generic**: copy them into the project's log, then adapt each line
+to the domain ([adapting](../../workflow/adapting.md)). A box is ticked only with evidence: a command, a result or a
+file.
 
-| Liste | Moment |
+| Checklist | Moment |
 |---|---|
-| [`session-resume.md`](session-resume.md) | Au début d'une session, d'une nouvelle version ou après une interruption |
-| [`visual-review.md`](visual-review.md) | À chaque comparatif ou aperçu présenté |
-| [`pre-production.md`](pre-production.md) | Avant de lancer un calcul ou un développement long |
-| [`web-video.md`](web-video.md) | Pour une vidéo destinée à une page web |
-| [`delivery.md`](delivery.md) | Avant d'annoncer qu'un travail est terminé |
+| [`session-resume.md`](session-resume.md) | At the start of a session, of a new version or after an interruption |
+| [`visual-review.md`](visual-review.md) | For every comparison or preview presented |
+| [`pre-production.md`](pre-production.md) | Before launching a long computation or development |
+| [`web-video.md`](web-video.md) | For a video meant for a web page |
+| [`delivery.md`](delivery.md) | Before announcing that work is done |

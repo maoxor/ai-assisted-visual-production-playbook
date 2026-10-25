@@ -1,52 +1,50 @@
 ---
 name: test-first-change
-description: Livrer une correction, une évolution ou une refactorisation de code applicatif : cadrage, test d'abord, implémentation, vérifications citées, documentation, commit. À utiliser avant de modifier du code applicatif.
+description: Ship a fix, a feature or a refactoring of application code: scoping, test first, implementation, quoted checks, documentation, commit. Use before modifying application code.
 ---
 
-# Livrer un changement, test d'abord
+# Ship a change, test first
 
-Changement court et local : suivre ces étapes directement. Plusieurs étapes ou plusieurs sessions : ouvrir aussi un
-journal (skill `work-log`).
+A short, local change: follow these steps directly. Several steps or sessions: also open a log (the `work-log` skill).
 
-## 1. Cadrer
+## 1. Scope
 
-- Formuler le comportement attendu en une phrase, avec ses cas limites.
-- Situer le code (`docs/architecture.md` s'il existe, puis recherche ciblée) et lire l'implémentation de référence la
-  plus proche ; en reprendre les conventions.
-- Si une règle métier est ambiguë ou contredit le code : s'arrêter et demander, ne pas inventer.
+- State the expected behaviour in one sentence, with its edge cases.
+- Locate the code (`docs/architecture.md` if it exists, then a targeted search) and read the closest reference
+  implementation; follow its conventions.
+- If a business rule is ambiguous or contradicts the code: stop and ask, do not invent.
 
-## 2. Test d'abord
+## 2. Test first
 
-| Changement | Premier test à écrire |
+| Change | First test to write |
 |---|---|
-| Bug | Test qui reproduit le bug ; l'exécuter, constater l'échec **pour la bonne raison** |
-| Nouvelle règle ou formule | Tests unitaires des cas nominaux et limites |
-| Accès aux données, requête, transaction | Test d'intégration sur une vraie base |
-| Nouvelle route | Propriétaire OK, autre utilisateur 404/403, non connecté 401 |
-| Refactorisation | Tests de caractérisation du comportement actuel, verts AVANT de toucher au code |
-| Écran ou parcours critique | Spec e2e (fausse API) |
+| Bug | A test that reproduces the bug; run it, see it fail **for the right reason** |
+| New rule or formula | Unit tests of the nominal and edge cases |
+| Data access, query, transaction | Integration test on a real database |
+| New route | Owner OK, other user 404/403, anonymous 401 |
+| Refactoring | Characterization tests of the current behaviour, green BEFORE touching the code |
+| Critical screen or journey | e2e spec (fake API) |
 
-## 3. Implémenter
+## 3. Implement
 
-- Le changement minimal qui fait passer le test, dans la bonne couche ; pas de nombre magique ; contrôle d'accès dans
-  le service.
-- Puis refactoriser si utile, tests toujours verts. Rien hors du périmètre demandé : noter les autres problèmes dans le
-  journal ou les signaler.
+- The minimal change that makes the test pass, in the right layer; no magic number; access control in the service.
+- Then refactor if useful, tests still green. Nothing outside the requested scope: note other problems in the log or
+  report them.
 
-## 4. Vérifier (et citer les résultats)
+## 4. Verify (and quote the results)
 
-Les commandes de vérification du `CLAUDE.md` du projet, au minimum pour la partie touchée. Un contrôle en échec se
-corrige à la cause : ne jamais désactiver une règle ni un test.
+The verification commands of the project's `CLAUDE.md`, at least for the part touched. A failing check is fixed at the
+cause: never disable a rule or a test.
 
-## 5. Documenter
+## 5. Document
 
-Mettre à jour dans le même commit ce que le changement rend faux ou incomplet : invariants, architecture, `CLAUDE.md`,
-décisions (`docs/decisions/`), déploiement.
+Update in the same commit what the change makes false or incomplete: invariants, architecture, `CLAUDE.md`, decisions
+(`docs/decisions/`), deployment.
 
-## 6. Committer
+## 6. Commit
 
-- Sur une branche dédiée, jamais sur la branche principale ; pas de push ni de fusion sans demande.
-- Message `type(portée): description` (`fix`, `feat`, `refactor`, `test`, `docs`, `chore`, `ci`, `perf`) ; corps qui
-  explique le pourquoi, la mesure avant/après, la preuve (test en échec puis vert) et les limites.
-- `git diff --staged` relu : aucun fichier hors sujet, aucun secret, aucun fichier de debug. Identité Git : celle
-  configurée sur le poste.
+- On a dedicated branch, never on the main branch; no push or merge unless asked.
+- Message `type(scope): description` (`fix`, `feat`, `refactor`, `test`, `docs`, `chore`, `ci`, `perf`); a body that
+  explains the why, the before/after measurement, the evidence (test failing then green) and the limitations.
+- `git diff --staged` reviewed: no unrelated file, no secret, no debug file. Git identity: the one configured on the
+  workstation.

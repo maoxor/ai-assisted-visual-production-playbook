@@ -1,292 +1,282 @@
-# Principes de qualité
+# Quality principles
 
-Ces seize principes valent quels que soient le projet, la technique et la direction artistique. Ils expliquent
-**pourquoi** le [workflow](workflow/README.md) est construit ainsi. Quand une étape doit être adaptée à un domaine,
-l'étape change, le principe reste.
+These sixteen principles hold whatever the project, technique or art direction. They explain **why** the
+[workflow](workflow/README.md) is built the way it is. When a step has to be adapted to a domain, the step changes; the
+principle stays.
 
-Tous les principes sont **[éprouvé]**, sauf mention contraire.
+All principles are **[proven]** unless stated otherwise.
 
 ---
 
 <a id="p1"></a>
 
-## P1. Le résultat perçu fait foi ; les mesures l'éclairent sans le prouver
+## P1. The perceived result is what counts; measurements inform it without proving it
 
-**Énoncé.** Un travail se juge sur ce que verra le destinataire : l'image à sa taille d'affichage, le mouvement à
-vitesse normale, l'expérience dans son environnement réel. Les métriques (SSIM, VMAF, contraste, pourcentages) servent
-au diagnostic et à la non-régression. Elles ne prouvent jamais une réussite et ne deviennent pas des objectifs.
+**Statement.** Work is judged on what its audience will see: the image at its display size, motion at normal speed,
+the experience in its real environment. Metrics (SSIM, VMAF, contrast, percentages) serve diagnosis and non-regression.
+They never prove success and never become targets.
 
-**Pourquoi.** Une variation mesurable n'est pas forcément visible. Une métrique devenue objectif se fait optimiser au
-détriment de ce qu'elle représentait.
+**Why.** A measurable variation is not necessarily visible. A metric that becomes a target gets optimized at the
+expense of what it stood for.
 
-**Comment.** Chaque mesure est accompagnée de la capture ou de la vidéo à inspecter. On écrit d'abord ce que l'on
-voit, puis ce que la mesure confirme ou nuance. Les seuils restent indicatifs ; quand ils viennent d'une autre source,
-on le dit.
+**How.** Every measurement comes with the capture or video to inspect. Write down what you see first, then what the
+measurement confirms or qualifies. Thresholds stay indicative; when they come from another source, say so.
 
-**Anti-modèle.** Réduire un traitement parce qu'une mesure baisse alors que la personne qui dirige préfère la version
-riche ([A12](quality/anti-patterns.md#a12)).
+**Anti-pattern.** Toning a treatment down because a measurement drops while the lead prefers the rich version
+([A12](quality/anti-patterns.md#a12)).
 
 ---
 
 <a id="p2"></a>
 
-## P2. « Vérifié » veut dire exécuté et cité ; nos contrôles ne valent pas validation
+## P2. "Verified" means run and quoted; the agent's checks are not the lead's approval
 
-**Énoncé.** Un contrôle n'est déclaré fait qu'après avoir été exécuté, avec son résultat cité (commande, chiffre,
-fichier). On distingue toujours *ce que l'agent a vérifié*, *ce que la personne qui dirige a validé* et *ce qui n'a pas
-pu être vérifié*.
+**Statement.** A check is reported as done only once it has been run, with its result quoted (command, figure, file).
+Always separate *what the agent checked*, *what the lead approved* and *what could not be verified*.
 
-**Pourquoi.** Un compte rendu peut être tronqué, une case cochée sans preuve, une hypothèse prise pour un fait. La
-confiance repose sur la traçabilité.
+**Why.** A report can be truncated, a box ticked without evidence, an assumption taken for a fact. Trust rests on
+traceability.
 
-**Comment.** Les journaux portent la mention « Ces observations sont les miennes ; elles ne valent pas validation ».
-Les rapports listent les contrôles réellement exécutés. Ce qui est émulé ou non testable est signalé comme tel.
+**How.** Logs carry the line "These observations are mine; they are not your approval". Reports list the checks that
+were actually run. What is emulated or untestable is flagged as such.
 
 ---
 
 <a id="p3"></a>
 
-## P3. Terminé signifie : les fichiers finaux existent, s'ouvrent et ont été contrôlés
+## P3. Done means: the final files exist, open and have been checked
 
-**Énoncé.** Une commande lancée, un calcul en cours, un prototype ou un plan ne sont pas une livraison. Le travail est
-terminé quand les livrables existent à leur emplacement définitif, se lisent dans leur environnement cible et ont
-passé les contrôles prévus.
+**Statement.** A launched command, a running computation, a prototype or a plan is not a delivery. Work is done when
+the deliverables exist at their final location, play or open in their target environment and have passed the planned
+checks.
 
-**Pourquoi.** L'écart entre « lancé » et « livré » concentre les défauts : unité manquante, fichier illisible dans la
-cible, élément résiduel oublié. Il donne aussi la fausse impression d'avoir fini.
+**Why.** The gap between "launched" and "delivered" is where defects concentrate: a missing unit, a file unreadable in
+the target, a forgotten leftover. It also gives a false sense of being finished.
 
-**Comment.** La [définition de « terminé »](quality/README.md#definition-of-done) sert de liste de sortie. Le bilan
-sépare *terminé*, *testé* et *limites*.
+**How.** The [definition of done](quality/README.md#definition-of-done) is the exit list. The report separates *done*,
+*tested* and *limitations*.
 
 ---
 
 <a id="p4"></a>
 
-## P4. Séparer ce qui est documenté, testé, supposé et observé
+## P4. Separate what is documented, tested, assumed and observed
 
-**Énoncé.** Dans une recherche ou un diagnostic, chaque affirmation porte son statut : **D** documenté (source citée),
-**T** testé dans le projet, **H** hypothèse, **O** observation sur nos résultats. Une technique n'est jamais attribuée à
-un studio ou à un auteur sans source directe.
+**Statement.** In research or diagnosis, every claim carries its status: **D** documented (source quoted), **T** tested
+in the project, **H** hypothesis, **O** observation on our own results. A technique is never attributed to a studio or
+author without a direct source.
 
-**Pourquoi.** Sinon, une supposition devient un fait, un conseil de forum devient une règle, et l'erreur se propage
-d'itération en itération.
+**Why.** Otherwise an assumption becomes a fact, forum advice becomes a rule, and the error spreads from one iteration
+to the next.
 
-**Comment.** Les notes de recherche suivent le [modèle](../templates/research-note.md). Les pages inaccessibles sont
-signalées.
+**How.** Research notes follow the [template](../templates/research-note.md). Inaccessible pages are flagged.
 
 ---
 
 <a id="p5"></a>
 
-## P5. Une recherche ciblée sert une décision, puis s'arrête
+## P5. Targeted research serves a decision, then stops
 
-**Énoncé.** On recherche pour résoudre un problème précis ou trancher un choix technique. Les sources primaires passent
-d'abord ; les forums sont des pistes à vérifier par un essai. On réutilise les recherches précédentes et l'on passe à
-l'essai dès qu'une méthode est assez étayée.
+**Statement.** Research solves a precise problem or settles a technical choice. Primary sources come first; forums are
+leads to be verified by a trial. Earlier research is reused, and the work moves to a trial as soon as a method is
+sufficiently supported.
 
-**Pourquoi.** Une recherche sans fin retarde la preuve ; une liste de liens ne fait rien avancer ; ignorer les essais
-passés fait refaire les mêmes impasses.
+**Why.** Endless research delays the evidence; a list of links moves nothing forward; ignoring past trials repeats the
+same dead ends.
 
-**Comment.** Voir [la recherche](workflow/02-research.md). L'agent mène la recherche lui-même, en parallélisant les
-requêtes ([décision 0003](decisions/0003-no-subagents.md)).
+**How.** See [research](workflow/02-research.md). By default the agent researches by itself and runs queries in
+parallel ([decision 0003](decisions/0003-no-subagents.md)).
 
 ---
 
 <a id="p6"></a>
 
-## P6. Une variable à la fois ; isoler pour comprendre
+## P6. One variable at a time; isolate to understand
 
-**Énoncé.** Un essai modifie une seule chose. Un défaut se diagnostique **par extinction** : on neutralise une cause
-possible à la fois (une source de lumière, un matériau peint en noir, un module désactivé, un élément caché) jusqu'à
-ce que le défaut disparaisse. Les corrections sont rangées en familles désactivables.
+**Statement.** A trial changes one thing. A defect is diagnosed **by elimination**: neutralize one possible cause at a
+time (a light source, a material painted black, a module disabled, an element hidden) until the defect disappears.
+Corrections are grouped into families that can be switched off.
 
-**Pourquoi.** Plusieurs changements simultanés rendent l'effet de chacun illisible : une correction peut en masquer
-une autre ou introduire une régression invisible.
+**Why.** Several simultaneous changes make the effect of each unreadable: one correction can hide another or introduce
+an invisible regression.
 
-**Comment.** Voir [l'itération sur preuves](workflow/04-evidence-based-iteration.md) et la
-[technique d'extinction](domains/offline-3d-rendering.md#diagnosis-by-elimination).
+**How.** See [evidence-based iteration](workflow/04-evidence-based-iteration.md) and the
+[elimination technique](domains/offline-3d-rendering.md#diagnosis-by-elimination).
 
 ---
 
 <a id="p7"></a>
 
-## P7. L'échantillon d'abord, la généralisation ensuite
+## P7. Sample first, generalize second
 
-**Énoncé.** Une méthode nouvelle se met au point sur **un échantillon représentatif** : un élément, un extrait de
-quelques secondes, une image difficile, un écran critique. On vérifie le résultat *et* le coût, puis on étend par lots
-mesurés. La production complète ne démarre qu'avec l'accord explicite de la personne qui dirige.
+**Statement.** A new method is tuned on **a representative sample**: one element, an excerpt of a few seconds, a
+difficult frame, a critical screen. Check the result *and* the cost, then extend in measured batches. Full production
+starts only with the lead's explicit approval.
 
-**Pourquoi.** Itérer sur le tout coûte des heures par essai. Un défaut généralisé se corrige partout, et un coût
-multiplié par cent éléments peut rendre la production impraticable.
+**Why.** Iterating on the whole costs hours per trial. A generalized defect has to be fixed everywhere, and a cost
+multiplied by a hundred elements can make production impractical.
 
-**Comment.** [Prototype minimal](workflow/03-prototyping.md), puis échantillon, puis extrait de validation au format
-final, puis production.
+**How.** [Minimal prototype](workflow/03-prototyping.md), then sample, then a validation excerpt in the final format,
+then production.
 
 ---
 
 <a id="p8"></a>
 
-## P8. Juger dans les conditions finales
+## P8. Judge in final conditions
 
-**Énoncé.** On évalue :
-- à la **taille finale d'affichage** ;
-- à **vitesse normale** ;
-- dans le **traitement final** (flou de profondeur de champ, réduction, encodage, build de production) ;
-- sur l'**œuvre entière** ;
-- en **lecture en avant**, jamais en aller-retour ;
-- sur la **dernière version**, pas sur une version passée prise comme étalon.
+**Statement.** Evaluate:
+- at the **final display size**;
+- at **normal speed**;
+- with the **final processing** (depth of field, downscaling, encoding, production build);
+- on the **whole piece**;
+- in **forward playback**, never back and forth;
+- on the **latest version**, not on a past version taken as the yardstick.
 
-Le ralenti, l'amplification, les vues de diagnostic et les gros plans servent à comprendre : ils ne valident rien.
+Slow motion, amplification, diagnostic views and close-ups help to understand: they validate nothing.
 
-**Pourquoi.** Un détail invisible à la taille finale ne compte pas ; un défaut visible seulement en mouvement passe
-inaperçu sur une image fixe ; une boucle en aller-retour masque le raccord ; comparer à une ancienne version brouille la
-décision.
+**Why.** A detail invisible at final size does not count; a defect visible only in motion goes unnoticed on a still; a
+back-and-forth loop hides the seam; comparing with an old version blurs the decision.
 
-**Comment.** Toute vidéo de contrôle montre l'œuvre entière, en avant, à la taille finale ; les gros plans viennent
-en plus. Les tableaux donnent des valeurs absolues sur la version actuelle.
+**How.** Every review video shows the whole piece, forward, at final size; close-ups come in addition. Tables give
+absolute values on the current version.
 
 ---
 
 <a id="p9"></a>
 
-## P9. Corriger la cause, pas le symptôme
+## P9. Fix the cause, not the symptom
 
-**Énoncé.** Un défaut se corrige là où il naît. On ne le masque pas par un flou global, une baisse d'amplitude, un
-débruitage qui efface les détails, la désactivation d'un test ou un recadrage.
+**Statement.** A defect is fixed where it originates. It is not hidden by a global blur, a reduced amplitude, a
+denoiser that erases detail, a disabled test or a crop.
 
-**Pourquoi.** Le symptôme masqué revient ailleurs, et l'on perd la qualité que l'on voulait préserver.
+**Why.** A masked symptom comes back elsewhere, and the quality you wanted to preserve is lost.
 
-**Comment.** On cherche à quelle étape le défaut apparaît (génération, rendu, débruitage, redimensionnement,
-encodage, lecture, code, données) et l'on corrige à cette étape. Un compromis assumé est montré précisément.
+**How.** Find the stage at which the defect appears (generation, rendering, denoising, resizing, encoding, playback,
+code, data) and fix it at that stage. An accepted trade-off is shown precisely.
 
 ---
 
 <a id="p10"></a>
 
-## P10. Ne rien perdre : versions identifiables, archives, sorties séparées
+## P10. Lose nothing: identifiable versions, archives, separate outputs
 
-**Énoncé.**
-- Chaque version est identifiable.
-- Avant tout changement important, l'état courant est archivé.
-- Les sorties de versions différentes ne se mélangent jamais.
-- Un résultat n'est réutilisé que s'il correspond exactement à l'état actuel, ce que vérifie une empreinte des
-  dépendances.
-- Rien n'est supprimé : l'obsolète est déplacé.
+**Statement.**
+- Every version is identifiable.
+- Before any significant change, the current state is archived.
+- Outputs of different versions never mix.
+- A result is reused only if it matches the current state exactly, which a fingerprint of the dependencies verifies.
+- Nothing is deleted: what is obsolete is moved.
 
-**Pourquoi.** Revenir à un état antérieur est fréquent ; mélanger les sorties de deux états produit des livrables faux
-et difficiles à détecter ; une comparaison avant/après exige l'avant.
+**Why.** Going back to an earlier state is frequent; mixing outputs of two states produces wrong deliverables that are
+hard to detect; a before/after comparison needs the "before".
 
-**Comment.** Voir [la production](workflow/06-production.md#fingerprint-and-resume) et l'outil
-[`fingerprint.py`](../tools/README.md#fingerprintpy).
+**How.** See [production](workflow/06-production.md#fingerprint-and-resume) and the
+[`fingerprint.py`](../tools/README.md#fingerprintpy) tool.
 
 ---
 
 <a id="p11"></a>
 
-## P11. Reproductible par construction
+## P11. Reproducible by construction
 
-**Énoncé.**
-- Les paramètres vivent dans une configuration déclarative, aux noms explicites.
-- La génération procédurale dérive d'une graine stable.
-- Les dépendances, modèles et révisions sont figés.
-- Toute ressource ajoutée porte sa provenance, sa licence et son empreinte.
-- On régénère plutôt que de retoucher à la main.
+**Statement.**
+- Parameters live in declarative configuration, with explicit names.
+- Procedural generation derives from a stable seed.
+- Dependencies, models and revisions are pinned.
+- Every added resource carries its provenance, licence and checksum.
+- Regenerate rather than retouch by hand.
 
-**Pourquoi.** Une retouche manuelle est perdue à la régénération suivante ; une graine instable rend deux
-constructions différentes ; une ressource sans licence vérifiée bloque une diffusion.
+**Why.** A manual retouch is lost at the next regeneration; an unstable seed makes two builds differ; a resource
+without a verified licence blocks distribution.
 
-**Comment.** Voir [la reproductibilité en rendu](domains/offline-3d-rendering.md#reproducibility) et
-[la provenance des ressources](tooling/README.md#provenance-and-licensing).
+**How.** See [reproducibility in rendering](domains/offline-3d-rendering.md#reproducibility) and
+[resource provenance](tooling/README.md#provenance-and-licensing).
 
 ---
 
 <a id="p12"></a>
 
-## P12. Autonomie sur le réversible, accord pour l'irréversible et l'extérieur
+## P12. Autonomy on what is reversible; approval for what is irreversible or external
 
-**Énoncé.** Les décisions techniques et artistiques **réversibles** se prennent sans redemander, à partir de la
-référence et des consignes. Exigent un accord explicite :
-- les publications, les achats, les abonnements ;
-- l'envoi de données ou d'assets vers un service externe ;
-- les suppressions ;
-- les changements système destructifs ;
-- le lancement d'une production longue quand la personne qui dirige se l'est réservé.
+**Statement.** **Reversible** technical and artistic decisions are taken without asking again, based on the reference
+and the instructions. Explicit approval is required for:
+- publications, purchases, subscriptions;
+- sending data or assets to an external service;
+- deletions;
+- destructive system changes;
+- launching a long production when the lead has reserved that decision.
 
-Quand un blocage exige vraiment une intervention, on pose une question précise et l'on poursuit les tâches
-indépendantes.
+When a blocker truly requires an intervention, ask one precise question and carry on with independent tasks.
 
-**Pourquoi.** Redemander à chaque étape épuise la personne qui dirige ; agir seul sur l'irréversible peut coûter des
-droits, de l'argent ou des données.
+**Why.** Asking again at every step exhausts the lead; acting alone on the irreversible can cost rights, money or data.
 
 ---
 
 <a id="p13"></a>
 
-## P13. Mesurer le coût réel avant de produire, et séparer les coûts
+## P13. Measure the real cost before producing, and keep costs apart
 
-**Énoncé.** Avant une production longue, on mesure le coût réel sur des unités représentatives, dont une difficile ;
-on distingue démarrage et régime établi ; on attribue chaque dépense à sa cause par des tests isolés. On sépare des
-coûts qui ne se confondent pas : temps de production, poids du livrable, coût de lecture ou d'exécution, maintenance.
-Aucun réglage n'est intouchable : son utilité doit être démontrée.
+**Statement.** Before a long production, measure the real cost on representative units, including a difficult one;
+separate start-up from steady state; attribute each expense to its cause with isolated tests. Keep apart costs that do
+not mix: production time, deliverable weight, playback or execution cost, maintenance. No setting is untouchable: its
+usefulness has to be demonstrated.
 
-**Pourquoi.** Un effet cher à calculer peut être bon marché à diffuser, et inversement. Un coût par unité qui dérive
-finit par empêcher toute itération.
+**Why.** An effect that is expensive to compute can be cheap to distribute, and the reverse. A drifting cost per unit
+ends up preventing any iteration.
 
-**Comment.** Voir [le profil de coût](workflow/06-production.md#cost-profile).
+**How.** See the [cost profile](workflow/06-production.md#cost-profile).
 
 ---
 
 <a id="p14"></a>
 
-## P14. Montrer, et rester aligné sur l'objectif
+## P14. Show, and stay aligned with the objective
 
-**Énoncé.**
-- On montre le résultat (ouvrir la vidéo, la page, l'image) au lieu de le décrire, et l'on vérifie qu'il s'est ouvert.
-- Les points d'avancement sont courts : ce qui fonctionne, ce qui reste, la prochaine action.
-- On répond à la question posée.
-- On sait reformuler à tout moment l'objectif et le critère essentiel du projet.
+**Statement.**
+- Show the result (open the video, the page, the image) instead of describing it, and check that it actually opened.
+- Status updates are short: what works, what remains, the next action.
+- Answer the question that was asked.
+- Be able to restate the project's objective and key criterion at any time.
 
-**Pourquoi.** La personne qui dirige juge sur pièce. Une explication sans résultat, une page qui ne s'ouvre pas ou une
-réponse à côté obligent à relancer et érodent la confiance.
+**Why.** The lead judges on the evidence. An explanation without a result, a page that does not open or an off-topic
+answer forces follow-ups and erodes trust.
 
-**Comment.** Voir [la communication](workflow/10-communication.md).
+**How.** See [communication](workflow/10-communication.md).
 
 ---
 
 <a id="p15"></a>
 
-## P15. La consigne la plus récente et explicite l'emporte ; tenir le registre des consignes
+## P15. The latest explicit instruction wins; keep an instruction register
 
-**Énoncé.** Les consignes évoluent : une demande peut en remplacer explicitement une autre. On tient un **registre
-des consignes actives**, avec leur date et ce qu'elles remplacent. Avant de présenter une itération comme terminée, on
-vérifie que chacune de ses demandes a été traitée.
+**Statement.** Instructions evolve: a request can explicitly replace another. Keep a **register of active
+instructions**, with their date and what they replace. Before presenting an iteration as finished, check that each of
+its requests has been handled.
 
-**Pourquoi.** Une ancienne consigne appliquée par inertie contredit la direction actuelle. Une demande oubliée au
-milieu d'une longue liste est le défaut le plus frustrant pour la personne qui dirige.
+**Why.** An old instruction applied out of inertia contradicts the current direction. A request forgotten in the
+middle of a long list is the most frustrating defect for the lead.
 
-**Comment.** Un [registre](../templates/instruction-register.md), relu à chaque reprise et avant chaque bilan. Le
-bilan reprend chaque demande avec l'un des états : *fait*, *essai écarté (raison)* ou *manquant*. Quand une consigne
-change, on cherche **toutes** ses traces (textes, mentions, réglages).
+**How.** A [register](../templates/instruction-register.md), reviewed at every resume and before every report. The
+report restates every request with one status: *done*, *trial rejected (reason)* or *missing*. When an instruction
+changes, look for **all** its traces (texts, mentions, settings).
 
 ---
 
 <a id="p16"></a>
 
-## P16. Chaque élément a un rôle ; le sujet reste le centre
+## P16. Every element has a role; the subject stays at the centre
 
-**Énoncé.** Dans une composition, chaque élément important reçoit un **rôle** : attirer le regard, fragmenter,
-donner de la profondeur, ménager une zone de lecture. Les effets accompagnent le sujet sans le concurrencer. Les
-mouvements sont coordonnés sans être synchronisés, sans agitation permanente. Ce principe porte sur la **méthode** de
-composition : les rôles eux-mêmes et le dosage sont des décisions propres à chaque projet, prises par la personne qui
-dirige.
+**Statement.** In a composition, every important element receives a **role**: draw the eye, fragment, add depth, keep
+a reading area clear. Effects accompany the subject without competing with it. Motions are coordinated without being
+synchronized, without constant agitation. This principle is about the **method** of composition: the roles themselves
+and their dosage are decisions of each project, taken by the lead.
 
-**Pourquoi.** Un effet sans rôle dilue l'attention ; des oscillations identiques partout produisent un mouvement
-mécanique.
+**Why.** An effect without a role dilutes attention; identical oscillations everywhere produce mechanical motion.
 
 ---
 
-## Ce qui ne relève pas des principes
+## What the principles do not cover
 
-Les principes ne disent rien du style, des formats ni des outils d'un projet. Ces choix sont des entrées de chaque
-projet et se consignent dans ses propres décisions
-([décision 0002](decisions/0002-method-separate-from-aesthetics.md)).
+The principles say nothing about a project's style, formats or tools. Those choices are inputs of each project and are
+recorded in its own decisions ([decision 0002](decisions/0002-method-separate-from-aesthetics.md)).

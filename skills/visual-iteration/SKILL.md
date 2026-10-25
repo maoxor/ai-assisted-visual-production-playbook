@@ -1,49 +1,52 @@
 ---
 name: visual-iteration
-description: Améliorer un résultat visuel ou animé (rendu, animation, interface, vidéo) par une boucle référence → essai isolé → comparatif → intégration, jugée dans les conditions finales. À utiliser pour toute correction ou exploration visuelle avant une production longue.
+description: Improve a visual or animated result (render, animation, interface, video) through a reference → isolated trial → comparison → integration loop, judged in final conditions. Use for any visual fix or exploration before a long production.
 ---
 
-# Itération visuelle sur preuves
+# Evidence-based visual iteration
 
-## 1. Préparer
+## 1. Prepare
 
-- Relire la demande et le registre des consignes (`docs/instruction-register.md`) ; lister chaque point demandé.
-- Choisir un **échantillon** représentatif (un élément, un extrait de quelques secondes, une image difficile). Ne pas
-  toucher au reste tant que l'échantillon n'est pas validé.
-- Produire la **référence de l'état actuel** avec les réglages de l'essai (même cadrage, même qualité). Si elle est
-  reconstruite, vérifier qu'elle redonne le même résultat.
+- Reread the request and the instruction register (`docs/instruction-register.md`); list every point requested.
+- Choose a representative **sample** (one element, an excerpt of a few seconds, a difficult frame). Do not touch the
+  rest until the sample is approved.
+- Produce the **reference of the current state** with the trial's settings (same framing, same quality). If it is
+  rebuilt, check that it gives the same result.
 
-## 2. Comprendre la cause
+## 2. Understand the cause
 
-- Si la cause n'est pas évidente : **diagnostic par extinction** — neutraliser une cause possible à la fois (source de
-  lumière, matériau en noir, élément caché, effet coupé) jusqu'à la disparition du défaut.
-- Localiser l'étape où naît le défaut (génération, rendu, débruitage, réduction, encodage, lecture) et y corriger.
-- Vérifier le sens et l'effet réel de chaque paramètre dans l'outil utilisé : mesurer, ne pas supposer.
+- If the cause is not obvious: **diagnosis by elimination** — neutralize one possible cause at a time (light source,
+  material set to black, element hidden, effect cut off) until the defect disappears.
+- Locate the stage where the defect originates (generation, rendering, denoising, downscaling, encoding, playback) and
+  fix it there.
+- Check the real meaning and effect of each parameter in the tool used: measure, do not assume.
 
-## 3. Essayer
+## 3. Try
 
-- **Une variable par essai**, nommée (`e1`, `e2`…), appliquée à une copie : la référence n'est jamais modifiée.
-- Comparer plusieurs amplitudes ou dosages plutôt qu'une seule valeur.
-- Si un essai échoue : examiner sa construction, pas seulement son intensité.
+- **One variable per trial**, named (`e1`, `e2`…), applied to a copy: the reference is never modified.
+- Compare several amplitudes or dosages rather than a single value.
+- If a trial fails: examine its construction, not only its intensity.
 
-## 4. Comparer dans les conditions finales
+## 4. Compare in final conditions
 
-- Côte à côte libellé, **même cadrage, même taille, même vitesse** : référence / avant / après, ou essai actuel /
-  nouvel essai.
-- Taille finale d'affichage **et** gros plans ; vue de diagnostic **et** traitement final (flou, encodage).
-- Œuvre entière animée, **lecture en avant**, en boucle ; tous les formats.
-- **Dernière version** comme base. Vérifier soi-même que la différence se voit avant de présenter.
-- Mesures en complément (et le coût : temps, poids), jamais comme preuve à elles seules.
+- Labelled side by side, **same framing, same size, same speed**: reference / before / after, or current trial / new
+  trial.
+- Final display size **and** close-ups; diagnostic view **and** final processing (blur, encoding).
+- Whole piece animated, **forward playback**, looping; every format.
+- **Latest version** as the base. Check yourself that the difference is visible before presenting.
+- Measurements as a complement (and the cost: time, weight), never as evidence on their own.
+- Tools, if the project has them (`tools/` or the playbook): `review_video.py` (forward, side by side), `flicker.py`,
+  `loop_check.py`, `review_page.py`.
 
-## 5. Intégrer
+## 5. Integrate
 
-- Contrôles de non-régression (reste inchangé, zones protégées, géométrie valide).
-- Archiver la configuration en vigueur, intégrer dans la configuration, régénérer.
-- Journal (`docs/experiments/`) : n°, essai, constat, retenu ou écarté et pourquoi.
+- Non-regression checks (rest unchanged, protected areas, valid geometry).
+- Archive the configuration in force, integrate into the configuration, regenerate.
+- Log (`docs/experiments/`): no., trial, finding, kept or rejected and why.
 
-## 6. Présenter
+## 6. Present
 
-- Ouvrir le comparatif pour l'utilisateur et vérifier l'ouverture ; point court : ce qui marche, ce qui reste, la
-  prochaine action.
-- Chaque point demandé avec son état : fait, essai écarté (raison), manquant.
-- Distinguer mes contrôles de sa validation ; ne pas généraliser ni lancer la production sans son accord.
+- Open the comparison for the user and check that it opened; a short update: what works, what remains, the next
+  action.
+- Every requested point with its status: done, trial rejected (reason), missing.
+- Separate my checks from their approval; do not generalize or launch production without their approval.

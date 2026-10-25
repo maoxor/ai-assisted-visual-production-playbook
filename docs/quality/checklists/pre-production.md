@@ -1,33 +1,32 @@
-# Avant une production longue
+# Before a long production
 
-## Décision
+## Decision
 
-- [ ] Accord explicite de lancer, si la personne qui dirige se l'est réservé.
-- [ ] Extrait de validation (forme du livrable final, réglages de livraison) validé, sauf instruction contraire
-      explicite.
-- [ ] Registre des consignes relu : **toutes** les corrections demandées sont faites
-      ([A2](../anti-patterns.md#a2)).
-- [ ] Défauts identifiés corrigés ; aucun « on verra après ».
+- [ ] Explicit approval to launch, if the lead reserved that decision.
+- [ ] Validation excerpt (shape of the final deliverable, delivery settings) approved, unless explicitly instructed
+      otherwise.
+- [ ] Instruction register reviewed: **every** requested fix is done ([A2](../anti-patterns.md#a2)).
+- [ ] Identified defects fixed; no "we'll see later".
 
-## Contenu (adapter au domaine)
+## Content (adapt to the domain)
 
-- [ ] Fidélité du sujet sur l'état de référence.
-- [ ] Zones protégées respectées sur toute la durée (visage, interface, texte).
-- [ ] Géométrie générée valide : orientation, fermeture, auto-intersections ([A13](../anti-patterns.md#a13)).
-- [ ] Bords et marges aux positions extrêmes.
-- [ ] Boucle : raccord exact de l'état à la période complète (position et vitesse), sans unité dupliquée.
-- [ ] Unités représentatives en qualité finale, dont les poses et angles extrêmes.
-- [ ] Reste de la composition inchangé après la dernière correction (comparaison élément par élément).
-- [ ] Éléments résiduels absents de la chaîne : signature, logo, texte, réglage d'essai.
+- [ ] Subject fidelity on the reference state.
+- [ ] Protected areas respected over the whole duration (face, interface, text).
+- [ ] Generated geometry valid: orientation, closure, self-intersections ([A13](../anti-patterns.md#a13)).
+- [ ] Edges and margins at extreme positions.
+- [ ] Loop: exact match of the state at the complete period (position and velocity), no duplicated unit.
+- [ ] Representative units at final quality, including extreme poses and angles.
+- [ ] Rest of the composition unchanged after the last fix (element-by-element comparison).
+- [ ] Leftovers absent from the pipeline: signature, logo, text, trial setting.
 
-## Coût et chaîne
+## Cost and pipeline
 
-- [ ] Coût par unité mesuré sur une machine libre, première unité distinguée du régime établi
+- [ ] Cost per unit measured on an idle machine, first unit separated from the steady state
       ([A16](../anti-patterns.md#a16)).
-- [ ] Estimation totale annoncée, avec ses hypothèses.
-- [ ] Chaîne reprenable : empreinte des dépendances, unité terminée = fichier complet, paquets, obsolètes déplacés
+- [ ] Total estimate announced, with its assumptions.
+- [ ] Resumable pipeline: fingerprint of dependencies, finished unit = complete file, batches, stale outputs moved
       ([`fingerprint.py`](../../../tools/README.md#fingerprintpy)).
-- [ ] Configuration et sources archivées avant le lancement.
-- [ ] Espace disque suffisant ; alimentation secteur ; mise en veille empêchée ([A15](../anti-patterns.md#a15)).
-- [ ] Étapes suivantes enchaînées : post-traitement, contrôles, exports, tests.
-- [ ] Consigne posée : **ne rien modifier** des dépendances pendant le calcul.
+- [ ] Configuration and sources archived before launch.
+- [ ] Enough disk space; mains power; sleep prevented ([A15](../anti-patterns.md#a15)).
+- [ ] Next steps chained: post-processing, checks, exports, tests.
+- [ ] Rule stated: **change nothing** in the dependencies during the computation.

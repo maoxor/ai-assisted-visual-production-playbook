@@ -1,22 +1,22 @@
-# Revue visuelle : avant de présenter un comparatif ou un aperçu
+# Visual review: before presenting a comparison or a preview
 
-## Forme
+## Form
 
-- [ ] Même cadrage, même taille, même vitesse pour toutes les colonnes ; colonnes libellées (référence / avant /
-      après, ou essai actuel / nouvel essai).
-- [ ] Taille finale d'affichage, en plus des gros plans de diagnostic (100 %, 200 %).
-- [ ] Traitement final appliqué (flou de profondeur de champ, réduction, encodage) en plus de la vue de diagnostic.
-- [ ] Œuvre entière, pas seulement des recadrages.
-- [ ] Vidéo **en avant**, en boucle, à vitesse normale ; plusieurs tours si le raccord compte.
-- [ ] **Dernière version** comme base ; versions passées seulement si elles sont demandées.
-- [ ] Tous les formats concernés (bureau, mobile…).
-- [ ] Fichier ou page **effectivement ouvert** pour la personne qui dirige, ou chemin exact donné.
+- [ ] Same framing, same size, same speed for every column; columns labelled (reference / before / after, or current
+      trial / new trial).
+- [ ] Final display size, in addition to diagnostic close-ups (100 %, 200 %).
+- [ ] Final processing applied (depth of field, downscaling, encoding) in addition to the diagnostic view.
+- [ ] Whole piece, not only crops.
+- [ ] Video played **forward**, looping, at normal speed; several cycles if the seam matters.
+- [ ] **Latest version** as the base; past versions only if requested.
+- [ ] Every relevant format (desktop, mobile…).
+- [ ] File or page **actually opened** for the lead, or exact path given.
 
-## Fond
+## Substance
 
-- [ ] La différence se voit soi-même à la taille finale ; sinon, on ne présente pas encore.
-- [ ] Ralenti, amplification et mesures présentés comme diagnostic, pas comme preuve.
-- [ ] Chaque demande de l'itération a son état : fait, essai écarté (raison) ou manquant.
-- [ ] Défauts connus signalés, y compris ceux d'une version montrée précédemment.
-- [ ] Recommandation distincte de la validation attendue.
-- [ ] Coût de la proposition indiqué (temps, poids).
+- [ ] You can see the difference yourself at final size; otherwise, do not present yet.
+- [ ] Slow motion, amplification and measurements presented as diagnosis, not as evidence.
+- [ ] Each request of the iteration has its status: done, trial rejected (reason) or missing.
+- [ ] Known defects flagged, including those of a version shown earlier.
+- [ ] Recommendation kept separate from the approval expected.
+- [ ] Cost of the proposal stated (time, weight).

@@ -1,43 +1,42 @@
-# 3. Prototype minimal
+# 3. Minimal prototype
 
-**Objectif.** Vérifier sur le plus petit cas possible que les risques principaux sont maîtrisables, avant d'investir
-dans la production.
+**Objective.** Check on the smallest possible case that the main risks are manageable, before investing in production.
 
-## Principe [éprouvé]
+## Principle [proven]
 
-Le prototype contient **un exemplaire de chaque élément risqué**, et rien d'autre. Pour une scène composée, par
-exemple : le sujet, un élément d'effet devant lui, un élément de premier plan et un court mouvement de caméra. Pour une
-application : une route de bout en bout, avec ses tests.
+The prototype contains **one instance of each risky element**, and nothing else. For a composited scene, for example:
+the subject, one effect element in front of it, one foreground element and a short camera move. For an application:
+one route end to end, with its tests.
 
-Il est décidé dès l'étude de faisabilité et réalisé avant l'œuvre complète.
+It is decided during the feasibility study and built before the complete piece.
 
-## Ce que le prototype doit prouver
+## What the prototype must prove
 
-Pour chaque risque, on prévoit un contrôle **qui peut échouer** :
+For each risk, plan a check **that can fail**:
 
-| Risque type | Contrôle |
+| Typical risk | Check |
 |---|---|
-| Fidélité au sujet ou à la source | Rendu de l'état de repos comparé à la source, à gestion des couleurs équivalente (PSNR, ꟻLIP, différence visuelle) |
-| Localité d'un effet | Déplacer l'effet en plusieurs positions et mesurer l'écart hors de son emprise |
-| Superpositions | Empiler les éléments transparents ou les couches ; aucune zone noire, aucun artefact |
-| Bruit et stabilité | Scène figée rendue avec plusieurs graines ; écart-type dans les zones sensibles |
-| Raccord de boucle | État de la scène à la période comparé à l'état initial |
-| Bords révélés | Marges aux positions extrêmes de la caméra ou de la mise en page |
-| Coût | Temps par unité en qualité finale |
+| Fidelity to the subject or source | Render of the rest state compared with the source, with equivalent colour management (PSNR, ꟻLIP, visual difference) |
+| Locality of an effect | Move the effect to several positions and measure the difference outside its footprint |
+| Overlaps | Stack the transparent elements or layers; no black area, no artefact |
+| Noise and stability | Static scene rendered with several seeds; standard deviation in sensitive areas |
+| Loop seam | State of the scene at the period compared with the initial state |
+| Revealed edges | Margins at the extreme camera or layout positions |
+| Cost | Time per unit at final quality |
 
-## Variantes à comparer dès le prototype [éprouvé]
+## Variants to compare in the prototype [proven]
 
-Quand deux techniques sont possibles (effet physique ou compositing, par exemple), on les compare sur le prototype et
-l'on retient celle qui respecte le mieux le cahier des charges.
+When two techniques are possible (a physical effect or compositing, for example), compare them on the prototype and
+keep the one that best meets the requirements.
 
-## Critère de fin
+## Exit criterion
 
-Chaque risque identifié au cadrage a un résultat mesuré et une capture ; le coût par unité est connu ; les risques non
-levés sont écrits avec la manière de les traiter.
+Every risk identified during scoping has a measured result and a capture; the cost per unit is known; the risks not
+yet retired are written down with how they will be handled.
 
-## Piège [éprouvé]
+## Pitfall [proven]
 
-Un prototype qui « marche » ne valide pas la production : plus d'éléments, un traitement final et un sujet animé font
-apparaître des défauts absents du prototype. Les contrôles du prototype sont **adaptés** au nouveau périmètre, pas
-recopiés : une comparaison pixel à pixel avec la source ne vaut que pour l'état de repos, et une variation temporelle
-voulue n'est pas du scintillement ([A18](../quality/anti-patterns.md#a18)).
+A prototype that "works" does not validate production: more elements, final processing and an animated subject reveal
+defects absent from the prototype. The prototype's checks are **adapted** to the new scope, not copied: a
+pixel-by-pixel comparison with the source only holds for the rest state, and an intended temporal variation is not
+flicker ([A18](../quality/anti-patterns.md#a18)).

@@ -1,81 +1,77 @@
-# 6. Production : produire le tout de façon fiable
+# 6. Production: produce the whole reliably
 
-**Objectif.** Produire l'œuvre complète avec des réglages justifiés, dans un temps qui permet d'itérer, par une chaîne
-qui survit aux interruptions et ne mélange jamais les versions.
+**Objective.** Produce the complete piece with justified settings, in a time that still allows iteration, through a
+pipeline that survives interruptions and never mixes versions.
 
-## Préalables [éprouvé]
+## Prerequisites [proven]
 
-- Les défauts identifiés sont corrigés : on ne relance pas des heures de calcul tant qu'ils persistent.
-- L'accord explicite de lancer a été donné, si la personne qui dirige se l'est réservé ([P12](../principles.md#p12)).
-- L'extrait de validation a été validé, sauf instruction contraire explicite.
-- La [liste avant production](../quality/checklists/pre-production.md) est passée.
+- The identified defects are fixed: hours of computation are not relaunched while they persist.
+- Explicit approval to launch has been given, if the lead reserved that decision ([P12](../principles.md#p12)).
+- The validation excerpt has been approved, unless explicitly instructed otherwise.
+- The [pre-production checklist](../quality/checklists/pre-production.md) has been passed.
 
 <a id="cost-profile"></a>
 
-## Profil de coût [éprouvé]
+## Cost profile [proven]
 
-1. **Mesurer quelques unités représentatives, dont une difficile**, en séparant démarrage (chargement, compilation,
-   préparation) et régime établi.
-2. **Vérifier l'utilisation réelle du matériel** : accélérateur effectivement utilisé, absence de repli sur le
-   processeur, mémoire au pic.
-3. **Attribuer le coût aux éléments** par des tests isolés, en retirant un élément à la fois.
-4. **Comparer quelques profils cohérents** sur les mêmes unités, avec un tableau court :
+1. **Measure a few representative units, including a difficult one**, separating start-up (loading, compilation,
+   preparation) from steady state.
+2. **Check real hardware usage**: accelerator actually used, no silent fallback to the CPU, peak memory.
+3. **Attribute the cost to elements** with isolated tests, removing one element at a time.
+4. **Compare a few consistent profiles** on the same units, in a short table:
 
-   | Profil | Temps par unité | Facteur | Ressemblance (SSIM, ꟻLIP) | Netteté par zone | Avis visuel |
+   | Profile | Time per unit | Factor | Similarity (SSIM, ꟻLIP) | Sharpness per area | Visual opinion |
    |---|---|---|---|---|---|
 
-5. **Explorer aussi les changements de méthode**, pas seulement les réglages : remplacer une géométrie secondaire par
-   une texture, supprimer les détails invisibles à la taille finale, répartir le travail entre calcul et
-   post-traitement.
-6. **Ne jamais figer** ce qui doit évoluer (un reflet, une réfraction, une donnée dynamique) et **ne jamais remplacer**
-   le calcul par une interpolation non vérifiée.
-7. **Estimer et annoncer** le temps total pour l'extrait et pour le tout, avec ses hypothèses.
+5. **Also explore method changes**, not only settings: replace secondary geometry with a texture, remove details
+   invisible at final size, split the work between computation and post-processing.
+6. **Never freeze** what has to evolve (a reflection, a refraction, dynamic data) and **never replace** computation
+   with an unverified interpolation.
+7. **Estimate and announce** the total time for the excerpt and for the whole, with its assumptions.
 
 <a id="fingerprint-and-resume"></a>
 
-## Empreinte et reprise [éprouvé]
+## Fingerprint and resume [proven]
 
-L'outil [`fingerprint.py`](../../tools/README.md#fingerprintpy) met en œuvre ces règles :
+The [`fingerprint.py`](../../tools/README.md#fingerprintpy) tool implements these rules:
 
-- **Empreinte** : SHA-256 de tout ce qui détermine le résultat (sources, configurations, calques, scripts de calcul et
-  de post-traitement, version du logiciel, profil de qualité), écrite dans `VERSION.json` à côté des sorties.
-- **Reprise sûre** : si l'empreinte ne correspond plus, les sorties existantes viennent d'un autre état ; elles sont
-  **déplacées** dans `_stale/<date>/`, jamais supprimées, et la production repart de zéro.
-- **Unité terminée = fichier complet** : un PNG n'est compté que si son bloc final (IEND) est présent.
-- **Par paquets** : un processus par paquet de N unités ; une interruption ne perd qu'un paquet et la mémoire est
-  libérée.
-- **Post-traitement au fil de l'eau** : chaque paquet terminé est aussitôt réduit à la taille finale.
-- **Espace disque vérifié avant chaque paquet.**
-- **Journal des temps** : une ligne par unité (CSV).
-- **Ne rien modifier pendant le calcul** : toute modification d'une dépendance change l'empreinte et arrête la
-  production au paquet suivant. C'est voulu.
+- **Fingerprint**: SHA-256 of everything that determines the result (sources, configurations, layers, computation and
+  post-processing scripts, software version, quality profile), written to `VERSION.json` next to the outputs.
+- **Safe resume**: if the fingerprint no longer matches, the existing outputs come from another state; they are
+  **moved** to `_stale/<date>/`, never deleted, and production starts again from scratch.
+- **Finished unit = complete file**: a PNG counts only if its final chunk (IEND) is present.
+- **In batches**: one process per batch of N units; an interruption loses at most one batch, and memory is released.
+- **Post-processing as you go**: each finished batch is immediately reduced to final size.
+- **Disk space checked before every batch.**
+- **Timing log**: one line per unit (CSV).
+- **Change nothing during the computation**: any change to a dependency changes the fingerprint and stops production at
+  the next batch. That is intended.
 
-## Machine et environnement [éprouvé]
+## Machine and environment [proven]
 
-- **Veille** : sur un portable, la mise en veille arrête le calcul. Sur macOS, `caffeinate -i -s` n'agit que sur
-  secteur ; sur batterie, capot fermé, la machine dort quand même. Lancer la production depuis un script qui attend
-  le secteur (`pmset -g batt`), puis s'exécute sous `caffeinate` ([A15](../quality/anti-patterns.md#a15)).
-- **Machine partagée** : ne jamais tuer les processus d'un autre projet ou d'une autre session ; faire passer les
-  calculs lourds par un verrou commun ([machine partagée](../tooling/README.md#shared-machine)).
-- **Processus orphelins** : un script tué peut laisser un processus enfant (moteur de rendu, navigateur) ; vérifier
-  après chaque arrêt.
-- **Détacher et surveiller** : lancer avec `nohup … &` et un journal ; montrer les premières unités sans attendre la
-  fin.
+- **Sleep**: on a laptop, sleep stops the computation. On macOS, `caffeinate -i -s` only works on mains power; on
+  battery with the lid closed, the machine sleeps anyway. Launch production from a script that waits for mains power
+  (`pmset -g batt`), then runs under `caffeinate` ([A15](../quality/anti-patterns.md#a15)).
+- **Shared machine**: never kill processes of another project or session; route heavy computations through a common
+  lock ([shared machine](../tooling/README.md#shared-machine)).
+- **Orphan processes**: a killed script can leave a child process (render engine, browser) behind; check after every
+  stop.
+- **Detach and monitor**: launch with `nohup … &` and a log; show the first units without waiting for the end.
 
-## Enchaînement de fin de production [éprouvé]
+## End-of-production chain [proven]
 
-Un seul script enchaîne toutes les étapes, chacune horodatée dans le journal :
+A single script chains every step, each one timestamped in the log:
 
-1. calcul de chaque format ;
-2. post-traitement (stabilisation, réduction), en boucle fermée si l'œuvre boucle ;
-3. contrôles de l'œuvre complète ;
-4. exports de diffusion ;
-5. tests de lecture ou d'intégration ;
-6. page de revue.
+1. computation of each format;
+2. post-processing (stabilization, downscaling), as a closed loop if the piece loops;
+3. whole-piece checks;
+4. distribution exports;
+5. playback or integration tests;
+6. review page.
 
-Le calcul lancé n'est que la première étape de la livraison ([P3](../principles.md#p3)).
+A launched computation is only the first step of delivery ([P3](../principles.md#p3)).
 
-## Critère de fin
+## Exit criterion
 
-L'œuvre complète existe dans chaque format, sous une empreinte unique et cohérente ; les temps réels sont consignés ;
-les étapes suivantes (validation, exports) sont enchaînées.
+The complete piece exists in every format, under a single consistent fingerprint; real timings are recorded; the next
+steps (validation, exports) are chained.

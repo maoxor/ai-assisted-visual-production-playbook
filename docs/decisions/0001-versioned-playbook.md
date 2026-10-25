@@ -1,30 +1,30 @@
-# 0001 — Un référentiel de méthode unique, versionné, séparé des projets
+# 0001 — A single, versioned method repository, separate from projects
 
-- **Statut** : acceptée
-- **Date** : 2026-10-25
-- **Décidée par** : la personne qui dirige
+- **Status**: accepted
+- **Date**: 2026-10-25
+- **Decided by**: the lead
 
-## Contexte
+## Context
 
-La méthode vivait à trois endroits dispersés : les demandes de la personne qui dirige (longues et souvent répétées),
-les mémoires de l'agent (propres à chaque dossier de projet) et les journaux de chaque projet. Rien ne permettait de la
-transmettre à un nouveau projet sans relire des centaines de pages.
+The method lived in three scattered places: the lead's requests (long and often repeated), the agent's memories
+(specific to each project folder) and each project's logs. Nothing made it possible to pass it on to a new project
+without rereading hundreds of pages.
 
-## Décision
+## Decision
 
-- Un dépôt dédié contient les principes, le workflow, les critères de qualité, les guides de domaine, les outils
-  testés, les modèles, les skills et les décisions de méthode.
-- Chaque pratique porte un niveau de maturité : **[éprouvé]**, **[extrapolé]** ou **[proposé]**.
-- Les projets restent dans leurs propres dépôts ; le référentiel n'en reçoit que les enseignements génériques
-  ([décision 0007](0007-no-project-content.md)).
-- La méthode est versionnée sur le modèle de semver ([`CONTRIBUTING.md`](../../CONTRIBUTING.md#versioning)).
+- A dedicated repository holds the principles, the workflow, the quality criteria, the domain guides, the tested tools,
+  the templates, the skills and the method decisions.
+- Every practice carries a maturity level: **[proven]**, **[extrapolated]** or **[proposed]**.
+- Projects stay in their own repositories; the playbook receives only their generic lessons
+  ([decision 0007](0007-no-project-content.md)).
+- The method is versioned in the spirit of semantic versioning ([`CONTRIBUTING.md`](../../CONTRIBUTING.md#versioning)).
 
-## Conséquences
+## Consequences
 
-- Après chaque projet, les enseignements génériques sont reportés ici ; le bilan détaillé reste dans le projet.
-- Les mémoires transversales de l'agent sont recopiées ici ; les mémoires propres à un projet restent dans le projet.
-- Le dépôt se vérifie lui-même : liens, ancres, niveaux de maturité, absence de secrets, tests des outils.
+- After each project, the generic lessons are brought back here; the detailed report stays in the project.
+- The agent's cross-project memories are copied here; project-specific memories stay in the project.
+- The repository checks itself: links, anchors, maturity levels, absence of secrets, tool tests.
 
-## Vérification
+## Verification
 
-`python3 scripts/check_repo.py` et la CI (`.github/workflows/ci.yml`).
+`python3 scripts/check_repo.py` and CI (`.github/workflows/ci.yml`).

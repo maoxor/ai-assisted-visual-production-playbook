@@ -1,23 +1,21 @@
-# Corriger un défaut sur un échantillon
+# Fix a defect on a sample
 
 ```markdown
-<Défaut constaté, précisément.> La référence présente <ce que l'on veut retrouver> ; notre rendu paraît <écart>.
+<The observed defect, precisely.> The reference shows <what we want to recover>; our render looks <gap>.
 
-Concentre cette correction sur **<élément échantillon>**. Utilise-le comme échantillon de travail avant d'appliquer la
-méthode aux autres. <Conserve <autre élément> exactement dans son état actuel comme référence.>
+Focus this fix on **<sample element>**. Use it as the working sample before applying the method to the others.
+<Keep <other element> exactly in its current state as a reference.>
 
-Réanalyse <captures> à côté d'un recadrage équivalent de la référence. Distingue <composantes à séparer : épaisseur
-globale et relief de surface ; relief, reflets et éléments ajoutés ; tous les points lumineux ne sont pas des faces>.
+Re-analyse <captures> next to an equivalent crop of the reference. Separate <components to keep apart: overall
+thickness and surface relief; relief, reflections and added elements; not every bright point is a face>.
 
-Recherche comment reproduire précisément cette apparence ; relie chaque méthode retenue aux différences observées.
-Choisis la technique à partir de l'effet observé. <Ce qui ne suffira pas : augmenter seulement X, ajouter un bruit
-uniforme…>
+Research how to reproduce this appearance precisely; link each method kept to the observed differences. Choose the
+technique from the observed effect. <What will not be enough: only increasing X, adding uniform noise…>
 
-Présente un comparatif **référence / avant / après** (ou **essai actuel / nouvel essai**), à cadrage et échelle
-comparables : vue de diagnostic, rendu dans le traitement final (<flou de profondeur de champ, taille finale>), et un
-court mouvement <de caméra> pour vérifier que <les reflets révèlent le relief>. Vérifie aussi le coût avant d'étendre
-la méthode.
+Present a **reference / before / after** comparison (or **current trial / new trial**), at comparable framing and
+scale: diagnostic view, render with the final processing (<depth of field, final size>), and a short <camera> move to
+check that <the reflections reveal the relief>. Also check the cost before extending the method.
 
-Ne considère pas la correction comme réussie tant que <critère perceptible> n'est pas visible. Continue sur cet
-échantillon uniquement ; ne lance pas la production complète.
+Do not consider the fix successful until <perceptible criterion> is visible. Continue on this sample only; do not
+launch the full production.
 ```

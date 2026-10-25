@@ -1,27 +1,27 @@
-# 0004 — Préserver l'œuvre source ; l'IA estime, elle ne régénère pas
+# 0004 — Preserve the source artwork; AI estimates, it does not regenerate
 
-- **Statut** : acceptée
-- **Date** : 2026-10-25
-- **Décidée par** : la personne qui dirige
+- **Status**: accepted
+- **Date**: 2026-10-25
+- **Decided by**: the lead
 
-## Contexte
+## Context
 
-Un projet peut partir d'une œuvre existante (illustration, photographie, rendu d'un tiers). La régénérer par IA
-trahit son identité, ses détails et souvent les droits de son auteur.
+A project may start from an existing artwork (illustration, photograph, third-party render). Regenerating it with AI
+betrays its identity, its details and often its author's rights.
 
-## Décision
+## Decision
 
-- Quand une œuvre source existe, elle est restituée telle quelle à l'état de repos, et la fidélité est contrôlée.
-- L'IA sert à **estimer** (segmentation, profondeur) et éventuellement à **reconstruire des zones cachées** limitées,
-  sous contrôle visuel. Elle ne remplace jamais le sujet.
-- Les modèles s'exécutent localement, avec révision et licence consignées.
+- When a source artwork exists, it is reproduced as is in the rest state, and fidelity is checked.
+- AI is used to **estimate** (segmentation, depth) and possibly to **rebuild limited hidden areas**, under visual
+  control. It never replaces the subject.
+- Models run locally, with their revision and licence recorded.
 
-## Conséquences
+## Consequences
 
-- Les animations se construisent par déformation contrôlée (calques projetés, champs à ancres), avec des amplitudes
-  limitées à ce que la vue supporte ([animation 2,5D](../domains/2-5d-animation.md)).
-- La fidélité devient un contrôle systématique : l'état de repos est comparé à la source.
+- Animations are built by controlled deformation (projected layers, anchored fields), with amplitudes limited to what
+  the view supports ([2.5D animation](../domains/2-5d-animation.md)).
+- Fidelity becomes a systematic check: the rest state is compared with the source.
 
-## Vérification
+## Verification
 
-Contrôle de fidélité dans la [liste avant production](../quality/checklists/pre-production.md).
+Fidelity check in the [pre-production checklist](../quality/checklists/pre-production.md).

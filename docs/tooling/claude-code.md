@@ -1,75 +1,81 @@
-# Claude Code : configuration et usage
+# Claude Code: configuration and use
 
-## Réglages du poste [éprouvé]
+The method is agent-agnostic, but it was developed with Claude Code. This page records how Claude Code is configured
+and used. Other agents can use the same files: `AGENTS.md` points to `CLAUDE.md`, and the skills follow the open Agent
+Skills format.
 
-- Langue de réponse fixée sur celle de la personne qui dirige (réglage `language`).
-- Modèle le plus capable disponible, effort élevé pour les travaux de production.
-- Mode de permissions large sur un poste personnel **seulement si** les règles de prudence sont écrites dans les
-  consignes et les hooks : publication, achat, suppression, processus des autres projets.
-- Plusieurs sessions peuvent tourner en parallèle sur des projets différents : verrou commun pour les calculs lourds,
-  processus des autres sessions intouchables ([machine partagée](README.md#shared-machine)).
+## Workstation settings [proven]
 
-## Instructions de projet
+- Response language set to the lead's language (`language` setting).
+- The most capable model available, high effort for production work.
+- A broad permission mode on a personal workstation **only if** the rules of caution are written in the instructions
+  and hooks: publication, purchases, deletion, other projects' processes.
+- Several sessions can run in parallel on different projects: a common lock for heavy computations, other sessions'
+  processes untouchable ([shared machine](README.md#shared-machine)).
 
-| Support | Rôle | Maturité |
+## Project instructions
+
+| Medium | Role | Maturity |
 |---|---|---|
-| `CLAUDE.md` racine, **court** | Carte du dépôt, commandes de vérification, règles impératives, continuité | [éprouvé] |
-| `CLAUDE.md` de sous-dossier, `.claude/rules/` | Conventions locales, chargées à la demande | [éprouvé] |
-| `AGENTS.md` | Renvoi vers `CLAUDE.md` pour d'autres agents | [éprouvé] |
-| Section « Méthode appliquée » qui renvoie à ce référentiel | Rend la méthode active dès la première session, sans répéter les consignes dans chaque demande | [proposé] ([modèle](../../templates/project-claude-md.md)) |
+| Root `CLAUDE.md`, **short** | Repository map, verification commands, mandatory rules, continuity | [proven] |
+| Sub-folder `CLAUDE.md`, `.claude/rules/` | Local conventions, loaded on demand | [proven] |
+| `AGENTS.md` | Points other agents to `CLAUDE.md` | [proven] |
+| An "Applied method" section that refers to this playbook | Makes the method active from the first session, without repeating the instructions in every request | [proposed] ([template](../../templates/project-claude-md.md)) |
 
-Sans `CLAUDE.md`, les consignes vivent dans les demandes et finissent répétées d'une version à l'autre : le modèle les
-rassemble une fois pour toutes.
+Without a `CLAUDE.md`, instructions live in the requests and end up repeated from one version to the next: the
+template gathers them once and for all.
 
-## Mémoire de l'agent [éprouvé]
+## Agent memory [proven]
 
-- Un fichier par fait, avec un en-tête (`name`, `description`, `type`) et, pour un retour de la personne qui dirige,
-  les sections **Why** et **How to apply** ; liens entre mémoires par `[[nom]]`.
-- Types : `feedback` (comment travailler), `project` (état, décisions), `reference` (ressource externe), `user`
-  (profil).
-- **Limite** : la mémoire est propre à un dossier de projet. Les préférences transversales vivent donc dans ce
-  référentiel ([préférences de collaboration](../quality/collaboration.md)).
+- One file per fact, with a header (`name`, `description`, `type`) and, for feedback from the lead, the **Why** and
+  **How to apply** sections; links between memories with `[[name]]`.
+- Types: `feedback` (how to work), `project` (state, decisions), `reference` (external resource), `user` (profile).
+- **Limit**: memory is specific to a project folder. Cross-project preferences therefore live in this playbook
+  ([collaboration defaults](../quality/collaboration.md)).
 
-## Skills
+## Skills and plugin
 
-| Skill | Rôle | Maturité |
+| Skill | Role | Maturity |
 |---|---|---|
-| [`work-log`](../../skills/work-log/SKILL.md) | Ouvrir, reprendre et clore un travail long avec son journal | [éprouvé] |
-| [`test-first-change`](../../skills/test-first-change/SKILL.md) | Livrer un changement de code : cadrer, test d'abord, vérifier, documenter, committer | [éprouvé] |
-| [`visual-iteration`](../../skills/visual-iteration/SKILL.md) | Boucle référence → essai isolé → comparatif → intégration pour un travail visuel | [proposé] |
-| Skills de coordination par sous-agents | Recherche déléguée | **Écartés** par défaut ([décision 0003](../decisions/0003-no-subagents.md)) |
+| [`work-log`](../../skills/work-log/SKILL.md) | Open, resume and close a long task with its log | [proven] |
+| [`test-first-change`](../../skills/test-first-change/SKILL.md) | Ship a code change: scope, test first, verify, document, commit | [proven] |
+| [`visual-iteration`](../../skills/visual-iteration/SKILL.md) | Reference → isolated trial → comparison → integration loop for visual work | [proposed] |
+| Sub-agent coordination skills | Delegated research | **Not used** by default ([decision 0003](../decisions/0003-no-subagents.md)) |
+
+The skills ship in two ways: copied into a project by `scripts/new_project.py` (`.claude/skills/`), or installed for
+every project through the repository's Claude Code plugin (`.claude-plugin/`, see
+[`skills/README.md`](../../skills/README.md#install)). The plugin manifests are checked with `claude plugin validate`.
 
 <a id="hooks"></a>
 
 ## Hooks
 
-Configuration **[éprouvé]** pour un projet logiciel :
+Configuration **[proven]** for a software project:
 
-- `PreToolUse` sur `Edit|Write` : garde (par exemple, refus de modifier une migration déjà fusionnée).
-- `PostToolUse` sur `Edit|Write` : vérification immédiate du fichier modifié.
-- `PreToolUse` sur `Bash` : vérifications complètes **avant tout `git commit`**.
-- `Stop` : vérifications complètes **à la fin de chaque tour**.
-- Permissions : lecture et écriture des `.env` refusées.
-- Hooks écrits en scripts portables et **testés en CI** avec des entrées simulées.
+- `PreToolUse` on `Edit|Write`: guard (for example, refusing to modify a migration that is already merged).
+- `PostToolUse` on `Edit|Write`: immediate check of the modified file.
+- `PreToolUse` on `Bash`: full checks **before any `git commit`**.
+- `Stop`: full checks **at the end of each turn**.
+- Permissions: reading and writing `.env` files denied.
+- Hooks written as portable scripts and **tested in CI** with simulated inputs.
 
-Pour un projet de rendu ou de média **[proposé]** :
+For a rendering or media project **[proposed]**:
 
-- refuser l'écriture dans les dossiers d'archive ;
-- refuser la modification des dépendances d'une production en cours (comparaison avec l'empreinte de
-  [`fingerprint.py`](../../tools/README.md#fingerprintpy)) ;
-- refuser l'ajout à Git de fichiers volumineux (rendus, vidéos, scènes binaires).
+- refuse writes to archive folders;
+- refuse changes to the dependencies of a running production (comparison with the fingerprint of
+  [`fingerprint.py`](../../tools/README.md#fingerprintpy));
+- refuse adding large files to Git (renders, videos, binary scenes).
 
-## Outils de l'agent [éprouvé]
+## Agent tools [proven]
 
-- **Exécution en arrière-plan avec notification** pour les calculs longs, plutôt qu'une attente active.
-- **Surveillance par événements** des étapes d'un script long, à condition que le script journalise des lignes
-  repérables (`STEP …`).
-- **Recherche web** menée directement, en parallélisant les requêtes.
-- **Partage privé** (Artifacts, par exemple) pour une galerie ou un rapport, avec l'accord de la personne qui dirige.
-- **Pas de sous-agents** par défaut ([décision 0003](../decisions/0003-no-subagents.md)).
+- **Background execution with notification** for long computations, rather than active waiting.
+- **Event-based monitoring** of the steps of a long script, provided the script logs recognizable lines (`STEP …`).
+- **Web search** run directly, with queries in parallel.
+- **Private sharing** (Artifacts, for example) for a gallery or report, with the lead's approval.
+- **No sub-agents** by default ([decision 0003](../decisions/0003-no-subagents.md)).
 
-## Demandes
+## Requests
 
-Les demandes efficaces suivent une structure stable : objectif, reprise de l'existant, recherche, méthode,
-vérifications, livrables, mode d'exécution, critère essentiel. Elle est reprise dans les
-[demandes types](../../templates/prompts/README.md).
+Effective requests follow a stable structure: objective, taking stock of the existing work, research, method, checks,
+deliverables, execution mode, key criterion. It is the structure of the
+[prompt templates](../../templates/prompts/README.md).

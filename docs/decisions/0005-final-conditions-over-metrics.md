@@ -1,30 +1,29 @@
-# 0005 — Le jugement dans les conditions finales prime ; les mesures complètent
+# 0005 — Judgement in final conditions comes first; measurements complement it
 
-- **Statut** : acceptée
-- **Date** : 2026-10-25
-- **Décidée par** : la personne qui dirige
+- **Status**: accepted
+- **Date**: 2026-10-25
+- **Decided by**: the lead
 
-## Contexte
+## Context
 
-Des mesures prises pour des preuves ont plusieurs fois conduit à de mauvaises décisions : un mouvement mesurable mais
-invisible, un pourcentage de visibilité qui ne dit rien de la crédibilité, une recommandation de sobriété contraire au
-goût de la personne qui dirige.
+Measurements taken as evidence have led to bad decisions several times: a motion that was measurable but invisible, a
+visibility percentage that said nothing about credibility, a recommendation of restraint contrary to the lead's taste.
 
-## Décision
+## Decision
 
-- Toute évaluation se fait d'abord dans les conditions finales : taille d'affichage, vitesse normale, traitement final,
-  œuvre entière, lecture en avant, dernière version ([P8](../principles.md#p8)).
-- Chaque mesure accompagne une capture ou une vidéo ; elle sert au diagnostic, à la non-régression et à la comparaison
-  de profils.
-- Aucun seuil n'est une cible. Le jugement de la personne qui dirige l'emporte sur les mesures de l'agent.
+- Every evaluation happens first in final conditions: display size, normal speed, final processing, whole piece,
+  forward playback, latest version ([P8](../principles.md#p8)).
+- Every measurement comes with a capture or a video; it serves diagnosis, non-regression and the comparison of
+  profiles.
+- No threshold is a target. The lead's judgement wins over the agent's measurements.
 
-## Conséquences
+## Consequences
 
-- Les outils de mesure ([`flicker.py`](../../tools/README.md#flickerpy), [`loop_check.py`](../../tools/README.md#loop_checkpy))
-  produisent aussi des cartes et s'utilisent avec les vidéos de revue.
-- Les rapports présentent d'abord ce qui se voit, puis ce que la mesure confirme.
+- The measurement tools ([`flicker.py`](../../tools/README.md#flickerpy), [`loop_check.py`](../../tools/README.md#loop_checkpy))
+  also produce maps and are used together with review videos.
+- Reports present what is seen first, then what the measurement confirms.
 
-## Vérification
+## Verification
 
-[Liste de revue visuelle](../quality/checklists/visual-review.md) : le rendu dans les conditions finales accompagne
-chaque mesure.
+[Visual review checklist](../quality/checklists/visual-review.md): the render in final conditions accompanies every
+measurement.

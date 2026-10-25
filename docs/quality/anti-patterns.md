@@ -1,194 +1,192 @@
-# Anti-modèles
+# Anti-patterns
 
-Erreurs classiques d'une collaboration entre une personne qui dirige et un agent, chacune avec son symptôme, son coût
-et sa prévention. Toutes sont **[éprouvé]** : elles ont été commises puis corrigées en conditions réelles. Les plus
-coûteuses viennent en premier.
+Classic mistakes of a collaboration between a lead and an agent, each with its symptom, cost and prevention. All are
+**[proven]**: they were made, then corrected, in real conditions. The most expensive come first.
 
-Format : **symptôme** → **coût** → **prévention**.
+Format: **symptom** → **cost** → **prevention**.
 
 ---
 
 <a id="a1"></a>
 
-### A1. Présenter des images fixes quand on attend du mouvement
+### A1. Presenting stills when motion is expected
 
-- **Symptôme.** La validation porte sur une œuvre animée, et l'agent présente des images.
-- **Coût.** Relances répétées, perte de confiance.
-- **Prévention.** Le livrable de validation a la forme du livrable final : un vrai extrait continu, avec les réglages
-  de livraison. Les images fixes complètent une vidéo, elles ne la remplacent pas ([P8](../principles.md#p8)).
+- **Symptom.** The approval is about an animated piece, and the agent presents images.
+- **Cost.** Repeated follow-ups, loss of trust.
+- **Prevention.** The validation deliverable has the shape of the final deliverable: a real continuous excerpt, with
+  the delivery settings. Stills complement a video; they do not replace it ([P8](../principles.md#p8)).
 
 <a id="a2"></a>
 
-### A2. Oublier une correction demandée
+### A2. Forgetting a requested fix
 
-- **Symptôme.** Une demande figurait dans un long message, souvent à côté d'un ordre de lancement, et n'a pas été
-  traitée.
-- **Coût.** Production à relancer, frustration.
-- **Prévention.** Registre des consignes ; avant tout lancement long et avant chaque bilan, reprendre chaque demande
-  avec son état ([P15](../principles.md#p15)).
+- **Symptom.** A request was part of a long message, often next to an order to launch, and was not handled.
+- **Cost.** Production to relaunch, frustration.
+- **Prevention.** Instruction register; before any long launch and before every report, restate each request with its
+  status ([P15](../principles.md#p15)).
 
 <a id="a3"></a>
 
-### A3. Laisser un élément résiduel dans les livrables
+### A3. Leaving a leftover in the deliverables
 
-- **Symptôme.** Une signature, un logo, une mention provisoire (« démo », « droits non confirmés ») ou un réglage
-  d'essai reste dans un livrable ou dans la page d'intégration, parfois après qu'une consigne a changé.
-- **Coût.** Défaut visible découvert par la personne qui dirige.
-- **Prévention.**
-  - Un contrôle des éléments résiduels figure dans toute liste de livraison. On cherche **où** un élément est ajouté
-    (calcul, post-traitement, page), pas seulement s'il est visible ([liste livraison](checklists/delivery.md)).
-  - Un ajout de ce type est désactivable par la configuration, et son absence est vérifiée sur toutes les unités.
-  - Quand une consigne change, on cherche **toutes** ses traces : textes, mentions, réglages.
+- **Symptom.** A signature, a logo, a provisional mention ("demo", "rights not confirmed") or a trial setting remains in
+  a deliverable or in the integration page, sometimes after an instruction changed.
+- **Cost.** A visible defect discovered by the lead.
+- **Prevention.**
+  - A leftover check is part of every delivery checklist. Look for **where** an element is added (computation,
+    post-processing, page), not only whether it is visible ([delivery checklist](checklists/delivery.md)).
+  - Such an addition can be switched off in the configuration, and its absence is checked on every unit.
+  - When an instruction changes, look for **all** its traces: texts, mentions, settings.
 
 <a id="a4"></a>
 
-### A4. Laisser le coût de production dériver jusqu'à empêcher l'itération
+### A4. Letting production cost drift until iteration is impossible
 
-- **Symptôme.** Les réglages s'accumulent (échantillons, suréchantillonnage, micro-détails invisibles) jusqu'à des
-  heures de calcul pour quelques secondes.
-- **Coût.** Plus aucune itération possible dans le délai.
-- **Prévention.** Le coût par unité est suivi à chaque itération ; toute hausse se justifie visuellement ; un profil
-  de coût précède la production ([P13](../principles.md#p13)).
+- **Symptom.** Settings pile up (samples, supersampling, invisible micro-details) until a few seconds take hours to
+  compute.
+- **Cost.** No iteration possible within the deadline.
+- **Prevention.** The cost per unit is tracked at every iteration; any increase is justified visually; a cost profile
+  precedes production ([P13](../principles.md#p13)).
 
 <a id="a5"></a>
 
-### A5. Présenter un changement imperceptible
+### A5. Presenting an imperceptible change
 
-- **Symptôme.** « Je ne vois aucune différence » : les détails modifiés sont trop petits pour la taille d'affichage.
-- **Prévention.** Avant de présenter, vérifier soi-même, à la taille finale et à vitesse normale, que la différence se
-  voit ; travailler à une échelle perceptible.
+- **Symptom.** "I can't see any difference": the modified details are too small for the display size.
+- **Prevention.** Before presenting, check yourself, at final size and normal speed, that the difference is visible;
+  work at a perceptible scale.
 
 <a id="a6"></a>
 
-### A6. Comparer à une ancienne version au lieu de la dernière
+### A6. Comparing with an old version instead of the latest
 
-- **Symptôme.** Les tableaux et messages prennent une version passée pour étalon.
-- **Prévention.** Valeurs absolues sur la version actuelle, avant et après la correction. Une version passée sert
-  d'étalon seulement sur demande. Une solution mesurée sur un état ancien est revalidée sur l'état actuel.
+- **Symptom.** Tables and messages take a past version as the yardstick.
+- **Prevention.** Absolute values on the current version, before and after the fix. A past version is the yardstick
+  only on request. A solution measured on an old state is revalidated on the current state.
 
 <a id="a7"></a>
 
-### A7. Vidéos de contrôle en aller-retour
+### A7. Back-and-forth review videos
 
-- **Symptôme.** Les comparatifs jouent 0 → n → 0, ce qui masque le vrai mouvement et le raccord.
-- **Prévention.** Lecture en avant seulement, en boucle, sur l'œuvre entière
+- **Symptom.** Comparisons play 0 → n → 0, which hides the real motion and the seam.
+- **Prevention.** Forward playback only, looping, on the whole piece
   ([`review_video.py`](../../tools/README.md#review_videopy)).
 
 <a id="a8"></a>
 
-### A8. Déléguer à des sous-agents contre la préférence de la personne qui dirige
+### A8. Delegating to sub-agents against the lead's preference
 
-- **Symptôme.** L'agent répartit la recherche entre des sous-agents alors que la personne qui dirige veut qu'il la
-  mène lui-même.
-- **Prévention.** Recherche menée par l'agent, en parallélisant les appels d'outils
-  ([décision 0003](../decisions/0003-no-subagents.md)).
+- **Symptom.** The agent splits research among sub-agents while the lead wants it to do the research itself.
+- **Prevention.** Research done by the agent, running tool calls in parallel
+  ([decision 0003](../decisions/0003-no-subagents.md)). More generally: honour the delegation preference recorded in
+  the instruction register.
 
 <a id="a9"></a>
 
-### A9. Paramètre sans effet pris pour une correction
+### A9. Taking a parameter without effect for a fix
 
-- **Symptôme.** Un paramètre est réglé depuis plusieurs versions pour corriger un défaut, mais il n'agit pas dans les
-  conditions du projet (par exemple un réglage spéculaire sur une surface entièrement transmissive).
-- **Prévention.** Vérifier le sens et l'effet de chaque paramètre **dans le moteur et la version utilisés** : mesurer
-  le résultat, ne pas se contenter de régler la valeur.
+- **Symptom.** A parameter has been set for several versions to fix a defect, but it does not act in the project's
+  conditions (for example a specular setting on a fully transmissive surface).
+- **Prevention.** Check the meaning and effect of each parameter **in the engine and version in use**: measure the
+  result, do not settle for setting the value.
 
 <a id="a10"></a>
 
-### A10. Erreur de configuration silencieuse
+### A10. Silent configuration error
 
-- **Symptôme.** Une clé se retrouve dans la mauvaise section après une modification structurelle (l'ordre des tables
-  TOML, par exemple), et plusieurs essais sont faits sans elle.
-- **Prévention.** Après toute modification structurelle de la configuration, diff sémantique avec la version archivée :
-  seuls des changements voulus doivent apparaître.
+- **Symptom.** A key ends up in the wrong section after a structural edit (TOML table order, for example), and several
+  trials are run without it.
+- **Prevention.** After any structural edit of the configuration, run a semantic diff against the archived version:
+  only intended changes may appear.
 
 <a id="a11"></a>
 
-### A11. Graine non déterministe
+### A11. Non-deterministic seed
 
-- **Symptôme.** Un même élément procédural diffère d'une construction à l'autre, parce que sa graine vient d'une
-  fonction instable (`hash()` de Python change à chaque processus) ou de l'ordre d'itération.
-- **Prévention.** Toute graine dérive d'une valeur stable (nom, numéro, CRC32 d'une chaîne) ; un test de
-  reconstruction vérifie l'identité au bit près.
+- **Symptom.** The same procedural element differs from one build to the next, because its seed comes from an unstable
+  function (Python's `hash()` changes with every process) or from iteration order.
+- **Prevention.** Every seed derives from a stable value (name, number, CRC32 of a string); a rebuild test checks
+  bit-for-bit identity.
 
 <a id="a12"></a>
 
-### A12. Défendre sa recommandation artistique contre le choix de la personne qui dirige
+### A12. Defending your artistic recommendation against the lead's choice
 
-- **Symptôme.** L'agent recommande un traitement sobre, mesures à l'appui, alors que la personne qui dirige préfère la
-  version riche.
-- **Prévention.** Proposer des variantes contrastées, présenter les mesures comme contrôle et non comme argument ; le
-  choix final appartient à la personne qui dirige.
+- **Symptom.** The agent recommends a restrained treatment, measurements in hand, while the lead prefers the rich
+  version.
+- **Prevention.** Propose contrasting variants, present measurements as checks and not as arguments; the final choice
+  belongs to the lead.
 
 <a id="a13"></a>
 
-### A13. Montrer une version qui portait un défaut non détecté
+### A13. Showing a version with an undetected defect
 
-- **Symptôme.** Une géométrie générée a des normales retournées ou n'est pas fermée ; le défaut est découvert après la
-  présentation.
-- **Prévention.** Contrôle automatique de validité de toute géométrie générée (orientation par le volume signé,
-  fermeture, intersections). Un défaut découvert après coup se signale toujours, avec un avant/après de la correction.
+- **Symptom.** A generated geometry has flipped normals or is not closed; the defect is discovered after the
+  presentation.
+- **Prevention.** An automatic validity check on any generated geometry (orientation from the signed volume, closure,
+  intersections). A defect discovered afterwards is always reported, with a before/after of the fix.
 
 <a id="a14"></a>
 
-### A14. Juger la stabilité sur des aperçus dégradés
+### A14. Judging stability on degraded previews
 
-- **Symptôme.** Des aperçus peu échantillonnés exagèrent fortement le scintillement et faussent la décision.
-- **Prévention.** Bruit et scintillement se jugent en qualité finale, à la taille finale. Les aperçus servent au
-  mouvement et à la composition.
+- **Symptom.** Low-sample previews strongly exaggerate flicker and skew the decision.
+- **Prevention.** Noise and flicker are judged at final quality and final size. Previews are for motion and
+  composition.
 
 <a id="a15"></a>
 
-### A15. Laisser la machine se mettre en veille pendant un calcul long
+### A15. Letting the machine sleep during a long computation
 
-- **Symptôme.** Un portable passe sur batterie, capot fermé, et un calcul de quelques minutes prend des heures.
-- **Prévention.** Avant un calcul long, vérifier alimentation, mise en veille et espace disque ; lancer via un script
-  qui attend le secteur ; choisir une chaîne reprenable ([production](../workflow/06-production.md)).
+- **Symptom.** A laptop switches to battery with the lid closed, and a few minutes of computation take hours.
+- **Prevention.** Before a long computation, check power, sleep settings and disk space; launch through a script that
+  waits for mains power; choose a resumable pipeline ([production](../workflow/06-production.md)).
 
 <a id="a16"></a>
 
-### A16. Prendre une première mesure de temps aberrante pour la vérité
+### A16. Taking an aberrant first timing for the truth
 
-- **Symptôme.** La première unité inclut la préparation (chargement, compilation) ou la machine est occupée ; le temps
-  annoncé est faux.
-- **Prévention.** Refaire toute mesure surprenante, croiser sur une machine libre, distinguer la première unité du
-  régime établi.
+- **Symptom.** The first unit includes preparation (loading, compilation) or the machine is busy; the announced time is
+  wrong.
+- **Prevention.** Measure again any surprising timing, cross-check on an idle machine, separate the first unit from the
+  steady state.
 
 <a id="a17"></a>
 
-### A17. Laisser un malentendu sur une consigne ambiguë
+### A17. Leaving a misunderstanding of an ambiguous instruction
 
-- **Symptôme.** Une consigne admettait deux lectures (orientation d'une face ou sens d'un relief, par exemple) et
-  l'agent a traité la mauvaise.
-- **Prévention.** Écrire ce que l'on a compris, traiter la lecture la plus probable, signaler l'autre dans le bilan.
+- **Symptom.** An instruction allowed two readings (orientation of a face or direction of a relief, for example) and
+  the agent handled the wrong one.
+- **Prevention.** Write down what you understood, handle the most likely reading, flag the other one in the report.
 
 <a id="a18"></a>
 
-### A18. Recopier tels quels des contrôles devenus inadaptés
+### A18. Copying checks that no longer fit
 
-- **Symptôme.** Après un changement de périmètre (un sujet statique devient animé, par exemple), les contrôles hérités
-  produisent des faux positifs ou ne contrôlent plus rien d'utile.
-- **Prévention.** À chaque changement de périmètre, relire les contrôles hérités et les adapter.
+- **Symptom.** After a change of scope (a static subject becomes animated, for example), the inherited checks produce
+  false positives or no longer check anything useful.
+- **Prevention.** At every change of scope, reread the inherited checks and adapt them.
 
 <a id="a19"></a>
 
-### A19. Annoncer ouvert un fichier ou une page qui ne l'est pas
+### A19. Announcing that a file or page is open when it is not
 
-- **Symptôme.** « La page ne s'est pas ouverte. »
-- **Prévention.** Vérifier que l'ouverture a réussi (processus, fenêtre, URL) ; sinon, donner le chemin exact.
+- **Symptom.** "The page did not open."
+- **Prevention.** Check that opening succeeded (process, window, URL); otherwise give the exact path.
 
 <a id="a20"></a>
 
-### A20. Proposer des directions artistiques sans ambition
+### A20. Proposing art directions without ambition
 
-- **Symptôme.** Plusieurs séries de propositions sont rejetées parce qu'elles reprennent l'existant au lieu de viser
-  les meilleures références du domaine (espaces, mouvement, réponses aux actions, vraie 3D quand elle sert).
-- **Prévention.** Fixer la barre sur les meilleures références du domaine ; prototyper en mouvement et filmer avant de
-  conclure.
+- **Symptom.** Several rounds of proposals are rejected because they rework the existing state instead of aiming at the
+  best references of the domain (space, motion, responses to actions, real 3D when it serves).
+- **Prevention.** Set the bar at the best references of the domain; prototype in motion and record it before
+  concluding.
 
 ---
 
-## Ajouter un anti-modèle
+## Adding an anti-pattern
 
-Dès qu'une erreur est corrigée dans un projet : ouvrir une issue « Lesson learned », puis ajouter l'entrée ici sous
-forme **générique**, sans nom de projet ni détail de livrable ([`CONTRIBUTING.md`](../../CONTRIBUTING.md)). Une erreur
-qui se répète devient une règle dans un principe, une étape du workflow ou une liste de contrôle.
+As soon as a mistake is corrected in a project: open a **Lesson learned** issue, then add the entry here in **generic**
+form, with no project name or deliverable detail ([`CONTRIBUTING.md`](../../CONTRIBUTING.md)). A mistake that repeats
+becomes a rule in a principle, a workflow step or a checklist.

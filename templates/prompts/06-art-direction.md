@@ -1,22 +1,21 @@
-# Déléguer une direction artistique
+# Delegate an art direction
 
 ```markdown
-Je te laisse prendre la direction artistique de <domaine>. Étudie comment répartir les traitements entre <éléments> :
-<liste des traitements possibles>.
+I am letting you take the art direction of <domain>. Study how to distribute the treatments among <elements>:
+<list of possible treatments>.
 
-**Faut-il traiter tous les éléments ou seulement certains ?** Propose une répartition et justifie-la selon la
-composition, la profondeur, l'éclairage et <ce qui se trouve derrière ou autour de chaque élément>.
+**Should every element be treated, or only some?** Propose a distribution and justify it by the composition, depth,
+lighting and <what lies behind or around each element>.
 
-Attribue à chaque élément important un rôle visuel : attirer le regard, <fragmenter / rythmer>, renforcer la
-profondeur, ménager une zone de lecture. Tiens compte de ses propriétés existantes : un traitement peut enrichir un
-effet ou rendre l'image confuse.
+Give each important element a visual role: draw the eye, <fragment / give rhythm>, reinforce depth, keep a reading area
+clear. Account for its existing properties: a treatment can enrich an effect or make the image confusing.
 
-Recherche un équilibre entre variété et cohérence. Présente aussi un contre-essai extrême.
+Look for a balance between variety and coherence. Also present an extreme counter-trial.
 
-Présente une vue annotée des traitements proposés et de leur fonction, puis un aperçu comparatif de l'œuvre complète.
-Évalue à la taille finale et en mouvement, dans tous les formats. Affine la répartition avant de généraliser ou de
-lancer la production complète.
+Present an annotated view of the proposed treatments and their function, then a comparative preview of the whole
+piece. Evaluate at final size and in motion, in every format. Refine the distribution before generalizing or launching
+the full production.
 ```
 
-Pour l'agent : présenter les mesures (lisibilité, contraste) comme **contrôles**, pas comme arguments ; recueillir et
-écrire le choix tel qu'il est formulé ([direction artistique](../../docs/workflow/05-art-direction.md)).
+For the agent: present measurements (legibility, contrast) as **checks**, not as arguments; collect the choice and
+write it down as it was expressed ([art direction](../../docs/workflow/05-art-direction.md)).

@@ -1,37 +1,37 @@
-# Nouvelle version ou changement de périmètre
+# New version or change of scope
 
 ```markdown
-Reprends le projet après la <version> pour obtenir <amélioration clairement perceptible>.
+Resume the project after <version> to obtain <a clearly perceptible improvement>.
 
-**Cette consigne remplace explicitement <ancienne consigne>.** <Précision sur ce qui reste interdit.>
+**This instruction explicitly replaces <old instruction>.** <What remains forbidden.>
 
-## 1. Reprendre l'existant sans perdre le travail
-Inspecte instructions, fichiers, sources, scripts et aperçus réellement disponibles ; vérifie dans les fichiers (les
-anciens comptes rendus peuvent être incomplets). Vérifie les processus actifs : arrête proprement les tâches devenues
-obsolètes (et leur finalisation automatique), sans interrompre d'autres travaux ; conserve leurs résultats utiles.
-Archive la version actuelle et crée une version identifiable ; sépare calculs, caches et rapports. La reprise d'une
-production doit vérifier la version des sources et de leurs dépendances, pas seulement la présence des fichiers.
-Conserve ce qui fonctionne ; fais évoluer l'architecture seulement là où le nouvel objectif l'exige.
-<Si un état antérieur doit être rétabli : identifie-le dans les archives avant de le reprendre.>
+## 1. Take stock of the existing work without losing anything
+Inspect the instructions, files, sources, scripts and previews that actually exist; check in the files (older reports
+may be incomplete). Check the active processes: cleanly stop the tasks that have become obsolete (and their automatic
+finalization), without interrupting other work; keep their useful results. Archive the current version and create an
+identifiable version; separate computations, caches and reports. Resuming a production must check the version of the
+sources and their dependencies, not just the presence of files. Keep what works; change the architecture only where
+the new objective requires it.
+<If an earlier state must be restored: identify it in the archives before resuming it.>
 
-## 2. Rechercher une méthode pour chaque problème
-Avant chaque correction complexe, recherche ciblée (<domaines>), sans sous-agents. Réexamine nos essais précédents.
-Pour chaque sujet, note courte : problème observé, sources utiles, méthode retenue, essai, résultat ; faits,
-hypothèses et observations distingués. Passe à l'essai dès qu'une méthode est suffisamment étayée ; si elle échoue,
-examine sa construction plutôt que son intensité.
+## 2. Research a method for each problem
+Before each complex fix, targeted research (<domains>), without sub-agents. Re-examine our earlier trials. For each
+topic, a short note: observed problem, useful sources, method kept, trial, result; facts, hypotheses and observations
+kept apart. Move to a trial as soon as a method is supported well enough; if it fails, examine its construction rather
+than its intensity.
 
-## 3. <Sujet 1> … ## N. <Sujet N>
-Pour chacun : défaut constaté, effet recherché, ce qui doit être préservé, ce qu'il faut éviter, comparaisons
-attendues (plusieurs amplitudes à vitesse normale).
+## 3. <Topic 1> … ## N. <Topic N>
+For each: observed defect, intended effect, what must be preserved, what to avoid, expected comparisons (several
+amplitudes at normal speed).
 
-## Démontrer avant le calcul long
-Comparatifs à cadrage, taille et vitesse identiques : <liste>. Boucle complète de travail dans tous les formats,
-unités représentatives en qualité finale. Juge d'abord l'apparence et le mouvement ; les mesures complètent ; ralentis
-et amplifications ne prouvent pas la réussite. Distingue tes vérifications de ma validation.
+## Demonstrate before the long computation
+Comparisons at identical framing, size and speed: <list>. A complete working loop in every format, representative
+units at final quality. Judge appearance and motion first; measurements complement; slow motion and amplification do
+not prove success. Keep your checks separate from my approval.
 
-Ne relance pas des heures de production tant que les défauts persistent. Puis : calculs, contrôles de boucle, exports,
-lecture vérifiée ; fichiers reproductibles, page d'aperçu locale, bilan bref des choix et limites. Avance de façon
-autonome sur les décisions réversibles. Un calcul lancé ne constitue pas une livraison terminée.
+Do not relaunch hours of production while the defects persist. Then: computations, loop checks, exports, verified
+playback; reproducible files, a local preview page, a brief report of choices and limitations. Move forward
+autonomously on reversible decisions. A launched computation is not a finished delivery.
 
-**Critère essentiel : <…>.**
+**Key criterion: <…>.**
 ```
