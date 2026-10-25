@@ -39,6 +39,8 @@ flowchart LR
    stretching, look for another way to produce the perceived effect (shadow, colour, timing).
 8. **Check what the result shows, not what the parameter says**: controller, deformation, evaluated texture, rebuilt
    scene, rendered image. A parameter can have no effect under some conditions ([A9](../quality/anti-patterns.md#a9)).
+   A review note describes the final capture, not the generator's intent: reread the capture before confirming a
+   note, and review the notes after any rebuild.
 9. **Check that a change is perceptible before presenting it** ([A5](../quality/anti-patterns.md#a5)).
 10. **Check for regressions**: the rest of the composition unchanged (element-by-element comparison), protected areas
     respected, cost stable.

@@ -11,6 +11,7 @@
 | **Sample** | A representative element, excerpt or frame on which a method is tuned before it is generalized |
 | **Validation excerpt** | A continuous portion of the final production, made with the delivery settings |
 | **Diagnosis by elimination** | Neutralizing one possible cause at a time until the defect disappears |
+| **Feature inventory** | The list of features a result must show, each with a measurement, a threshold and a review view, written before generation; a feature judged "sketchy" blocks delivery |
 | **Counter-trial** | An extreme variant ("treat everything", "almost nothing") shown to reveal a preference |
 | **Named modification** | A trial change applied by a test bench to a copy of the reference state, under a name (`e1`, `e2`) |
 | **Fingerprint** | SHA-256 of every dependency of a production; protects a resume against mixing versions |

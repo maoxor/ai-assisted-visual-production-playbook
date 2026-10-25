@@ -183,6 +183,27 @@ Format: **symptom** → **cost** → **prevention**.
 - **Prevention.** Set the bar at the best references of the domain; prototype in motion and record it before
   concluding.
 
+<a id="a21"></a>
+
+### A21. Every check passes on a rudimentary result
+
+- **Symptom.** All automated checks are green, yet the result is sketchy: parts missing or rudimentary, details
+  unreadable. The checks only measured global properties.
+- **Cost.** A delivery that does not meet the bar; a second full pass.
+- **Prevention.** Before generating, write an inventory of the expected features, each with an independent
+  measurement, a threshold and a review view; a written review note per feature after reading its close-up next to
+  the reference; a feature judged "sketchy" or "absent" blocks delivery ([P1](../principles.md#p1)).
+
+<a id="a22"></a>
+
+### A22. A measurement reported without a threshold
+
+- **Symptom.** A tool has computed and written a measurement in its report for several versions, but nothing compares
+  it with a limit; the defect it reveals goes unnoticed.
+- **Cost.** A known-but-unread defect reaches the deliverable.
+- **Prevention.** A measurement enters a gate (threshold, exit code) or it does not count; measure on the delivered
+  file, not on an intermediate.
+
 ---
 
 ## Adding an anti-pattern

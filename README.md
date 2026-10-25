@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 A field-tested **method and toolkit for producing visual work with an AI coding agent**: offline 3D renders, 2.5D
-animation, looping background videos for the web and web interfaces. A person (the **lead**) sets the intent and
+animation, real-time 3D for the web, looping background videos and web interfaces. A person (the **lead**) sets the intent and
 judges; the agent ([Claude Code](https://docs.claude.com/en/docs/claude-code/overview) in practice) researches,
 builds, measures and documents. The playbook covers the whole path, from scoping to delivery, and keeps the result
 **perceptibly better, verifiable and reproducible** at every step.
@@ -27,7 +27,7 @@ Agent-assisted visual work fails in recurring, expensive ways:
 | A request buried in a long message is forgotten; a replaced instruction is still applied | An [instruction register](templates/instruction-register.md), reviewed before every report |
 | A new session cannot resume without the whole conversation | Logs, archived versions and a resume checklist ([continuity](docs/workflow/09-continuity.md)) |
 
-Twenty of these failures are written up as [anti-patterns](docs/quality/anti-patterns.md), each with its symptom, cost
+Twenty-two of these failures are written up as [anti-patterns](docs/quality/anti-patterns.md), each with its symptom, cost
 and prevention.
 
 ## What you get
@@ -121,8 +121,9 @@ flowchart LR
 
 ## Scope and limitations
 
-- **Proven on** offline 3D rendering delivered as web background video, 2.5D animation of a single illustration, and
-  web applications. Other domains are [extrapolated] ([roadmap](ROADMAP.md)).
+- **Proven on** offline 3D rendering delivered as web background video, 2.5D animation of a single illustration,
+  real-time 3D for the web (WebGL) and web applications. Motion design, games and documents are [extrapolated]
+  ([roadmap](ROADMAP.md)).
 - **Tools and hooks are tested on synthetic data** in CI (Linux, macOS, Windows); their thresholds are starting
   points to validate on each project, never targets. The hooks are [proposed]: not yet used in a real production.
 - **macOS-specific advice** is labelled as such (power management, Apple video colour).
