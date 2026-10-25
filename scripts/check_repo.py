@@ -1,4 +1,4 @@
-"""Repository checks: internal links, anchors, maturity levels, structure, confidentiality.
+"""Repository checks: internal links, anchors, maturity levels, structure, consistency, confidentiality.
 
   python3 scripts/check_repo.py                          # exit code 1 on any error
   python3 scripts/check_repo.py --deny-list terms.txt    # also reject workstation-specific terms
@@ -6,25 +6,29 @@
 Checks:
 1. Every relative link in a Markdown file points to an existing file; every anchor (#...) exists in the target
    (explicit <a id="..."> or heading, using GitHub's slug algorithm). Code blocks are ignored.
-2. Method documents carry at least one maturity level: [éprouvé], [extrapolé] or [proposé].
-3. Every top-level documentation folder has a README.md referenced from the root README.
-4. Confidentiality (decision 0007): no secrets (GitHub tokens, API keys, private keys), no email addresses other than
+2. Method documents carry at least one maturity level: [proven], [extrapolated] or [proposed].
+3. Structure: required root files exist; every top-level documentation folder has a README.md referenced from the
+   root README; every skill has a SKILL.md whose front matter names the skill and describes it.
+4. Consistency: the version is the same in CHANGELOG.md, pyproject.toml and the plugin manifests.
+5. Confidentiality (decision 0007): no secrets (GitHub tokens, API keys, private keys), no email addresses other than
    "noreply", no absolute workstation paths, no media or binary assets, ASCII-only file names.
-5. Optional deny list: one term per line ('#' starts a comment), matched case-insensitively as whole words in every
+6. Optional deny list: one term per line ('#' starts a comment), matched case-insensitively as whole words in every
    text file and file name. Default location: .git/info/deny-list.txt (local, never versioned).
 Standard library only.
 """
 import argparse
+import json
 import re
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-IGNORED = {".git", ".pytest_cache", ".venv", "__pycache__", "node_modules", ".ruff_cache"}
+IGNORED = {".git", ".pytest_cache", ".venv", "__pycache__", "node_modules", ".ruff_cache", "outputs", "renders"}
 LINK = re.compile(r"(?<!!)\[[^\]]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 HTML_ANCHOR = re.compile(r'<a\s+id="([^"]+)"', re.I)
 HEADING = re.compile(r"^(#{1,6})\s+(.*?)\s*#*\s*$")
-MATURITY = re.compile(r"\[(éprouvé|extrapolé|proposé)\]")
+MATURITY = re.compile(r"\[(proven|extrapolated|proposed)\]")
+LEGACY_MATURITY = re.compile(r"\[(éprouvé|extrapolé|proposé)\]")
 SECRETS = [
     (re.compile(r"\bgh[pousr]_[A-Za-z0-9]{20,}"), "GitHub token"),
     (re.compile(r"\bgithub_pat_[A-Za-z0-9_]{20,}"), "GitHub token"),
@@ -42,7 +46,11 @@ MATURITY_REQUIRED = ["docs/principles.md", "docs/workflow/*.md", "docs/quality/R
                      "docs/quality/anti-patterns.md", "docs/quality/collaboration.md", "docs/domains/*.md",
                      "docs/tooling/*.md", "skills/README.md"]
 MATURITY_EXEMPT = {"docs/domains/README.md"}
-DOC_FOLDERS = ["docs", "templates", "skills", "tools"]
+DOC_FOLDERS = ["docs", "templates", "skills", "tools", "examples"]
+REQUIRED_FILES = ["README.md", "LICENSE", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "CHANGELOG.md",
+                  "GETTING_STARTED.md", "pyproject.toml", ".claude-plugin/plugin.json",
+                  ".claude-plugin/marketplace.json"]
+FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 
 
 def files(pattern="**/*"):
@@ -104,10 +112,16 @@ def check_maturity(errors):
         for p in files(pattern):
             rel = p.relative_to(ROOT).as_posix()
             if rel not in MATURITY_EXEMPT and not MATURITY.search(p.read_text(encoding="utf-8")):
-                errors.append(f"{rel}: no maturity level [éprouvé] / [extrapolé] / [proposé]")
+                errors.append(f"{rel}: no maturity level [proven] / [extrapolated] / [proposed]")
+    for md in files("**/*.md"):
+        if LEGACY_MATURITY.search(md.read_text(encoding="utf-8")):
+            errors.append(f"{md.relative_to(ROOT)}: legacy maturity marker (use [proven] / [extrapolated] / [proposed])")
 
 
 def check_structure(errors):
+    for f in REQUIRED_FILES:
+        if not (ROOT / f).is_file():
+            errors.append(f"{f}: missing required file")
     root_readme = (ROOT / "README.md").read_text(encoding="utf-8")
     for d in DOC_FOLDERS:
         if not (ROOT / d).is_dir():
@@ -117,6 +131,48 @@ def check_structure(errors):
             errors.append(f"{d}/: missing README.md")
         if f"{d}/" not in root_readme:
             errors.append(f"{d}/: not referenced from the root README")
+
+
+def check_skills(errors):
+    for folder in sorted(p for p in (ROOT / "skills").iterdir() if p.is_dir()):
+        skill = folder / "SKILL.md"
+        rel = skill.relative_to(ROOT).as_posix()
+        if not skill.is_file():
+            errors.append(f"{rel}: missing")
+            continue
+        m = FRONT_MATTER.match(skill.read_text(encoding="utf-8"))
+        fields = dict(line.split(":", 1) for line in m.group(1).splitlines() if ":" in line) if m else {}
+        if fields.get("name", "").strip() != folder.name:
+            errors.append(f"{rel}: front matter 'name' must be '{folder.name}'")
+        if len(fields.get("description", "").strip()) < 20:
+            errors.append(f"{rel}: front matter 'description' missing or too short")
+
+
+def project_versions():
+    """Version declared by each file that carries one (missing files are skipped)."""
+    found = {}
+    changelog = ROOT / "CHANGELOG.md"
+    if changelog.is_file():
+        m = re.search(r"^## v(\d+\.\d+\.\d+)", changelog.read_text(encoding="utf-8"), re.M)
+        found["CHANGELOG.md"] = m.group(1) if m else None
+    pyproject = ROOT / "pyproject.toml"
+    if pyproject.is_file():
+        m = re.search(r'^version\s*=\s*"([^"]+)"', pyproject.read_text(encoding="utf-8"), re.M)
+        found["pyproject.toml"] = m.group(1) if m else None
+    for name in ("plugin.json", "marketplace.json"):
+        path = ROOT / ".claude-plugin" / name
+        if path.is_file():
+            data = json.loads(path.read_text(encoding="utf-8"))
+            if name == "marketplace.json":
+                data = (data.get("plugins") or [{}])[0]
+            found[f".claude-plugin/{name}"] = data.get("version")
+    return found
+
+
+def check_versions(errors):
+    versions = project_versions()
+    if len(set(versions.values())) > 1 or None in versions.values():
+        errors.append("inconsistent versions: " + ", ".join(f"{k}={v}" for k, v in versions.items()))
 
 
 def load_deny_list(path):
@@ -171,6 +227,8 @@ def main(argv=None):
     n_links = check_links(errors)
     check_maturity(errors)
     check_structure(errors)
+    check_skills(errors)
+    check_versions(errors)
     check_confidentiality(errors, deny_terms)
     n_md = sum(1 for _ in files("**/*.md"))
     for e in errors:

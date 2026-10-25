@@ -5,7 +5,7 @@
 
 Copies: agent instructions (CLAUDE.md, AGENTS.md), document templates (docs/), skills (.claude/skills/), toolkit
 (tools/), config/ and outputs/ folders and a .gitignore. An existing file is kept as is and reported. Does not run
-"git init": that is the project lead's choice (recommended, see GETTING_STARTED.md).
+"git init": that is the lead's choice (recommended, see GETTING_STARTED.md).
 Standard library only.
 """
 import argparse
@@ -40,13 +40,14 @@ __pycache__/
 .DS_Store
 *.blend1
 """
-AGENTS = """# Instructions pour les agents
+AGENTS = """# Instructions for agents
 
-Les instructions du projet sont dans [`CLAUDE.md`](CLAUDE.md). Elles s'appliquent à tout agent, quel que soit l'outil.
+The project's instructions are in [`CLAUDE.md`](CLAUDE.md). They apply to every agent, whatever the tool.
 """
 TOOLS_README = """# Tools
 
-Copied from the production-playbook repository (`tools/`, where their documentation and tests live).
+Copied from the ai-assisted-visual-production-playbook repository (`tools/`; documentation in its
+`tools/README.md`, tests in its `tests/`). Run `python tools/<tool>.py --help` for the options.
 Update them from the playbook rather than editing them here; a generic improvement goes back to the playbook.
 """
 
@@ -68,7 +69,7 @@ def create(target, name, tools=True):
     report = []
     today = date.today().isoformat()
     for rel, src in COPIES.items():
-        text = src.read_text(encoding="utf-8").replace("<nom du projet>", name)
+        text = src.read_text(encoding="utf-8").replace("<project name>", name)
         if rel in DATED:
             text = text.replace("YYYY-MM-DD", today, 1)
         write(target / rel, text, report)
