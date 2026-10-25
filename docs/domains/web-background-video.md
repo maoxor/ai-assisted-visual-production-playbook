@@ -102,3 +102,34 @@ Ceilings to confront with the quality obtained, to be adjusted with a justificat
 - **Under load**, an engine can drop many frames; before blaming the files, rerun the test on an idle machine or A/B
   against older exports.
 - **Test the final exports**: the weight and behaviour of provisional exports are not representative.
+
+<a id="physical-devices"></a>
+
+## Testing on physical devices [proposed]
+
+Emulation does not reproduce hardware decoders, thermal throttling, power-saving modes or Apple's colour pipeline on
+iOS. This procedure has not yet been applied in a project: record the first results and adjust it.
+
+1. **Choose the devices** from the audience, not from what is at hand: at least one recent iPhone, one mid-range
+   Android phone, one tablet; note model, OS version and browser version for each.
+2. **Serve locally, publish nothing**: the local server with range requests, listening on the local network (for
+   example `--bind 0.0.0.0` on a trusted network), opened from the device at `http://<computer IP>:<port>/`. Turn the
+   listening off afterwards.
+3. **Inspect remotely**: Safari Web Inspector for iOS (USB, "Web Inspector" enabled in the device's Safari settings),
+   `chrome://inspect` for Android (USB debugging). Read the engine's `data-*` attributes and the `?debug` overlay.
+4. **Run the matrix** on each device, final exports only:
+
+   | Case | What to check |
+   |---|---|
+   | First load, normal network | Poster at once, video starts without stalling, chosen variant and codec |
+   | Three loop cycles | Dropped frames (`getVideoPlaybackQuality`), visible seam, smoothness |
+   | Rotation during playback, then during loading | No black screen, a single new request, position in the loop kept |
+   | Power saving (iOS Low Power Mode, Android battery saver) | Autoplay refused → poster, then playback on the first gesture |
+   | Reduced motion enabled in the system settings | Still image, no video downloaded |
+   | Throttled or real mobile network | Variant chosen, time to start, bytes downloaded |
+   | Five minutes of playback | Heating, throttling, dropped frames over time |
+
+5. **Check colour on the device**: take a device screenshot of the page while the video plays and compare the
+   sampled values with the poster at the same frame; repeat with and without the Apple pre-compensation.
+6. **Record** device, versions, case, result and evidence (screenshot, numbers) in the project's delivery report,
+   separated from the emulated results.
