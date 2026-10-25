@@ -27,7 +27,8 @@ Options: `--output <folder>` (default `outputs/demo`, ignored by Git), `--frames
 
 ### Expected result
 
-The sequence is deterministic. On the reference run (macOS, Python 3.12, OpenCV 4.x), the summary line reads:
+The sequence is deterministic. The same summary line is printed on Linux, macOS and Windows (CI runs, Python 3.10 to
+3.13):
 
 ```text
 Summary: flicker 0.2689 % -> 0.0184 % (93 % less); loop ok: True (seam ratio 1.0); page: …/outputs/demo/review/index.html
