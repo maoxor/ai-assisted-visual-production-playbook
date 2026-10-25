@@ -19,8 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Links, anchors, maturity levels, structure, versions, confidentiality
@@ -28,7 +28,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
       - name: Lint (ruff)
         run: uv run --locked ruff check .
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: "22"
       - name: Validate the Claude Code plugin and marketplace manifests
@@ -51,7 +51,7 @@ jobs:
           - { os: macos-latest, python: "3.12" }
           - { os: windows-latest, python: "3.12" }
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v7
       - name: Install ffmpeg (Linux)
         if: runner.os == 'Linux'
