@@ -53,6 +53,7 @@ when and why each rule changed. By contributing, you agree that your contributio
 git clone https://github.com/maoxor/ai-assisted-visual-production-playbook.git
 cd ai-assisted-visual-production-playbook
 uv run pytest                    # or: python -m pip install numpy opencv-python-headless pytest && python -m pytest
+uv run ruff check .              # lint (configuration in pyproject.toml)
 python3 scripts/check_repo.py
 ```
 
@@ -63,9 +64,10 @@ Optional, for the plugin manifests: `claude plugin validate .`
 - **One branch per contribution**: `docs/<topic>`, `tools/<topic>`, `ci/<topic>`, `fix/<topic>`.
 - **Commits** follow `type(scope): description`. Types: `docs`, `feat` (tool, template, skill), `fix`, `test`, `ci`,
   `chore`, `refactor`. Scopes: `principles`, `workflow`, `quality`, `domains`, `tooling`, `decisions`, `templates`,
-  `skills`, `tools`, `scripts`, `examples`, `plugin`.
+  `skills`, `hooks`, `tools`, `scripts`, `examples`, `plugin`.
 - **Commit body**: why, what changes for a future project, evidence (tests, checks).
-- Fill in the pull request template. CI must be green.
+- Fill in the pull request template. CI must be green; `main` accepts changes only through pull requests whose checks
+  pass.
 - **Issue labels**: `lesson-learned`, `method-change`, `gap`.
 
 <a id="versioning"></a>
@@ -93,6 +95,12 @@ uv run pytest
 Without the option, `check_repo.py` also reads `.git/info/deny-list.txt` if it exists: a local file, never versioned,
 one term per line (`#` starts a comment). Put there the names of your projects, clients and colleagues so that they
 can never slip into a contribution.
+
+To run these checks automatically before every commit, enable the repository's Git hook once per clone:
+
+```bash
+git config core.hooksPath scripts/git-hooks      # runs scripts/check_repo.py, with your deny list, on each commit
+```
 
 CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs the same checks, without any deny list, on every push
 and pull request.

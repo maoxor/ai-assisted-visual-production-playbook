@@ -44,7 +44,8 @@ p.intro, p.text { color:var(--muted); max-width:80ch; }
 figure { margin:0; } figcaption { color:var(--muted); font-size:13px; margin-top:4px; }
 video, img { display:block; width:100%; height:auto; background:#000; }
 .missing { border:2px dashed var(--missing); color:var(--missing); padding:24px; text-align:center; }
-table { border-collapse:collapse; margin:10px 0; } td, th { border:1px solid var(--line); padding:4px 10px; text-align:left; }
+table { border-collapse:collapse; margin:10px 0; }
+td, th { border:1px solid var(--line); padding:4px 10px; text-align:left; }
 a { color:var(--accent); }
 """
 

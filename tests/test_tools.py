@@ -104,7 +104,7 @@ def test_flicker_16_bit(tmp_path):
     images = [(image.astype(np.uint16) * 257) for image in smooth_sequence()]
     d = write_sequence(tmp_path / "16", images)
     lum = flicker.load(d)
-    assert 0 <= min(l.min() for l in lum) and max(l.max() for l in lum) <= 255.01
+    assert 0 <= min(frame.min() for frame in lum) and max(frame.max() for frame in lum) <= 255.01
 
 
 def test_flicker_rejects_fewer_than_three_frames():
@@ -154,7 +154,7 @@ def test_stabilization_removes_blinking_without_touching_motion(tmp_path):
     assert before > 0.3 and after < before * 0.3
     clean = textured_sequence(jump=0)
     stable = [cv2.imread(str(p)) for p in sorted(dst.glob("frame_*.png"))]
-    gap = np.mean([np.abs(a.astype(float) - b.astype(float)).mean() for a, b in zip(clean, stable)])
+    gap = np.mean([np.abs(a.astype(float) - b.astype(float)).mean() for a, b in zip(clean, stable, strict=True)])
     assert gap < 1.0                                                # the sliding texture is preserved
 
 
@@ -172,7 +172,7 @@ def test_stabilization_smooth_sequence_unchanged(tmp_path):
     src = write_sequence(tmp_path / "src", textured_sequence())
     dst = tmp_path / "dst"
     stabilize.main(["--src", str(src), "--dst", str(dst)])
-    for a, b in zip(sorted(src.glob("*.png")), sorted(dst.glob("*.png"))):
+    for a, b in zip(sorted(src.glob("*.png")), sorted(dst.glob("*.png")), strict=True):
         assert np.abs(cv2.imread(str(a)).astype(int) - cv2.imread(str(b)).astype(int)).max() <= 1
 
 
@@ -296,7 +296,8 @@ def test_review_video_any_file_names(tmp_path):
     out = tmp_path / "out" / "review.mp4"
     assert review_video.make([d], out, height=48) == 6
     probe = subprocess.run(["ffprobe", "-v", "error", "-count_frames", "-select_streams", "v:0", "-show_entries",
-                            "stream=nb_read_frames", "-of", "json", str(out)], capture_output=True, text=True, check=True)
+                            "stream=nb_read_frames", "-of", "json", str(out)],
+                           capture_output=True, text=True, check=True)
     assert int(json.loads(probe.stdout)["streams"][0]["nb_read_frames"]) == 6
 
 

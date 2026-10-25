@@ -33,6 +33,19 @@ feel alive; with every element, the whole must form a coherent composition".>
 - Rights and licences (third-party sources, publication):
 - Distribution: local only until authorized.
 
+## Time and budget
+
+| Item | Value | How it was estimated |
+|---|---|---|
+| Deadline and fixed dates (reviews, delivery) | | |
+| The lead's time: review slots, response delay | | |
+| Machine time for production: units × measured cost per unit × expected runs | | cost profile on representative units |
+| Number of iterations planned before production | | |
+| Money: purchases, subscriptions, services (approval required) | none by default | |
+| Margin kept for the unexpected | | |
+
+Re-estimate after the prototype and after the cost profile; say what changed and why.
+
 ## Existing work inspected
 
 <Files, versions, running processes, earlier results: checked in the files, not from a report.>

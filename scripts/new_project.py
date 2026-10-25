@@ -1,10 +1,11 @@
 """Create the skeleton of a new project that applies the playbook, never overwriting an existing file.
 
   python3 scripts/new_project.py ~/dev/my-project --name "My project"
-  python3 scripts/new_project.py ~/dev/my-project --name "My project" --no-tools
+  python3 scripts/new_project.py ~/dev/my-project --name "My project" --no-tools --no-hooks
 
-Copies: agent instructions (CLAUDE.md, AGENTS.md), document templates (docs/), skills (.claude/skills/), toolkit
-(tools/), config/ and outputs/ folders and a .gitignore. An existing file is kept as is and reported. Does not run
+Copies: agent instructions (CLAUDE.md, AGENTS.md), document templates (docs/), skills (.claude/skills/), guard hooks
+(.claude/hooks/ and .claude/settings.json), toolkit (tools/), config/ and outputs/ folders and a .gitignore.
+An existing file is kept as is and reported. Does not run
 "git init": that is the lead's choice (recommended, see GETTING_STARTED.md).
 Standard library only.
 """
@@ -31,6 +32,7 @@ COPIES = {
 }
 DATED = {"docs/BRIEF.md", "docs/instruction-register.md"}
 SKILLS = ["work-log", "test-first-change", "visual-iteration"]
+HOOKS = ["_common.py", "guard_archive.py", "guard_production.py", "guard_large_files.py"]
 TOOLS = ["flicker.py", "loop_check.py", "stabilize.py", "fingerprint.py", "review_page.py", "review_video.py"]
 GITIGNORE = """# Large, regenerable outputs stay out of Git (version sources, configuration and scripts)
 outputs/
@@ -64,7 +66,7 @@ def write(dest, content, report):
     report.append(f"created   {dest}")
 
 
-def create(target, name, tools=True):
+def create(target, name, tools=True, hooks=True):
     target = Path(target).expanduser().resolve()
     report = []
     today = date.today().isoformat()
@@ -77,6 +79,10 @@ def create(target, name, tools=True):
     write(target / ".gitignore", GITIGNORE, report)
     for s in SKILLS:
         write(target / ".claude/skills" / s / "SKILL.md", PLAYBOOK / "skills" / s / "SKILL.md", report)
+    if hooks:
+        for h in HOOKS:
+            write(target / ".claude/hooks" / h, PLAYBOOK / "hooks" / h, report)
+        write(target / ".claude/settings.json", PLAYBOOK / "hooks" / "settings.json", report)
     if tools:
         for t in TOOLS:
             write(target / "tools" / t, PLAYBOOK / "tools" / t, report)
@@ -91,8 +97,9 @@ def main(argv=None):
     ap.add_argument("target", help="folder of the new project (created if missing)")
     ap.add_argument("--name", required=True, help="project name")
     ap.add_argument("--no-tools", action="store_true", help="do not copy the toolkit")
+    ap.add_argument("--no-hooks", action="store_true", help="do not install the guard hooks")
     a = ap.parse_args(argv)
-    target, report = create(a.target, a.name, not a.no_tools)
+    target, report = create(a.target, a.name, not a.no_tools, not a.no_hooks)
     print("\n".join(report))
     print(f"\nProject ready: {target}\nNext: fill in docs/BRIEF.md and complete CLAUDE.md (see the playbook's "
           "GETTING_STARTED.md). Git: run 'git init' if wanted.")

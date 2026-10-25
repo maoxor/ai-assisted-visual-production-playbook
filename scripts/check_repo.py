@@ -9,7 +9,7 @@ Checks:
 2. Method documents carry at least one maturity level: [proven], [extrapolated] or [proposed].
 3. Structure: required root files exist; every top-level documentation folder has a README.md referenced from the
    root README; every skill has a SKILL.md whose front matter names the skill and describes it.
-4. Consistency: the version is the same in CHANGELOG.md, pyproject.toml and the plugin manifests.
+4. Consistency: the version is the same in CHANGELOG.md, pyproject.toml, CITATION.cff and the plugin manifests.
 5. Confidentiality (decision 0007): no secrets (GitHub tokens, API keys, private keys), no email addresses other than
    "noreply", no absolute workstation paths, no media or binary assets, ASCII-only file names.
 6. Optional deny list: one term per line ('#' starts a comment), matched case-insensitively as whole words in every
@@ -46,9 +46,9 @@ MATURITY_REQUIRED = ["docs/principles.md", "docs/workflow/*.md", "docs/quality/R
                      "docs/quality/anti-patterns.md", "docs/quality/collaboration.md", "docs/domains/*.md",
                      "docs/tooling/*.md", "skills/README.md"]
 MATURITY_EXEMPT = {"docs/domains/README.md"}
-DOC_FOLDERS = ["docs", "templates", "skills", "tools", "examples"]
+DOC_FOLDERS = ["docs", "templates", "skills", "hooks", "tools", "examples"]
 REQUIRED_FILES = ["README.md", "LICENSE", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "SECURITY.md", "CHANGELOG.md",
-                  "GETTING_STARTED.md", "pyproject.toml", ".claude-plugin/plugin.json",
+                  "GETTING_STARTED.md", "pyproject.toml", "CITATION.cff", ".claude-plugin/plugin.json",
                   ".claude-plugin/marketplace.json"]
 FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 
@@ -71,7 +71,10 @@ def github_slug(title):
     return t.replace(" ", "-")
 
 
-def anchors(path, cache={}):
+_ANCHORS = {}
+
+
+def anchors(path, cache=_ANCHORS):
     if path not in cache:
         text = path.read_text(encoding="utf-8")
         found = set(HTML_ANCHOR.findall(text))
@@ -115,7 +118,8 @@ def check_maturity(errors):
                 errors.append(f"{rel}: no maturity level [proven] / [extrapolated] / [proposed]")
     for md in files("**/*.md"):
         if LEGACY_MATURITY.search(md.read_text(encoding="utf-8")):
-            errors.append(f"{md.relative_to(ROOT)}: legacy maturity marker (use [proven] / [extrapolated] / [proposed])")
+            errors.append(f"{md.relative_to(ROOT)}: legacy maturity marker "
+                          "(use [proven] / [extrapolated] / [proposed])")
 
 
 def check_structure(errors):
@@ -159,6 +163,10 @@ def project_versions():
     if pyproject.is_file():
         m = re.search(r'^version\s*=\s*"([^"]+)"', pyproject.read_text(encoding="utf-8"), re.M)
         found["pyproject.toml"] = m.group(1) if m else None
+    citation = ROOT / "CITATION.cff"
+    if citation.is_file():
+        m = re.search(r"^version:\s*(\S+)", citation.read_text(encoding="utf-8"), re.M)
+        found["CITATION.cff"] = m.group(1) if m else None
     for name in ("plugin.json", "marketplace.json"):
         path = ROOT / ".claude-plugin" / name
         if path.is_file():

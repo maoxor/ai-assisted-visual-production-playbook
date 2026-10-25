@@ -22,6 +22,26 @@ for the authors of this playbook. They are **defaults, not laws**: an explicit p
 | C14 | **No AI regeneration of the subject** when a source artwork exists ([decision 0004](../decisions/0004-preserve-the-source.md)) | Fidelity and rights |
 | C15 | **Aim for the best references of the domain**, judged on the rendered result and the experience | Avoids timid proposals ([A20](anti-patterns.md#a20)) |
 
+<a id="several-people"></a>
+
+## Working with several people [proposed]
+
+The defaults above describe one lead and one agent. When more people are involved:
+
+| Role | Decides | Rule |
+|---|---|---|
+| **Lead** (one per project) | Intent, references, approvals, conflicts between instructions | Named in the brief; the only source of approvals unless they delegate in writing |
+| **Reviewers** | Nothing by default; they give feedback | Feedback becomes an instruction only when the lead adopts it |
+| **Owners of other repositories** (collaborators, clients) | Their own code and history | Read-only unless agreed; changes go through their branches and pull requests |
+| **Agent** | Reversible decisions delegated by the lead | Records who gave each instruction |
+
+- **One instruction register**, with the author of each instruction; two contradictory instructions go to the lead,
+  who decides, and the decision is written down.
+- **Approvals are attributed**: "approved by the lead on <date>", never "validated" without a name of role.
+- **Shared machines and repositories**: never touch another person's processes, branches or sessions
+  ([shared machine](../tooling/README.md#shared-machine)).
+- **Git identity**: each person commits with their own identity (C12).
+
 ## Snippet ready to copy
 
 To apply these defaults to every project, copy this block into Claude Code's global instructions (`~/.claude/CLAUDE.md`)

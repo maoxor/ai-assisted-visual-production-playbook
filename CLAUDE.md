@@ -10,7 +10,7 @@ contains no project. Everything is written in English.
 | Path | Content |
 |---|---|
 | `docs/` | The method (principles, workflow, quality, domains, tooling, decisions) |
-| `templates/`, `skills/` | Copied into projects by `scripts/new_project.py`; `skills/` is also the plugin's skill folder |
+| `templates/`, `skills/`, `hooks/` | Copied into projects by `scripts/new_project.py`; `skills/` is also the plugin's skill folder |
 | `tools/` | Standalone Python CLIs, copied into projects; tests in `tests/` |
 | `examples/demo.py` | End-to-end demonstration on synthetic frames |
 | `scripts/` | `check_repo.py` (repository checks), `new_project.py` (scaffolder) |
@@ -21,6 +21,7 @@ contains no project. Everything is written in English.
 ```bash
 python3 scripts/check_repo.py
 uv run pytest
+uv run ruff check .
 claude plugin validate .        # when the manifests or skills change
 ```
 

@@ -111,7 +111,13 @@ missing or incomplete units (PNG without its IEND chunk, empty file).
 python tools/fingerprint.py compute --dep scene.blend --dep config/scene.toml --dep 'layers/*.png' --extra tool="Blender 4.2"
 python tools/fingerprint.py ensure --outputs renders/v1/desktop --dep ... [--extra quality=final] [--stale renders/v1/_stale]
 python tools/fingerprint.py pending --outputs renders/v1/desktop --count 300 [--template 'frame_{:04d}.png']
+python tools/fingerprint.py run --outputs renders/v1/desktop -- python scripts/render.py --batch 0
 ```
+
+`run` executes the command while `<outputs>/RUNNING` (holding the process id) marks the production as in progress,
+removes the marker at the end and returns the command's exit code; `fingerprint.running(outputs)` does the same around
+a block of Python code. The [`guard_production.py`](../hooks/README.md) hook uses this marker to freeze the
+dependencies listed in `VERSION.json`.
 
 `ensure` writes `<outputs>/VERSION.json` (fingerprint, date, per-file digests, extra values) and prints the
 fingerprint prefix with the action taken: `new`, `unchanged` or `… moved to <stale folder>`. File paths are part of the
@@ -124,10 +130,12 @@ fingerprint: always call it from the same folder, with the same relative paths.
   ```python
   from fingerprint import ensure, pending
   deps = ["scenes/main.blend", "config/scene.toml", "scripts/render/job.py", "layers/*.png"]
+  from fingerprint import running
   ensure("renders/v3/desktop", deps, {"renderer": "4.2", "quality": "final"})
   todo = pending("renders/v3/desktop", 300)
-  for start in range(0, len(todo), 10):
-      render(todo[start:start + 10])     # one process per batch; check disk space before each one
+  with running("renders/v3/desktop"):    # dependencies frozen for the agent while the loop runs
+      for start in range(0, len(todo), 10):
+          render(todo[start:start + 10])  # one process per batch; check disk space before each one
   ```
 
 <a id="review_pagepy"></a>

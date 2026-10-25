@@ -59,12 +59,14 @@ Configuration **[proven]** for a software project:
 - Permissions: reading and writing `.env` files denied.
 - Hooks written as portable scripts and **tested in CI** with simulated inputs.
 
-For a rendering or media project **[proposed]**:
+For a rendering or media project **[proposed]**, three hooks are shipped in [`hooks/`](../../hooks/README.md) and
+installed by `scripts/new_project.py` (written and tested with simulated events, not yet used in a real production):
 
-- refuse writes to archive folders;
-- refuse changes to the dependencies of a running production (comparison with the fingerprint of
-  [`fingerprint.py`](../../tools/README.md#fingerprintpy));
-- refuse adding large files to Git (renders, videos, binary scenes).
+- `guard_archive.py` refuses edits inside archive folders;
+- `guard_production.py` refuses edits to the dependencies of a running production (the files listed in the
+  `VERSION.json` of [`fingerprint.py`](../../tools/README.md#fingerprintpy), while `fingerprint.py run` holds the
+  `RUNNING` marker);
+- `guard_large_files.py` refuses a `git commit` that adds large or media files (renders, videos, binary scenes).
 
 ## Agent tools [proven]
 

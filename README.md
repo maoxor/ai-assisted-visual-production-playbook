@@ -37,6 +37,7 @@ and prevention.
 | [Method](docs/README.md) | 16 [principles](docs/principles.md), a 10-step [workflow](docs/workflow/README.md), a [quality](docs/quality/README.md) grid, 5 [checklists](docs/quality/checklists/README.md), [domain guides](docs/domains/README.md) | Decide what to do, in which order, and when it is finished |
 | [Templates](templates/README.md) | 11 project documents (brief, instruction register, logs, delivery report…) and 11 [prompt templates](templates/prompts/README.md) | Start documents and requests from a proven structure |
 | [Agent skills](skills/README.md) | `work-log`, `test-first-change`, `visual-iteration` (Agent Skills format), packaged as a Claude Code plugin | Make the agent follow the procedures without repeating them |
+| [Hooks](hooks/README.md) | 3 Claude Code guards for rendering projects: archives read-only, dependencies of a running production frozen, no large files in Git | Enforce the rules automatically, whatever the agent does |
 | [Tools](tools/README.md) | 6 tested Python command-line tools: flicker measurement, loop check, temporal stabilization, dependency fingerprint, review page, review video | Measure, protect and present visual results |
 | [`scripts/new_project.py`](scripts/new_project.py) | Project scaffolder | Create a project that applies the method in one command |
 | [`examples/demo.py`](examples/README.md) | End-to-end demonstration on synthetic frames | See every tool work in two minutes, without any project data |
@@ -65,8 +66,8 @@ uv run examples/demo.py --open
 python3 scripts/new_project.py ~/dev/my-project --name "My project"
 ```
 
-It creates the agent instructions (`CLAUDE.md`), the document templates, the skills and the tools, and never
-overwrites an existing file. Then follow [`GETTING_STARTED.md`](GETTING_STARTED.md).
+It creates the agent instructions (`CLAUDE.md`), the document templates, the skills, the guard hooks and the tools,
+and never overwrites an existing file. Then follow [`GETTING_STARTED.md`](GETTING_STARTED.md).
 
 **3. Or install only the skills in Claude Code**, for every project:
 
@@ -122,8 +123,8 @@ flowchart LR
 
 - **Proven on** offline 3D rendering delivered as web background video, 2.5D animation of a single illustration, and
   web applications. Other domains are [extrapolated] ([roadmap](ROADMAP.md)).
-- **Tools are tested on synthetic data** in CI (Linux, macOS, Windows); their thresholds are starting points to
-  validate on each project, never targets.
+- **Tools and hooks are tested on synthetic data** in CI (Linux, macOS, Windows); their thresholds are starting
+  points to validate on each project, never targets. The hooks are [proposed]: not yet used in a real production.
 - **macOS-specific advice** is labelled as such (power management, Apple video colour).
 - **Not a style guide, not a project archive, not a render engine.** The tools measure and protect results; they do
   not generate images.
@@ -143,6 +144,7 @@ flowchart LR
 | Run or reuse a tool | [`tools/`](tools/README.md) |
 | Start from a document or prompt template | [`templates/`](templates/README.md) |
 | Install the agent skills | [`skills/`](skills/README.md) |
+| Add automatic guards to a project | [`hooks/`](hooks/README.md) |
 | Understand a structural decision | [Decisions](docs/decisions/README.md) |
 | See what is planned | [`ROADMAP.md`](ROADMAP.md) |
 | Contribute | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
@@ -160,6 +162,7 @@ docs/                  The method
   decisions/             structural decisions about the method (ADR)
 templates/             Document and prompt templates copied into projects
 skills/                Agent skills (also the Claude Code plugin's skills)
+hooks/                 Claude Code guard hooks for rendering projects
 tools/                 Tested Python command-line tools
 examples/              End-to-end demonstration on synthetic data
 scripts/               Repository checks, project scaffolder
@@ -181,4 +184,5 @@ uv run pytest                      # tools, scripts and demo tests
 Contributions are welcome: lessons learned, method changes, tools, domain guides. Read
 [`CONTRIBUTING.md`](CONTRIBUTING.md), the [code of conduct](CODE_OF_CONDUCT.md) and the
 [security policy](SECURITY.md). Released under the [MIT license](LICENSE); the templates and skills may also be copied
-into your projects without attribution (see [`LICENSE`](LICENSE)).
+into your projects without attribution (see [`LICENSE`](LICENSE)). To cite the playbook, use
+[`CITATION.cff`](CITATION.cff) (GitHub's "Cite this repository" button).
