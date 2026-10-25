@@ -1,96 +1,184 @@
-# Production Playbook
+# AI-assisted visual production playbook
 
-Référentiel de méthode pour **concevoir, produire, itérer, valider et livrer** un travail technique ou créatif, mené
-par une personne qui dirige et un agent d'IA (Claude Code) qui exécute, recherche et vérifie.
+[![CI](https://github.com/maoxor/ai-assisted-visual-production-playbook/actions/workflows/ci.yml/badge.svg)](https://github.com/maoxor/ai-assisted-visual-production-playbook/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Il documente **comment réaliser les travaux**, pas les travaux eux-mêmes. Il ne contient aucun livrable, aucune
-réalisation, aucun asset et aucune donnée de projet ([décision 0007](docs/decisions/0007-no-project-content.md)). Tout
-y est générique et réutilisable, quels que soient le domaine, la technique ou la direction artistique.
+A field-tested **method and toolkit for producing visual work with an AI coding agent**: offline 3D renders, 2.5D
+animation, looping background videos for the web and web interfaces. A person (the **lead**) sets the intent and
+judges; the agent ([Claude Code](https://docs.claude.com/en/docs/claude-code/overview) in practice) researches,
+builds, measures and documents. The playbook covers the whole path, from scoping to delivery, and keeps the result
+**perceptibly better, verifiable and reproducible** at every step.
 
-## Niveau de maturité des pratiques
+It documents **how to do the work**. It contains no project, deliverable or asset
+([decision 0007](docs/decisions/0007-no-project-content.md)).
 
-Chaque pratique porte un niveau, pour savoir sur quoi l'on peut s'appuyer :
+## The problems it solves
 
-| Niveau | Signification |
+Agent-assisted visual work fails in recurring, expensive ways:
+
+| Failure | What the playbook does about it |
 |---|---|
-| **[éprouvé]** | Appliqué en production réelle, avec un effet constaté. |
-| **[extrapolé]** | Dérivé de pratiques éprouvées pour un autre contexte, sans y avoir encore été appliqué. |
-| **[proposé]** | Nouveau, destiné à combler un manque. À éprouver. |
+| "Done" is announced when a render was merely launched | A [definition of done](docs/quality/README.md#definition-of-done): final files exist, open and were checked |
+| Improvements are judged on stills, zoomed diagnostics or metrics | Judge in **final conditions** (final size, normal speed, whole piece, forward playback) ([P8](docs/principles.md#p8)) |
+| Several changes at once, so nobody knows what helped | One variable at a time, on a sample, with a before/after ([evidence-based iteration](docs/workflow/04-evidence-based-iteration.md)) |
+| A defect is hidden (global blur, disabled test) instead of fixed | Diagnosis by elimination and fixing at the cause ([P9](docs/principles.md#p9)) |
+| An interrupted production silently mixes outputs of two versions | Fingerprinted, resumable production ([`fingerprint.py`](tools/README.md#fingerprintpy)) |
+| Production cost drifts until iteration becomes impossible | Cost profile measured before any long run ([P13](docs/principles.md#p13)) |
+| A request buried in a long message is forgotten; a replaced instruction is still applied | An [instruction register](templates/instruction-register.md), reviewed before every report |
+| A new session cannot resume without the whole conversation | Logs, archived versions and a resume checklist ([continuity](docs/workflow/09-continuity.md)) |
 
-Les preuves restent dans les projets concernés : le référentiel ne garde que la règle qui en découle.
+Twenty of these failures are written up as [anti-patterns](docs/quality/anti-patterns.md), each with its symptom, cost
+and prevention.
 
-## Par où commencer
+## What you get
 
-| Je veux… | Lire |
-|---|---|
-| Comprendre la philosophie en 10 minutes | [Principes](docs/principles.md) |
-| Démarrer un nouveau projet | [`GETTING_STARTED.md`](GETTING_STARTED.md) |
-| Suivre le déroulé complet, du besoin à la livraison | [Workflow](docs/workflow/README.md) |
-| Adapter la méthode à un autre domaine ou une autre direction artistique | [Adapter](docs/workflow/adapting.md) |
-| Savoir quand un travail est « terminé » et comment le juger | [Qualité](docs/quality/README.md) |
-| Éviter les erreurs classiques | [Anti-modèles](docs/quality/anti-patterns.md) |
-| Utiliser une liste de contrôle | [Listes de contrôle](docs/quality/checklists/README.md) |
-| Retrouver les méthodes par technique (rendu 3D, animation 2,5D, vidéo web, application web, IA) | [Domaines](docs/domains/README.md) |
-| Configurer Claude Code et choisir ses outils | [Outillage](docs/tooling/README.md) |
-| Réutiliser des scripts testés | [`tools/`](tools/README.md) |
-| Partir d'un modèle de document ou de demande | [`templates/`](templates/README.md) |
-| Installer des skills dans un projet | [`skills/`](skills/README.md) |
-| Comprendre une décision structurante | [Décisions](docs/decisions/README.md) |
-| Savoir ce qui reste à faire pour renforcer la méthode | [`ROADMAP.md`](ROADMAP.md) |
-| Enrichir le référentiel | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
-| Vérifier le vocabulaire | [`GLOSSARY.md`](GLOSSARY.md) |
+| Component | Content | Use it to |
+|---|---|---|
+| [Method](docs/README.md) | 16 [principles](docs/principles.md), a 10-step [workflow](docs/workflow/README.md), a [quality](docs/quality/README.md) grid, 5 [checklists](docs/quality/checklists/README.md), [domain guides](docs/domains/README.md) | Decide what to do, in which order, and when it is finished |
+| [Templates](templates/README.md) | 11 project documents (brief, instruction register, logs, delivery report…) and 11 [prompt templates](templates/prompts/README.md) | Start documents and requests from a proven structure |
+| [Agent skills](skills/README.md) | `work-log`, `test-first-change`, `visual-iteration` (Agent Skills format), packaged as a Claude Code plugin | Make the agent follow the procedures without repeating them |
+| [Tools](tools/README.md) | 6 tested Python command-line tools: flicker measurement, loop check, temporal stabilization, dependency fingerprint, review page, review video | Measure, protect and present visual results |
+| [`scripts/new_project.py`](scripts/new_project.py) | Project scaffolder | Create a project that applies the method in one command |
+| [`examples/demo.py`](examples/README.md) | End-to-end demonstration on synthetic frames | See every tool work in two minutes, without any project data |
 
-## La méthode en une page
+## Quick start
 
-1. **Cadrer avec des hypothèses explicites.** Reformuler le besoin, inspecter l'existant réel, écrire les hypothèses,
-   ne poser que les questions qui changent la solution. → [Cadrage](docs/workflow/01-scoping.md)
-2. **Rechercher de façon ciblée, puis s'arrêter.** Sources primaires d'abord, forums comme pistes, chaque affirmation
-   étiquetée, arrêt dès qu'un essai est possible. → [Recherche](docs/workflow/02-research.md)
-3. **Lever les risques sur un prototype minimal**, avant toute production. → [Prototype](docs/workflow/03-prototyping.md)
-4. **Itérer sur des preuves.** Un essai isolé, une variable à la fois, un échantillon avant de généraliser, un
-   diagnostic par extinction, un avant/après à conditions identiques. → [Itération](docs/workflow/04-evidence-based-iteration.md)
-5. **Laisser la direction artistique à celui qui juge.** Variantes contrastées, rôle de chaque élément, choix écrit.
-   → [Direction artistique](docs/workflow/05-art-direction.md)
-6. **Produire seulement après avoir mesuré le coût réel.** Production reprenable, protégée par une empreinte,
-   versions séparées, rien supprimé. → [Production](docs/workflow/06-production.md)
-7. **Valider dans les conditions finales.** Taille finale, vitesse normale, œuvre entière, lecture en avant, dernière
-   version. Les mesures complètent le jugement. → [Validation](docs/workflow/07-validation.md)
-8. **Livrer des fichiers qui existent, s'ouvrent et ont été contrôlés.** Le bilan sépare terminé, testé et limites.
-   → [Livraison](docs/workflow/08-delivery.md)
-9. **Rendre la reprise possible sans la conversation.** Journal, versions archivées, registre des consignes.
-   → [Continuité](docs/workflow/09-continuity.md)
-10. **Montrer plutôt que décrire.** Ouvrir le résultat, faire des points courts, garder l'objectif en tête.
-    → [Communication](docs/workflow/10-communication.md)
-
-## Organisation
-
-```
-docs/
-  principles.md        Pourquoi : seize principes indépendants du projet
-  workflow/            Quoi et quand : dix étapes, critères de fin, adaptation
-  quality/             Comment juger : définition de « terminé », grille, anti-modèles, listes de contrôle
-  domains/             Comment, par technique : guides de domaine
-  tooling/             Avec quoi : inventaire, provenance et licences, Claude Code
-  decisions/           Décisions structurantes de la méthode (ADR)
-templates/             Modèles de documents et de demandes
-skills/                Skills Claude Code prêts à installer
-tools/                 Scripts Python testés (mesure, contrôle, stabilisation, empreinte, revue)
-scripts/               Vérification du référentiel, création d'un projet
-```
-
-## Vérification
-
-Le référentiel se vérifie lui-même, en local et dans la CI (`.github/workflows/ci.yml`) :
+Requirements: Git and Python 3.10 or later. [uv](https://docs.astral.sh/uv/) is recommended; pip works too. ffmpeg is
+needed only for review videos. Details: [`GETTING_STARTED.md`](GETTING_STARTED.md#requirements).
 
 ```bash
-python3 scripts/check_repo.py          # liens, ancres, niveaux de maturité, structure, secrets
-uv run --no-project --python 3.12 --with numpy --with opencv-python-headless --with pytest pytest tools/tests -q
+git clone https://github.com/maoxor/ai-assisted-visual-production-playbook.git
+cd ai-assisted-visual-production-playbook
 ```
 
-## Ce que ce dépôt n'est pas
+**1. See the tools work (2 minutes).** The demo generates a synthetic looping sequence with sparkle flicker, measures
+it, stabilizes it, checks the loop seam and builds a side-by-side review video and an offline review page:
 
-- **Pas une archive de projets** : ni réalisations, ni livrables, ni retours d'expérience nominatifs, ni chiffres de
-  projet. Chaque projet garde son propre bilan ; seuls les enseignements génériques remontent ici.
-- **Pas un catalogue de styles** : aucun choix esthétique n'est prescrit
-  ([décision 0002](docs/decisions/0002-method-separate-from-aesthetics.md)).
-- **Pas figé** : la méthode est versionnée ([`CHANGELOG.md`](CHANGELOG.md)) et évolue par décisions documentées.
+```bash
+uv run examples/demo.py --open
+# without uv: python -m pip install numpy opencv-python-headless && python examples/demo.py --open
+```
+
+**2. Start a project that applies the method.**
+
+```bash
+python3 scripts/new_project.py ~/dev/my-project --name "My project"
+```
+
+It creates the agent instructions (`CLAUDE.md`), the document templates, the skills and the tools, and never
+overwrites an existing file. Then follow [`GETTING_STARTED.md`](GETTING_STARTED.md).
+
+**3. Or install only the skills in Claude Code**, for every project:
+
+```text
+/plugin marketplace add maoxor/ai-assisted-visual-production-playbook
+/plugin install visual-production@visual-production-playbook
+```
+
+**4. Read the method.** Ten minutes: the [principles](docs/principles.md). Then the [workflow](docs/workflow/README.md)
+and the [anti-patterns](docs/quality/anti-patterns.md).
+
+## How it works
+
+```mermaid
+flowchart LR
+    P[Principles<br/>why] --> W[Workflow<br/>what and when]
+    W --> Q[Quality<br/>definition of done, checklists]
+    W --> D[Domain guides<br/>how, per technique]
+    Q --> T[Templates and prompts]
+    W --> S[Agent skills]
+    Q --> X[Python tools]
+    T & S & X --> N[new_project.py<br/>a project that applies the method]
+    N -->|generic lessons after delivery| P
+```
+
+- **Principles** explain why; the **workflow** says what to do and when; **quality** documents say when it is good
+  enough; **domain guides** give procedures per technique. One rule lives in one place; everything else links to it.
+- **Templates, skills and tools** turn the method into things an agent can follow and run.
+- Every practice carries a **maturity level**, so you know what you can rely on:
+
+  | Level | Meaning |
+  |---|---|
+  | **[proven]** | Applied in real production, with an observed effect |
+  | **[extrapolated]** | Derived from proven practices for another context, not yet applied there |
+  | **[proposed]** | New, written to fill a gap; still to be tried |
+
+- **Roles.** The lead decides intent, references and final choices; their visual judgement wins over the agent's
+  measurements. The agent decides what is reversible and asks before anything irreversible or external
+  ([P12](docs/principles.md#p12)).
+
+## Reuse and adapt
+
+- **Another domain** (motion design, real time, documents): the [adaptation guide](docs/workflow/adapting.md) translates
+  every concept (production unit, final conditions, sample, checks, costs).
+- **Another art direction**: the method prescribes no style
+  ([decision 0002](docs/decisions/0002-method-separate-from-aesthetics.md)); it transfers mechanisms, not looks.
+- **Another agent**: the principles, workflow and tools are agent-agnostic. `AGENTS.md` points other agents to the same
+  instructions; the skills use the open Agent Skills format.
+- **Your own defaults**: [collaboration defaults](docs/quality/collaboration.md) are the authors' defaults; replace them
+  in your project's instruction register.
+
+## Scope and limitations
+
+- **Proven on** offline 3D rendering delivered as web background video, 2.5D animation of a single illustration, and
+  web applications. Other domains are [extrapolated] ([roadmap](ROADMAP.md)).
+- **Tools are tested on synthetic data** in CI (Linux, macOS, Windows); their thresholds are starting points to
+  validate on each project, never targets.
+- **macOS-specific advice** is labelled as such (power management, Apple video colour).
+- **Not a style guide, not a project archive, not a render engine.** The tools measure and protect results; they do
+  not generate images.
+
+## Documentation map
+
+| I want to… | Read |
+|---|---|
+| Understand the philosophy in 10 minutes | [Principles](docs/principles.md) |
+| Start a new project | [`GETTING_STARTED.md`](GETTING_STARTED.md) |
+| Follow the full path from request to delivery | [Workflow](docs/workflow/README.md) |
+| Know when work is done and how to judge it | [Quality](docs/quality/README.md) |
+| Avoid classic mistakes | [Anti-patterns](docs/quality/anti-patterns.md) |
+| Use a checklist | [Checklists](docs/quality/checklists/README.md) |
+| Find methods per technique | [Domain guides](docs/domains/README.md) |
+| Configure Claude Code and choose tools | [Tooling](docs/tooling/README.md) |
+| Run or reuse a tool | [`tools/`](tools/README.md) |
+| Start from a document or prompt template | [`templates/`](templates/README.md) |
+| Install the agent skills | [`skills/`](skills/README.md) |
+| Understand a structural decision | [Decisions](docs/decisions/README.md) |
+| See what is planned | [`ROADMAP.md`](ROADMAP.md) |
+| Contribute | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
+| Look up a term | [`GLOSSARY.md`](GLOSSARY.md) |
+
+## Repository layout
+
+```
+docs/                  The method
+  principles.md          why: sixteen project-independent principles
+  workflow/              what and when: ten steps, exit criteria, adaptation
+  quality/               how to judge: definition of done, grid, anti-patterns, checklists
+  domains/               how, per technique: domain guides
+  tooling/               with what: inventory, provenance and licensing, Claude Code
+  decisions/             structural decisions about the method (ADR)
+templates/             Document and prompt templates copied into projects
+skills/                Agent skills (also the Claude Code plugin's skills)
+tools/                 Tested Python command-line tools
+examples/              End-to-end demonstration on synthetic data
+scripts/               Repository checks, project scaffolder
+tests/                 Tests for tools, scripts and the demo
+.claude-plugin/        Claude Code plugin and marketplace manifests
+```
+
+## Checking the repository
+
+The repository checks itself locally and in CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)):
+
+```bash
+python3 scripts/check_repo.py      # links, anchors, maturity levels, structure, confidentiality
+uv run pytest                      # tools, scripts and demo tests
+```
+
+## Contributing, conduct, security, license
+
+Contributions are welcome: lessons learned, method changes, tools, domain guides. Read
+[`CONTRIBUTING.md`](CONTRIBUTING.md), the [code of conduct](CODE_OF_CONDUCT.md) and the
+[security policy](SECURITY.md). Released under the [MIT license](LICENSE); the templates and skills may also be copied
+into your projects without attribution (see [`LICENSE`](LICENSE)).

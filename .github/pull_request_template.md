@@ -1,17 +1,17 @@
-## Quoi et pourquoi
+## What and why
 
-<!-- Ce qui change dans la méthode, et la raison, sous une forme générique. -->
+<!-- What changes in the method or the tools, and why, in generic form. -->
 
-## Portée
+## Scope
 
-- [ ] correctif · [ ] mineure · [ ] majeure (nouvelle décision dans `docs/decisions/`)
+- [ ] patch · [ ] minor · [ ] major (new decision in `docs/decisions/`, or a breaking change in a tool's command line)
 
-## Vérifications
+## Checks
 
-- [ ] Aucun contenu de projet : ni livrable, ni nom, ni chiffre, ni citation (décision 0007)
-- [ ] Chaque pratique nouvelle porte un niveau : [éprouvé], [extrapolé] ou [proposé]
-- [ ] Méthode et non choix esthétique
-- [ ] Noms de fichiers et identifiants en anglais
-- [ ] `python3 scripts/check_repo.py` : 0 erreur (avec la liste de termes interdits du poste)
-- [ ] Tests de la boîte à outils verts si un outil change
-- [ ] `CHANGELOG.md` mis à jour
+- [ ] No project content: no deliverable, name, figure or quotation (decision 0007)
+- [ ] Every new practice carries a level: [proven], [extrapolated] or [proposed]
+- [ ] Method, not aesthetic choice
+- [ ] English names and documentation
+- [ ] `python3 scripts/check_repo.py`: 0 errors (with your local deny list)
+- [ ] `uv run pytest` green; a changed tool comes with a test on synthetic data and an updated `tools/README.md`
+- [ ] `CHANGELOG.md` updated; version consistent in `pyproject.toml` and `.claude-plugin/`

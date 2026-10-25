@@ -1,1 +1,5 @@
 blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/maoxor/ai-assisted-visual-production-playbook/security/advisories/new
+    about: Report vulnerabilities privately, not in a public issue.

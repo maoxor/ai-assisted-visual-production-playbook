@@ -8,8 +8,8 @@ permissions:
   contents: read
 
 jobs:
-  check:
-    name: Links, maturity levels, confidentiality and toolkit tests
+  checks:
+    name: Repository checks and plugin manifests
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -17,18 +17,44 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Structure, internal links, anchors, maturity levels, confidentiality
+      - name: Links, anchors, maturity levels, structure, versions, confidentiality
         run: python scripts/check_repo.py
-      - name: Install ffmpeg
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-      - name: Test dependencies
-        run: python -m pip install --quiet numpy opencv-python-headless pytest
-      - name: Toolkit tests
-        run: python -m pytest tools/tests -q
-      - name: Sample project creation
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate the Claude Code plugin and marketplace manifests
         run: |
-          python scripts/new_project.py "$RUNNER_TEMP/sample-project" --name "CI sample"
+          npm install --global --silent @anthropic-ai/claude-code
+          claude plugin validate .
+
+  tests:
+    name: Tests (${{ matrix.os }}, Python ${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest, python: "3.10" }
+          - { os: ubuntu-latest, python: "3.11" }
+          - { os: ubuntu-latest, python: "3.12" }
+          - { os: ubuntu-latest, python: "3.13" }
+          - { os: macos-latest, python: "3.12" }
+          - { os: windows-latest, python: "3.12" }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Install ffmpeg (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: Tests (tools, scripts, demonstration)
+        run: uv run --locked --python ${{ matrix.python }} pytest -q -rs
+      - name: Demonstration
+        run: uv run --locked --python ${{ matrix.python }} examples/demo.py --output outputs/ci-demo
+      - name: Sample project creation
+        shell: bash
+        run: |
+          uv run --locked --python ${{ matrix.python }} python scripts/new_project.py "$RUNNER_TEMP/sample-project" --name "CI sample"
           test -f "$RUNNER_TEMP/sample-project/CLAUDE.md"
           test -f "$RUNNER_TEMP/sample-project/.claude/skills/work-log/SKILL.md"
-          python scripts/new_project.py "$RUNNER_TEMP/sample-project" --name "CI sample" | grep -q "kept"
-          python "$RUNNER_TEMP/sample-project/tools/fingerprint.py" compute --dep "$RUNNER_TEMP/sample-project/docs/BRIEF.md"
+          uv run --locked --python ${{ matrix.python }} python scripts/new_project.py "$RUNNER_TEMP/sample-project" --name "CI sample" | grep -q "kept"
