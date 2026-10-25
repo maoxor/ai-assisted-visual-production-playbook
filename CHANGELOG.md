@@ -13,6 +13,8 @@ Format: [versioning](CONTRIBUTING.md#versioning). Each release has a `vX.Y.Z` Gi
 - **Physical device test procedure** for web video, [proposed], with a checklist line.
 - **Scoping**: time and budget estimation (brief table, step 8 of scoping), [proposed].
 - **Collaboration**: roles when several people are involved, [proposed].
+- **Web applications**: "Audit, then counter-audit" [proven]: an independent counter-audit after an audit's fixes,
+  concurrency checked explicitly, every finding reproduced by a test first.
 - **Repository**: pre-commit Git hook (`scripts/git-hooks/`), ruff lint in CI, Dependabot (Actions and uv), CODEOWNERS,
   `CITATION.cff`, `.editorconfig`, bug report template; `main` protected by required checks.
 - **Roadmap** rewritten: what remains needs real projects, hardware or new tools.

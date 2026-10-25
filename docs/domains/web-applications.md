@@ -65,6 +65,26 @@ Detailed in the [`test-first-change`](../../skills/test-first-change/SKILL.md) s
   dependency audit, secret detection (gitleaks, false positives justified one by one).
 - **A failing check is fixed at the cause**, never by disabling the test or the rule.
 
+<a id="audit-then-counter-audit"></a>
+
+## Audit, then counter-audit [proven]
+
+An audit of a repository by an agent finds real problems, but it also anchors whoever reads it. A second,
+**independent counter-audit** run after the fixes finds what the first one missed or introduced.
+
+1. **Run it separately**: another session (or another person), briefed with the repository and the audit's scope, not
+   with its conclusions.
+2. **Look for four things**: regressions introduced by the audit's fixes; fixes that treat a symptom instead of the
+   cause; problems the audit missed; guardrails for agents (hooks, permissions, instructions) that do not actually
+   work.
+3. **Check concurrency explicitly**: read-then-write sequences (quotas, counters, limited codes, state transitions)
+   fail under simultaneous requests and are rarely found by reading code; reproduce them with parallel requests in a
+   test.
+4. **Reproduce every finding with a test first**, then fix it at the cause; rank findings by priority and record the
+   evidence (test, command) next to each one.
+5. **Test the guardrails themselves**: a hook that silently stopped working looks exactly like a hook that never
+   fires; mutation tests in CI catch it.
+
 ## Git as a traceability tool
 
 - **Commit types**: `fix`, `feat`, `docs`, `chore`, `refactor`, `style`, `test`, `perf`, `ci`; explicit merges.
