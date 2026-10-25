@@ -117,17 +117,20 @@ def _extra(values):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
+    helps = {"compute": "print the fingerprint of the dependencies",
+             "ensure": "prepare an output folder for the current state; move outputs of another state",
+             "pending": "list the missing or incomplete units"}
     for name in ("compute", "ensure"):
-        p = sub.add_parser(name)
+        p = sub.add_parser(name, help=helps[name])
         p.add_argument("--dep", action="append", required=True, help="file or glob pattern (repeatable)")
         p.add_argument("--extra", action="append", help="key=value added to the fingerprint (repeatable)")
         if name == "ensure":
-            p.add_argument("--outputs", required=True)
-            p.add_argument("--stale", default=None)
-    p = sub.add_parser("pending")
-    p.add_argument("--outputs", required=True)
-    p.add_argument("--count", type=int, required=True)
-    p.add_argument("--template", default="frame_{:04d}.png")
+            p.add_argument("--outputs", required=True, help="output folder protected by VERSION.json")
+            p.add_argument("--stale", default=None, help="where stale outputs go (default: <outputs>/../_stale)")
+    p = sub.add_parser("pending", help=helps["pending"])
+    p.add_argument("--outputs", required=True, help="folder of the units")
+    p.add_argument("--count", type=int, required=True, help="expected number of units")
+    p.add_argument("--template", default="frame_{:04d}.png", help="file name of unit i (default: frame_{:04d}.png)")
     a = ap.parse_args(argv)
     if a.cmd == "compute":
         fp, details = fingerprint(a.dep, _extra(a.extra))

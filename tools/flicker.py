@@ -102,10 +102,16 @@ def measure(frames, region=None, threshold=24.0):
 
 
 def write_map(path, map_points, map_areas, n_frames):
-    k = 255.0 * 6 / max(1, n_frames - 2)
+    """Colour map of flickering pixels: red for isolated points, yellow for areas.
+
+    Any pixel that flickered at least once is clearly visible (level 80 out of 255); the level then grows with the
+    number of flickering frames and saturates when a pixel flickers in a sixth of the frames.
+    """
+    k = 175.0 * 6 / max(1, n_frames - 2)
+    total = map_points + map_areas
     bgr = np.zeros(map_points.shape + (3,), np.uint8)
-    bgr[..., 2] = np.clip((map_points + map_areas) * k, 0, 255)
-    bgr[..., 1] = np.clip(map_areas * k, 0, 255)
+    bgr[..., 2] = np.where(total > 0, np.clip(80 + total * k, 0, 255), 0)
+    bgr[..., 1] = np.where(map_areas > 0, np.clip(80 + map_areas * k, 0, 255), 0)
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     cv2.imwrite(str(path), bgr)
 
@@ -115,12 +121,12 @@ def main(argv=None):
     ap.add_argument("--seq", required=True, help="image folder or video file")
     ap.add_argument("--label", required=True, help="name of the measurement")
     ap.add_argument("--pattern", default="*.png", help="image pattern inside the folder (default: *.png)")
-    ap.add_argument("--start", type=int, default=0)
-    ap.add_argument("--end", type=int, default=10 ** 9)
-    ap.add_argument("--step", type=int, default=1)
-    ap.add_argument("--threshold", type=float, default=24.0, help="acceleration threshold (levels out of 255)")
-    ap.add_argument("--region", default=None, help="x0,y0,x1,y1 as fractions of the image")
-    ap.add_argument("--map", default=None, help="PNG image of flickering pixels")
+    ap.add_argument("--start", type=int, default=0, help="first frame index (default: 0)")
+    ap.add_argument("--end", type=int, default=10 ** 9, help="last frame index, inclusive (default: last)")
+    ap.add_argument("--step", type=int, default=1, help="use one frame out of STEP (default: 1)")
+    ap.add_argument("--threshold", type=float, default=24.0, help="acceleration threshold, levels out of 255 (default: 24)")
+    ap.add_argument("--region", default=None, help="x0,y0,x1,y1 as fractions of the image, origin top-left (default: whole image)")
+    ap.add_argument("--map", default=None, help="write a PNG map of flickering pixels (red: points, yellow: areas)")
     ap.add_argument("--json", default=None, help="JSON file where the measurement is stored under its label")
     a = ap.parse_args(argv)
     frames = load(a.seq, a.start, a.end, a.step, a.pattern)

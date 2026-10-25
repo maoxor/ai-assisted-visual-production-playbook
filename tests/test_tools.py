@@ -1,6 +1,6 @@
 """Toolkit tests on synthetic sequences (no project data needed).
 
-  uv run --no-project --python 3.12 --with numpy --with opencv-python-headless --with pytest pytest tools/tests -q
+  uv run pytest tests/test_tools.py
 """
 import json
 import shutil
@@ -13,7 +13,7 @@ import numpy as np
 import pytest
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent))
+sys.path.insert(0, str(HERE.parent / "tools"))
 
 import fingerprint  # noqa: E402
 import flicker  # noqa: E402
@@ -176,6 +176,32 @@ def test_stabilization_smooth_sequence_unchanged(tmp_path):
         assert np.abs(cv2.imread(str(a)).astype(int) - cv2.imread(str(b)).astype(int)).max() <= 1
 
 
+def test_stabilization_keeps_alpha_channel(tmp_path):
+    """Renders often carry an alpha channel: it must survive stabilization untouched."""
+    src = tmp_path / "src"
+    images = []
+    for image in textured_sequence(n=8, jump=60):
+        rgba = np.dstack([image, np.full(image.shape[:2], 200, np.uint8)])
+        images.append(rgba)
+    write_sequence(src, images)
+    dst = tmp_path / "dst"
+    stabilize.main(["--src", str(src), "--dst", str(dst), "--threshold", "4"])
+    out = [cv2.imread(str(p), cv2.IMREAD_UNCHANGED) for p in sorted(dst.glob("frame_*.png"))]
+    assert len(out) == 8 and all(o.shape[2] == 4 for o in out)
+    assert all(int(o[..., 3].min()) == 200 == int(o[..., 3].max()) for o in out)
+
+
+def test_stabilization_grey_frames(tmp_path):
+    src = write_sequence(tmp_path / "src", [image[..., 0] for image in textured_sequence(n=8, jump=60)])
+    dst = tmp_path / "dst"
+    stabilize.main(["--src", str(src), "--dst", str(dst), "--threshold", "4"])
+    out = [cv2.imread(str(p), cv2.IMREAD_UNCHANGED) for p in sorted(dst.glob("frame_*.png"))]
+    assert len(out) == 8 and all(o.ndim == 2 for o in out)
+    before = flicker.measure(flicker.load(src))[0]["flicker_pct"]
+    after = flicker.measure(flicker.load(dst))[0]["flicker_pct"]
+    assert after < before * 0.5
+
+
 # -- fingerprint -----------------------------------------------------------------------------------------------------
 
 def test_fingerprint_stable_and_sensitive(tmp_path):
@@ -261,3 +287,22 @@ def test_review_video_loops_and_side_by_side(tmp_path):
     stream = json.loads(probe.stdout)["streams"][0]
     assert int(stream["nb_read_frames"]) == 24                      # 12 frames x 2 loops, forward
     assert stream["width"] == 2 * W and stream["height"] == H
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="ffmpeg not installed")
+def test_review_video_any_file_names(tmp_path):
+    """Names with spaces or glob characters work: frames are staged under sequential names."""
+    d = write_sequence(tmp_path / "odd [names]", smooth_sequence(6), template="shot A {:02d}.png")
+    out = tmp_path / "out" / "review.mp4"
+    assert review_video.make([d], out, height=48) == 6
+    probe = subprocess.run(["ffprobe", "-v", "error", "-count_frames", "-select_streams", "v:0", "-show_entries",
+                            "stream=nb_read_frames", "-of", "json", str(out)], capture_output=True, text=True, check=True)
+    assert int(json.loads(probe.stdout)["streams"][0]["nb_read_frames"]) == 6
+
+
+def test_review_video_rejects_odd_height(tmp_path):
+    if not shutil.which("ffmpeg"):
+        pytest.skip("ffmpeg not installed")
+    d = write_sequence(tmp_path / "a", smooth_sequence(4))
+    with pytest.raises(ValueError):
+        review_video.make([d], tmp_path / "o.mp4", height=47)

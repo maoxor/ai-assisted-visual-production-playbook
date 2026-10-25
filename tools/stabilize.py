@@ -33,8 +33,8 @@ def read(path):
 
 
 def gray8(image, peak):
-    g = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY).astype(np.float32) * (255.0 / peak)
-    return np.clip(g, 0, 255).astype(np.uint8)
+    g = image if image.ndim == 2 else cv2.cvtColor(image[..., :3], cv2.COLOR_BGR2GRAY)
+    return np.clip(g.astype(np.float32) * (255.0 / peak), 0, 255).astype(np.uint8)
 
 
 def flow(dis, a8, b8):
@@ -56,6 +56,10 @@ def consistency(f_ab, f_ba):
 
 
 def stabilize_frame(cur, prv, nxt, peak, dis, threshold, strength, guard):
+    if cur.ndim == 2:                                   # grey frames: process as BGR, return one channel
+        out, share = stabilize_frame(*(np.repeat(x[..., None], 3, axis=2) for x in (cur, prv, nxt)), peak, dis,
+                                     threshold, strength, guard)
+        return out[..., 0], share
     c8, p8, n8 = gray8(cur, peak), gray8(prv, peak), gray8(nxt, peak)
     f_cp, f_pc = flow(dis, c8, p8), flow(dis, p8, c8)
     f_cn, f_nc = flow(dis, c8, n8), flow(dis, n8, c8)
@@ -83,13 +87,13 @@ def stabilize_frame(cur, prv, nxt, peak, dis, threshold, strength, guard):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--src", required=True)
-    ap.add_argument("--dst", required=True)
+    ap.add_argument("--src", required=True, help="folder of the source frames")
+    ap.add_argument("--dst", required=True, help="output folder (same file names)")
     ap.add_argument("--frames", default=None, help="a..b (default: all)")
     ap.add_argument("--threshold", type=float, default=6.0,
-                    help="minimum distance outside the neighbour interval (levels /255)")
-    ap.add_argument("--strength", type=float, default=1.0)
-    ap.add_argument("--guard", type=float, default=120.0, help="above this, the warp is deemed wrong: pixel kept")
+                    help="minimum distance outside the neighbour interval, levels out of 255 (default: 6)")
+    ap.add_argument("--strength", type=float, default=1.0, help="share of the correction applied, 0 to 1 (default: 1)")
+    ap.add_argument("--guard", type=float, default=120.0, help="above this gap (levels out of 255) the warp is deemed wrong and the pixel is kept (default: 120)")
     ap.add_argument("--loop", action="store_true", help="the sequence loops: frame 0 neighbours the last frame")
     ap.add_argument("--pattern", default="frame_*.png", help="image pattern (default: frame_*.png)")
     a = ap.parse_args(argv)

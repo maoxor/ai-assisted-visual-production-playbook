@@ -1,109 +1,187 @@
-# Boîte à outils
+# Tools
 
-Scripts Python génériques, sans dépendance à un projet et **testés** sur des séquences synthétiques
-([`tests/test_tools.py`](tests/test_tools.py), 20 tests). Ils servent les mécanismes de qualité de la méthode :
-mesurer le scintillement, contrôler une boucle, stabiliser, garantir qu'on ne mélange pas les versions, présenter une
-revue. Le code (noms, options, messages) est en anglais.
+Six standalone Python command-line tools that serve the method's quality mechanisms: measure flicker, check a loop,
+stabilize frames, make sure versions never mix, present a review. They have no dependency on any project, are
+**tested** on synthetic sequences ([`tests/test_tools.py`](../tests/test_tools.py)) and are demonstrated end to end by
+[`examples/demo.py`](../examples/README.md).
 
-## Installation et tests
+| Tool | Purpose | Needs |
+|---|---|---|
+| [`flicker.py`](#flickerpy) | Measure flicker in a frame sequence or a video; flicker map | numpy, OpenCV |
+| [`loop_check.py`](#loop_checkpy) | Check a complete looping sequence: frames, seam, flicker | numpy, OpenCV |
+| [`stabilize.py`](#stabilizepy) | Remove temporal spikes without spatial blur | numpy, OpenCV |
+| [`fingerprint.py`](#fingerprintpy) | Fingerprint a production's dependencies; safe resume | standard library |
+| [`review_page.py`](#review_pagepy) | Offline HTML review page from a JSON plan | standard library |
+| [`review_video.py`](#review_videopy) | Forward, side-by-side review video | ffmpeg |
 
-Python 3.12 et [uv](https://docs.astral.sh/uv/), sans installation globale :
+## Install and run
+
+From a clone of this repository (dependencies pinned in `uv.lock`):
 
 ```bash
-uv run --no-project --python 3.12 --with numpy --with opencv-python-headless --with pytest pytest tools/tests -q
-# utiliser un outil :
-uv run --no-project --python 3.12 --with numpy --with opencv-python-headless \
-    python tools/flicker.py --seq <dossier> --label trial
+uv run python tools/flicker.py --seq <frames> --label trial
+uv run pytest tests/test_tools.py
 ```
 
-`review_video.py` requiert ffmpeg. `fingerprint.py` et `review_page.py` n'utilisent que la bibliothèque standard.
+Without uv: `python -m pip install numpy opencv-python-headless`, then `python tools/<tool>.py`. Every tool prints its
+options with `--help`. `scripts/new_project.py` copies the tools into a project's `tools/` folder so that the project
+keeps the exact version it was built with; update them from this repository rather than editing them in place.
 
-## Outils
+**Common conventions.** Frame sequences are folders of images sorted by name (`--pattern` selects them; 8 or 16-bit,
+grey, BGR or BGRA PNG). Luminance uses BT.709 weights on a 0-255 scale whatever the bit depth. Measurements are
+printed as one JSON object on standard output. Exit code 0 means success; `loop_check.py` and `review_page.py` return
+1 when they find a problem.
 
 <a id="flickerpy"></a>
 
 ### `flicker.py`
 
-Mesure les pixels qui s'allument puis s'éteignent, d'après l'accélération temporelle de la luminance, sur une
-séquence d'images ou une vidéo décodée : part de pixels scintillants, part de points isolés, carte.
+Measures the pixels that light up then go dark, from the temporal acceleration of luminance
+A(t) = I(t+1) − 2·I(t) + I(t−1), on a frame sequence or a decoded video.
 
-- **Quand** : diagnostic d'une régression de stabilité ; avant/après une correction ; images sources contre vidéos
-  encodées, pour savoir où naît le défaut.
-- **Apport** : rend mesurable un défaut que l'œil voit mais ne localise pas ; sépare calcul et encodage.
-- **Limite** : une variation voulue (clignement, éclair) est comptée ; juger avec la vidéo sous les yeux, à la taille
-  et en qualité finales.
+```bash
+python tools/flicker.py --seq renders/final --label v3 [--pattern 'frame_*.png'] [--start 0 --end 299 --step 1]
+    [--threshold 24] [--region 0.2,0.1,0.8,0.6] [--map flicker_v3.png] [--json measures.json]
+python tools/flicker.py --seq review.mp4 --label h264
+```
+
+Output fields: `frames`, `size`, `mean_acceleration` (mean |A|), `flicker_pct` (share of pixels where |A| exceeds the
+threshold with a sign change, i.e. back and forth), `isolated_pct` (among them, 1 to 9-pixel blobs: point flicker), plus
+`label` and `sequence`. `--json` accumulates measurements under their label in one file. `--map` writes a PNG: red for
+isolated points, yellow for areas.
+
+- **When**: diagnosing a stability regression; before/after a fix; source frames against encoded videos, to find
+  where the defect originates.
+- **Contribution**: makes measurable a defect the eye sees but cannot locate; separates computation from encoding.
+- **Limit**: an intended variation (blink, flash) is counted; judge with the video in front of you, at final size and
+  quality.
 
 <a id="loop_checkpy"></a>
 
 ### `loop_check.py`
 
-Contrôle une séquence complète destinée à boucler : nombre d'images, fichiers lisibles, raccord (rapport entre l'écart
-dernière → première image et l'écart consécutif moyen), scintillement à travers le raccord. Code de sortie 1 en cas de
-problème.
+Checks a complete sequence meant to loop: frame count, readable files, seam (ratio between the last → first frame
+difference and the mean consecutive difference), flicker across the seam.
 
-- **Quand** : après chaque production complète, avant l'encodage.
-- **Apport** : détecte un saut au raccord, une image manquante ou une image finale dupliquée (écart nul, signe d'une
-  pause).
-- **Limite** : complète, sans la remplacer, la vérification de l'**état** de la scène à la période.
+```bash
+python tools/loop_check.py --seq renders/final --expected 300 [--pattern 'frame_*.png'] [--max-ratio 2.0]
+    [--json check.json]
+```
+
+Output fields: `frames`, `expected`, `unreadable`, `mean_consecutive_diff`, `max_consecutive_diff`,
+`min_consecutive_diff`, `seam_diff`, `seam_ratio`, `flicker_pct`, `ok`. Exit code 1 when frames are missing or
+unreadable, or when the seam ratio exceeds `--max-ratio`. A seam difference close to zero reveals a duplicated last
+frame (a visible pause).
+
+- **When**: after each complete production, before encoding.
+- **Contribution**: detects a jump at the seam, a missing frame or a duplicated final frame.
+- **Limit**: complements, without replacing, the check of the scene's **state** at the period.
 
 <a id="stabilizepy"></a>
 
 ### `stabilize.py`
 
-Stabilisation temporelle : médiane sur trois images recalées par flux optique dense (OpenCV DIS), **limitée aux
-pics** ; un pixel n'est modifié que s'il sort de l'intervalle de ses deux voisins recalés. Aucun flou spatial ; boucle
-fermée en option (`--loop`).
+Temporal stabilization: a median of three frames motion-compensated with dense optical flow (OpenCV DIS), **limited to
+spikes**: a pixel is changed only if it lies outside the interval of its two warped neighbours. No spatial blur.
 
-- **Quand** : après un rendu dont le scintillement résiduel vient de l'échantillonnage (reflets très intenses, petits
-  détails brillants).
-- **Apport** : forte réduction du scintillement sans perte de netteté ; vidéos plus légères à qualité égale.
-- **Garde-fous** : pixels laissés intacts si le flux est incohérent dans les deux sens (zone sans texture) ou si
-  l'écart dépasse `--guard` (occlusion, recalage faux). Les tests le vérifient.
-- **Limite** : ce n'est pas un débruiteur ; vérifier à 200 % les zones sensibles (visage, texte).
+```bash
+python tools/stabilize.py --src renders/final --dst renders/stable --loop [--threshold 6] [--strength 1.0]
+    [--guard 120] [--frames 0..19] [--pattern 'frame_*.png']
+```
+
+Writes the frames under the same names in `--dst` and prints the share of changed pixels. Without `--loop`, the first
+and last frames are copied unchanged; with `--loop`, frame 0 has the last frame as its neighbour.
+
+- **When**: after a render whose residual flicker comes from sampling (very intense reflections, small bright details).
+- **Contribution**: strong flicker reduction without loss of sharpness; lighter videos at equal quality.
+- **Safeguards**: pixels are left untouched where the flow is inconsistent forward and backward (textureless area) or
+  where the gap exceeds `--guard` (occlusion, wrong warp). The tests check both.
+- **Limit**: this is not a denoiser; inspect sensitive areas (faces, text) at 200 %. Start with `--threshold 6`; lower
+  values (4) treat more pixels on very noisy scenes.
 
 <a id="fingerprintpy"></a>
 
 ### `fingerprint.py`
 
-Empreinte SHA-256 des dépendances d'une production (fichiers, motifs, valeurs comme la version du logiciel ou le
-profil). `ensure` déplace dans `_stale/` les sorties d'un autre état, sans jamais les supprimer ; `pending` liste les
-unités absentes ou incomplètes (PNG sans bloc IEND).
+SHA-256 fingerprint of a production's dependencies (files, glob patterns, values such as the software version or the
+quality profile). `ensure` moves the outputs of another state to `_stale/`, never deleting them; `pending` lists the
+missing or incomplete units (PNG without its IEND chunk, empty file).
 
-- **Quand** : avant chaque paquet de production, et pour toute reprise après interruption.
-- **Apport** : aucune unité d'un ancien état ne se glisse dans un livrable ; reprise sûre ; historique conservé.
-- Intégration dans une boucle de calcul :
+```bash
+python tools/fingerprint.py compute --dep scene.blend --dep config/scene.toml --dep 'layers/*.png' --extra tool="Blender 4.2"
+python tools/fingerprint.py ensure --outputs renders/v1/desktop --dep ... [--extra quality=final] [--stale renders/v1/_stale]
+python tools/fingerprint.py pending --outputs renders/v1/desktop --count 300 [--template 'frame_{:04d}.png']
+```
+
+`ensure` writes `<outputs>/VERSION.json` (fingerprint, date, per-file digests, extra values) and prints the
+fingerprint prefix with the action taken: `new`, `unchanged` or `… moved to <stale folder>`. File paths are part of the
+fingerprint: always call it from the same folder, with the same relative paths.
+
+- **When**: before each production batch, and for any resume after an interruption.
+- **Contribution**: no unit of an old state slips into a deliverable; safe resume; history kept.
+- Integration into a render loop:
 
   ```python
   from fingerprint import ensure, pending
   deps = ["scenes/main.blend", "config/scene.toml", "scripts/render/job.py", "layers/*.png"]
-  ensure("renders/v3/desktop", deps, {"renderer": "5.x", "quality": "final"})
-  for batch in split(pending("renders/v3/desktop", 300), 10):
-      render(batch)        # un processus par paquet ; vérifier l'espace disque avant chacun
+  ensure("renders/v3/desktop", deps, {"renderer": "4.2", "quality": "final"})
+  todo = pending("renders/v3/desktop", 300)
+  for start in range(0, len(todo), 10):
+      render(todo[start:start + 10])     # one process per batch; check disk space before each one
   ```
 
 <a id="review_pagepy"></a>
 
 ### `review_page.py`
 
-Génère une page HTML locale, autonome et hors ligne, à partir d'un plan JSON : sections, vidéos en boucle lues en
-avant, images, tableaux de mesures. Thème clair ou sombre selon le système ; légendes obligatoires ; fichiers absents
-signalés. Option `--open`.
+Generates a local, self-contained, offline HTML page from a JSON plan: sections, looping videos played forward,
+images, measurement tables. Light or dark theme follows the system; captions are mandatory; missing files are flagged.
 
-- **Quand** : à chaque étape présentée à la personne qui dirige.
-- **Apport** : comparatifs homogènes (même taille, colonnes libellées), rien d'oublié, aucune publication nécessaire.
+```bash
+python tools/review_page.py --plan review.json --output review/step/index.html [--open]
+```
+
+Plan format (paths relative to the page):
+
+```json
+{
+  "title": "Iteration 4 - sample element",
+  "lang": "en",
+  "intro": "What the page shows and what is expected from the reviewer.",
+  "sections": [
+    {"title": "Whole scene, desktop", "text": "Forward playback, final size.",
+     "media": [{"file": "before.mp4", "caption": "Before"}, {"file": "after.mp4", "caption": "After"}],
+     "table": {"columns": ["Measure", "Before", "After"], "rows": [["Flicker", "1.33 %", "0.16 %"]]}}
+  ]
+}
+```
+
+Exit code 1 when a file is missing (also listed on standard error as `MISSING <file>`).
+
+- **When**: at each step presented to the lead.
+- **Contribution**: homogeneous comparisons (same size, labelled columns), nothing forgotten, no publication needed.
 
 <a id="review_videopy"></a>
 
 ### `review_video.py`
 
-Transforme une ou plusieurs séquences d'images en vidéo de revue H.264 (CRF 14), **en avant**, sur plusieurs tours,
-côte à côte à la même hauteur.
+Turns one or several frame sequences into an H.264 review video (CRF 14), **played forward**, over several loops, side
+by side at the same height.
 
-- **Quand** : comparatifs avant/après, revue d'une boucle (plusieurs tours pour juger le raccord).
-- **Apport** : applique d'office les règles de revue (jamais d'aller-retour, même taille).
+```bash
+python tools/review_video.py --seq renders/final --output review.mp4 [--loops 3] [--fps 30] [--height 1080]
+python tools/review_video.py --seq before/ --seq after/ --output before_after.mp4
+```
 
-## Ajouter un outil
+Frames are selected with `--pattern` and staged under sequential names in a temporary folder, so any file name works
+on Linux, macOS and Windows. `--height` must be even. Column captions belong in the review page.
 
-Un script n'entre ici qu'une fois **généralisé** (aucun chemin, nom ou réglage de projet), **testé** sur des données
-synthétiques et documenté dans ce fichier avec son usage, son apport et ses limites
-([`CONTRIBUTING.md`](../CONTRIBUTING.md#after-each-project)).
+- **When**: before/after comparisons, review of a loop (several loops to judge the seam).
+- **Contribution**: applies the review rules by default (never back and forth, same size).
+
+## Adding a tool
+
+A script enters only once **generalized** (no project path, name or setting), **tested** on synthetic data in
+`tests/`, and documented in this file with its usage, contribution and limits
+([`CONTRIBUTING.md`](../CONTRIBUTING.md#after-each-project)). Keep tools standalone: standard library, numpy and
+OpenCV only, unless a new dependency is justified in the pull request.

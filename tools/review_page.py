@@ -5,6 +5,7 @@
 Plan (JSON):
 {
   "title": "Iteration 4 - sample element",
+  "lang": "en",
   "intro": "What the page shows and what is expected from the reviewer.",
   "sections": [
     {"title": "Whole scene, desktop", "text": "Forward playback, final size.",
@@ -22,6 +23,7 @@ Rules enforced by the page (method: docs/workflow/07-validation.md):
 import argparse
 import html
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -88,7 +90,7 @@ def build(plan, output):
         b.append("</section>")
         blocks.append("".join(b))
     title = e(plan.get("title", "Review"))
-    lang = e(plan.get("lang", "fr"))
+    lang = e(plan.get("lang", "en"))
     intro = f'<p class="intro">{e(plan["intro"])}</p>' if plan.get("intro") else ""
     doc = (f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8">'
            f'<meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title>'
@@ -98,22 +100,32 @@ def build(plan, output):
     return missing
 
 
+def open_page(path):
+    """Open a file with the system's default application; True on success."""
+    path = str(Path(path).resolve())
+    try:
+        if sys.platform == "win32":
+            os.startfile(path)  # noqa: S606 (Windows only)
+            return True
+        cmd = "open" if sys.platform == "darwin" else "xdg-open"
+        return subprocess.run([cmd, path]).returncode == 0
+    except OSError:
+        return False
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--plan", required=True, help="JSON file describing the page")
     ap.add_argument("--output", required=True, help="path of the HTML page")
-    ap.add_argument("--open", action="store_true", help="open the page (macOS: open, Linux: xdg-open)")
+    ap.add_argument("--open", action="store_true", help="open the page in the default browser")
     a = ap.parse_args(argv)
     plan = json.loads(Path(a.plan).read_text(encoding="utf-8"))
     missing = build(plan, a.output)
     for m in missing:
         print(f"MISSING {m}", file=sys.stderr)
     print(f"PAGE {a.output}")
-    if a.open:
-        cmd = "open" if sys.platform == "darwin" else "xdg-open"
-        r = subprocess.run([cmd, a.output])
-        if r.returncode != 0:
-            print(f"Could not open the page: open {Path(a.output).resolve()} manually", file=sys.stderr)
+    if a.open and not open_page(a.output):
+        print(f"Could not open the page: open {Path(a.output).resolve()} manually", file=sys.stderr)
     return 1 if missing else 0
 
 
