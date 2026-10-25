@@ -1,0 +1,2 @@
+# Keep LF line endings on every platform (scripts, Markdown, YAML)
+* text=auto eol=lf
