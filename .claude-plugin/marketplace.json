@@ -1,0 +1,19 @@
+{
+  "name": "visual-production-playbook",
+  "owner": {
+    "name": "ai-assisted-visual-production-playbook contributors",
+    "url": "https://github.com/maoxor/ai-assisted-visual-production-playbook"
+  },
+  "metadata": {
+    "description": "Marketplace of the AI-assisted visual production playbook."
+  },
+  "plugins": [
+    {
+      "name": "visual-production",
+      "source": "./",
+      "description": "Skills from the AI-assisted visual production playbook: work-log, test-first-change, visual-iteration.",
+      "version": "2.0.0",
+      "license": "MIT"
+    }
+  ]
+}

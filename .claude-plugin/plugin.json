@@ -1,0 +1,13 @@
+{
+  "name": "visual-production",
+  "version": "2.0.0",
+  "description": "Skills from the AI-assisted visual production playbook: long-task logs with reliable resume, test-first code changes, and evidence-based visual iteration judged in final conditions.",
+  "author": {
+    "name": "ai-assisted-visual-production-playbook contributors",
+    "url": "https://github.com/maoxor/ai-assisted-visual-production-playbook"
+  },
+  "homepage": "https://github.com/maoxor/ai-assisted-visual-production-playbook",
+  "repository": "https://github.com/maoxor/ai-assisted-visual-production-playbook",
+  "license": "MIT",
+  "keywords": ["workflow", "quality-assurance", "visual-production", "rendering", "animation", "web-video", "methodology"]
+}
