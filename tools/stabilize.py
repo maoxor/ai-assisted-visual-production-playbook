@@ -55,6 +55,11 @@ def consistency(f_ab, f_ba):
     return np.linalg.norm(f_ab + back, axis=2)
 
 
+def lum(x):
+    """BT.709 luminance of a BGR(A) float image."""
+    return 0.0722 * x[..., 0] + 0.7152 * x[..., 1] + 0.2126 * x[..., 2]
+
+
 def stabilize_frame(cur, prv, nxt, peak, dis, threshold, strength, guard):
     if cur.ndim == 2:                                   # grey frames: process as BGR, return one channel
         out, share = stabilize_frame(*(np.repeat(x[..., None], 3, axis=2) for x in (cur, prv, nxt)), peak, dis,
@@ -66,7 +71,6 @@ def stabilize_frame(cur, prv, nxt, peak, dis, threshold, strength, guard):
     p = warp(prv.astype(np.float32), f_cp)
     n = warp(nxt.astype(np.float32), f_cn)
     c = cur.astype(np.float32)
-    lum = lambda x: 0.0722 * x[..., 0] + 0.7152 * x[..., 1] + 0.2126 * x[..., 2]   # BGR
     lc, lp, ln = lum(c), lum(p), lum(n)
     low, high = np.minimum(lp, ln), np.maximum(lp, ln)
     s = threshold * peak / 255.0
@@ -93,7 +97,9 @@ def main(argv=None):
     ap.add_argument("--threshold", type=float, default=6.0,
                     help="minimum distance outside the neighbour interval, levels out of 255 (default: 6)")
     ap.add_argument("--strength", type=float, default=1.0, help="share of the correction applied, 0 to 1 (default: 1)")
-    ap.add_argument("--guard", type=float, default=120.0, help="above this gap (levels out of 255) the warp is deemed wrong and the pixel is kept (default: 120)")
+    ap.add_argument("--guard", type=float, default=120.0,
+                    help="above this gap (levels out of 255) the warp is deemed wrong and the pixel is kept "
+                         "(default: 120)")
     ap.add_argument("--loop", action="store_true", help="the sequence loops: frame 0 neighbours the last frame")
     ap.add_argument("--pattern", default="frame_*.png", help="image pattern (default: frame_*.png)")
     a = ap.parse_args(argv)

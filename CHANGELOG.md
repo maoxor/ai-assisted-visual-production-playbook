@@ -2,6 +2,21 @@
 
 Format: [versioning](CONTRIBUTING.md#versioning). Each release has a `vX.Y.Z` Git tag.
 
+## v2.1.0 — 2026-10-25
+
+- **Hooks for rendering projects** ([`hooks/`](hooks/README.md)), [proposed]: `guard_archive.py` (archives
+  read-only), `guard_production.py` (dependencies of a running production frozen), `guard_large_files.py` (no media or
+  large files committed, including files staged by the same command line). Installed by `new_project.py`
+  (`--no-hooks` to skip); 15 tests with simulated events. The process check never sends a signal on Windows.
+- **`fingerprint.py run`** and `fingerprint.running()`: mark a production as in progress (`RUNNING` file) for the
+  hooks.
+- **Physical device test procedure** for web video, [proposed], with a checklist line.
+- **Scoping**: time and budget estimation (brief table, step 8 of scoping), [proposed].
+- **Collaboration**: roles when several people are involved, [proposed].
+- **Repository**: pre-commit Git hook (`scripts/git-hooks/`), ruff lint in CI, Dependabot (Actions and uv), CODEOWNERS,
+  `CITATION.cff`, `.editorconfig`, bug report template; `main` protected by required checks.
+- **Roadmap** rewritten: what remains needs real projects, hardware or new tools.
+
 ## v2.0.1 — 2026-10-25
 
 - The repository is public; private vulnerability reporting is enabled.

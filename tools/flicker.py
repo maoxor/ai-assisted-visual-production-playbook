@@ -124,8 +124,10 @@ def main(argv=None):
     ap.add_argument("--start", type=int, default=0, help="first frame index (default: 0)")
     ap.add_argument("--end", type=int, default=10 ** 9, help="last frame index, inclusive (default: last)")
     ap.add_argument("--step", type=int, default=1, help="use one frame out of STEP (default: 1)")
-    ap.add_argument("--threshold", type=float, default=24.0, help="acceleration threshold, levels out of 255 (default: 24)")
-    ap.add_argument("--region", default=None, help="x0,y0,x1,y1 as fractions of the image, origin top-left (default: whole image)")
+    ap.add_argument("--threshold", type=float, default=24.0,
+                    help="acceleration threshold, levels out of 255 (default: 24)")
+    ap.add_argument("--region", default=None,
+                    help="x0,y0,x1,y1 as fractions of the image, origin top-left (default: whole image)")
     ap.add_argument("--map", default=None, help="write a PNG map of flickering pixels (red: points, yellow: areas)")
     ap.add_argument("--json", default=None, help="JSON file where the measurement is stored under its label")
     a = ap.parse_args(argv)

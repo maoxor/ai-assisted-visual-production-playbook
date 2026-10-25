@@ -19,6 +19,9 @@ jobs:
           python-version: "3.12"
       - name: Links, anchors, maturity levels, structure, versions, confidentiality
         run: python scripts/check_repo.py
+      - uses: astral-sh/setup-uv@v6
+      - name: Lint (ruff)
+        run: uv run --locked ruff check .
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
