@@ -1,0 +1,31 @@
+name: Bug report
+description: A tool, script, hook or the demonstration does not behave as documented
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: input
+    id: component
+    attributes:
+      label: Component
+      placeholder: "e.g. tools/stabilize.py"
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and input
+      description: The exact command, and a description of the input (size, bit depth, number of frames). No project data.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual result
+      description: Include the full output or traceback.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "OS, Python version, OpenCV version, ffmpeg version"

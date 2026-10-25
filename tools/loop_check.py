@@ -52,7 +52,8 @@ def main(argv=None):
     ap.add_argument("--seq", required=True, help="folder of the complete sequence")
     ap.add_argument("--expected", type=int, default=None, help="expected number of frames (e.g. 300)")
     ap.add_argument("--pattern", default="*.png", help="image pattern inside the folder (default: *.png)")
-    ap.add_argument("--max-ratio", type=float, default=2.0, help="tolerated seam / consecutive difference ratio (default: 2.0)")
+    ap.add_argument("--max-ratio", type=float, default=2.0,
+                    help="tolerated seam / consecutive difference ratio (default: 2.0)")
     ap.add_argument("--json", default=None, help="also write the report to this JSON file")
     a = ap.parse_args(argv)
     report = check(a.seq, a.expected, a.pattern, a.max_ratio)

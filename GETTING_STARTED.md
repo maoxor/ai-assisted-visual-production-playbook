@@ -68,6 +68,7 @@ my-project/
   docs/status-update.md            status update template
   archive/_template-README.md      README of an archived version
   .claude/skills/                  work-log, test-first-change, visual-iteration
+  .claude/hooks/, .claude/settings.json   guard hooks (--no-hooks to skip)
   tools/                           toolkit (--no-tools to skip it)
   config/  outputs/                parameters; outputs kept apart
   .gitignore                       large outputs excluded

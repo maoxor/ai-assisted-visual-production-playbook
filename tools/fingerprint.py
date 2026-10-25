@@ -1,8 +1,9 @@
 """Fingerprint the dependencies of a production and resume safely: never mix outputs from different states.
 
-  python fingerprint.py compute --dep scene.blend --dep config/scene.toml --dep 'layers/*.png' --extra tool="Blender 5.x"
-  python fingerprint.py ensure --outputs renders/v1/desktop --dep ... [--extra quality=final] [--stale renders/v1/_stale]
+  python fingerprint.py compute --dep scene.blend --dep config/scene.toml --dep 'layers/*.png' --extra tool="4.2"
+  python fingerprint.py ensure --outputs renders/v1/desktop --dep ... [--extra quality=final] [--stale <folder>]
   python fingerprint.py pending --outputs renders/v1/desktop/final --count 300 [--template 'frame_{:04d}.png']
+  python fingerprint.py run --outputs renders/v1/desktop -- python scripts/render.py --batch 0
 
 - "compute": SHA-256 of each dependency (files or glob patterns, sorted) and of the "extra" values (tool version,
   quality profile...), combined into a single fingerprint.
@@ -10,13 +11,18 @@
   without a fingerprint, the whole folder is MOVED to the stale folder (never deleted), then recreated with the new
   fingerprint. Exit code 0 in every case; the message says what was done.
 - "pending": lists the units to (re)do: missing or incomplete files (PNG without its IEND chunk, empty file).
+- "run": runs a command while <outputs>/RUNNING exists (it holds the process id), then removes it. The marker tells
+  guards such as hooks/guard_production.py that the dependencies listed in VERSION.json must not change.
 
 Usage rule: call "ensure" before each production batch; never modify a dependency during the computation (the
 fingerprint would change and the resume would start over).
 """
 import argparse
+import contextlib
 import hashlib
 import json
+import os
+import subprocess
 import sys
 import time
 from glob import glob
@@ -106,6 +112,18 @@ def pending(folder, count, template="frame_{:04d}.png"):
     return [i for i in range(count) if not is_complete(Path(folder) / template.format(i))]
 
 
+@contextlib.contextmanager
+def running(outputs):
+    """Mark <outputs> as being produced (RUNNING file with the process id) for the duration of the block."""
+    marker = Path(outputs) / "RUNNING"
+    marker.parent.mkdir(parents=True, exist_ok=True)
+    marker.write_text(json.dumps({"pid": os.getpid(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}))
+    try:
+        yield marker
+    finally:
+        marker.unlink(missing_ok=True)
+
+
 def _extra(values):
     out = {}
     for v in values or []:
@@ -127,6 +145,9 @@ def main(argv=None):
         if name == "ensure":
             p.add_argument("--outputs", required=True, help="output folder protected by VERSION.json")
             p.add_argument("--stale", default=None, help="where stale outputs go (default: <outputs>/../_stale)")
+    p = sub.add_parser("run", help="run a command while <outputs>/RUNNING marks the production as in progress")
+    p.add_argument("--outputs", required=True, help="output folder protected by VERSION.json")
+    p.add_argument("command", nargs=argparse.REMAINDER, help="command to run, after --")
     p = sub.add_parser("pending", help=helps["pending"])
     p.add_argument("--outputs", required=True, help="folder of the units")
     p.add_argument("--count", type=int, required=True, help="expected number of units")
@@ -138,6 +159,12 @@ def main(argv=None):
     elif a.cmd == "ensure":
         fp, action = ensure(a.outputs, a.dep, _extra(a.extra), a.stale)
         print(f"{fp[:16]} {action}")
+    elif a.cmd == "run":
+        command = a.command[1:] if a.command[:1] == ["--"] else a.command
+        if not command:
+            ap.error("run: give the command after --")
+        with running(a.outputs):
+            return subprocess.run(command).returncode
     else:
         units = pending(a.outputs, a.count, a.template)
         print(json.dumps({"pending": len(units), "units": units}))

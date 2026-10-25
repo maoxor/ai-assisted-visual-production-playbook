@@ -30,7 +30,10 @@ explicit assumptions without waiting for answers that would not change the solut
 7. **Restate the objective and the key criterion** [proven]. A request often contains one sentence that sums
    everything up (for example: "even without effects, the subject must feel alive"). That criterion is used to judge
    every iteration.
-8. **Open the instruction register** [proven] ([P15](../principles.md#p15)): durable constraints (local only, no
+8. **Estimate time and budget** [proposed]: deadline, the lead's review slots, machine time (units × measured cost
+   per unit × expected runs, re-estimated after the prototype), number of iterations, money (none without approval),
+   margin. The [brief](../../templates/project-brief.md) has a table for it.
+9. **Open the instruction register** [proven] ([P15](../principles.md#p15)): durable constraints (local only, no
    sub-agents, rights) and choices already made.
 
 ## Outputs

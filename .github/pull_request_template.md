@@ -13,5 +13,5 @@
 - [ ] Method, not aesthetic choice
 - [ ] English names and documentation
 - [ ] `python3 scripts/check_repo.py`: 0 errors (with your local deny list)
-- [ ] `uv run pytest` green; a changed tool comes with a test on synthetic data and an updated `tools/README.md`
+- [ ] `uv run pytest` and `uv run ruff check .` green; a changed tool comes with a test on synthetic data and an updated `tools/README.md`
 - [ ] `CHANGELOG.md` updated; version consistent in `pyproject.toml` and `.claude-plugin/`

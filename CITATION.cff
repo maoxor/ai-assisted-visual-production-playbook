@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this playbook or its tools, please cite it as below."
+title: "AI-assisted visual production playbook"
+abstract: >-
+  Method and tested tools for producing 3D renders, animations and web background videos with an AI coding agent:
+  principles, workflow, checklists, templates, agent skills, guard hooks and Python quality-assurance tools.
+type: software
+authors:
+  - name: "The ai-assisted-visual-production-playbook contributors"
+repository-code: "https://github.com/maoxor/ai-assisted-visual-production-playbook"
+license: MIT
+version: 2.1.0
+date-released: "2026-10-25"
+keywords:
+  - ai-agents
+  - claude-code
+  - visual-production
+  - rendering
+  - quality-assurance

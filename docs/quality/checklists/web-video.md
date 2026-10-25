@@ -33,6 +33,8 @@ Details and reasons: [web video guide](../../domains/web-background-video.md).
 ## Tests
 
 - [ ] Real / emulated matrix written; what cannot be tested is listed.
+- [ ] Physical devices tested with the [procedure](../../domains/web-background-video.md#physical-devices), or the
+      absence of physical tests stated in the report.
 - [ ] Dropped frames, intervals at the seams, stalls, long tasks, CLS, bytes downloaded: measured in each engine.
 - [ ] **Each delivered codec played at least once** by an engine, fallback included (force the codec if needed).
 - [ ] Tests rerun on the **final exports**, not only on provisional ones.
