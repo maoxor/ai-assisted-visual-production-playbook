@@ -7,6 +7,7 @@ project's values are measured on that project.
 |---|---|
 | Offline 3D rendering: reproducible architecture, test bench, diagnosis, transparent materials, flicker, cost, loop | [`offline-3d-rendering.md`](offline-3d-rendering.md) |
 | 2.5D animation of a subject from a single image | [`2-5d-animation.md`](2-5d-animation.md) |
+| Real-time 3D for the web: references and feature inventory, detail budget, shared toolkit, construction by shape, motion and atlas checks | [`real-time-web-3d.md`](real-time-web-3d.md) |
 | Background video for the web: exports, colour, budgets, integration, tests | [`web-background-video.md`](web-background-video.md) |
 | Web application: test first, layers, guardrails, CI, Git | [`web-applications.md`](web-applications.md) |
 | Local AI models and third-party resources: provenance, licences, rights | [`ai-models-and-assets.md`](ai-models-and-assets.md) |
