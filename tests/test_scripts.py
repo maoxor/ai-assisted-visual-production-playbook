@@ -109,3 +109,18 @@ def test_check_repo_deny_list_and_versions(tmp_path):
     assert r.returncode == 1
     assert "deny-listed term (secretproject)" in r.stdout
     assert "inconsistent versions" in r.stdout
+
+
+def test_check_repo_rejects_personal_commit_addresses(tmp_path):
+    repo = copy_repo(tmp_path)
+    env = {**os.environ, "GIT_AUTHOR_NAME": "x", "GIT_COMMITTER_NAME": "x",
+           "GIT_AUTHOR_EMAIL": "1+x@users.noreply.github.com", "GIT_COMMITTER_EMAIL": "1+x@users.noreply.github.com"}
+    for cmd in (["git", "init", "-q"], ["git", "add", "-A"], ["git", "commit", "-q", "-m", "ok"]):
+        subprocess.run(cmd, cwd=repo, check=True, env=env)
+    assert run_check(repo).returncode == 0
+    (repo / "docs" / "extra.md").write_text("more\n", encoding="utf-8")
+    personal = {**env, "GIT_AUTHOR_EMAIL": "someone" + "@" + "example.com"}
+    subprocess.run(["git", "add", "-A"], cwd=repo, check=True, env=personal)
+    subprocess.run(["git", "commit", "-q", "-m", "leak"], cwd=repo, check=True, env=personal)
+    r = run_check(repo)
+    assert r.returncode == 1 and "is not a noreply address" in r.stdout and "example.com" in r.stdout

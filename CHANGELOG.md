@@ -2,6 +2,13 @@
 
 Format: [versioning](CONTRIBUTING.md#versioning). Each release has a `vX.Y.Z` Git tag.
 
+## v2.2.1 — 2026-10-25
+
+- `check_repo.py` also checks the author and committer address of every commit in the history (GitHub noreply
+  addresses only); CI checks out the full history for it. Three merge commits had been created with a personal
+  address; they were rewritten with the noreply address (content unchanged) and the v2.1.0 and v2.2.0 tags and
+  releases recreated on the rewritten commits.
+
 ## v2.2.0 — 2026-10-25
 
 - **Real-time 3D for the web** guide, [proven]: references and feature inventory before generation, detail budget from
