@@ -1,6 +1,6 @@
 {
   "name": "visual-production",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Skills from the AI-assisted visual production playbook: long-task logs with reliable resume, test-first code changes, and evidence-based visual iteration judged in final conditions.",
   "author": {
     "name": "ai-assisted-visual-production-playbook contributors",

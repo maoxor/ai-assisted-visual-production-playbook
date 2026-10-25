@@ -12,13 +12,16 @@ Checks:
 4. Consistency: the version is the same in CHANGELOG.md, pyproject.toml, CITATION.cff and the plugin manifests.
 5. Confidentiality (decision 0007): no secrets (GitHub tokens, API keys, private keys), no email addresses other than
    "noreply", no absolute workstation paths, no media or binary assets, ASCII-only file names.
-6. Optional deny list: one term per line ('#' starts a comment), matched case-insensitively as whole words in every
+6. Commit metadata: when run inside a Git clone, every author and committer address in the history must be a GitHub
+   noreply address (personal addresses must never be published through commits).
+7. Optional deny list: one term per line ('#' starts a comment), matched case-insensitively as whole words in every
    text file and file name. Default location: .git/info/deny-list.txt (local, never versioned).
 Standard library only.
 """
 import argparse
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -183,6 +186,25 @@ def check_versions(errors):
         errors.append("inconsistent versions: " + ", ".join(f"{k}={v}" for k, v in versions.items()))
 
 
+NOREPLY = re.compile(r"(@users\.noreply\.github\.com|^noreply@github\.com)$")
+
+
+def check_commit_emails(errors):
+    """Author and committer addresses of the whole history (skipped outside a Git clone or on a shallow clone)."""
+    if not (ROOT / ".git").exists():
+        return
+    shallow = subprocess.run(["git", "rev-parse", "--is-shallow-repository"], cwd=ROOT, capture_output=True, text=True)
+    if shallow.stdout.strip() == "true":
+        return
+    log = subprocess.run(["git", "log", "--all", "--format=%h %ae %ce"], cwd=ROOT, capture_output=True, text=True)
+    for line in log.stdout.splitlines():
+        sha, *emails = line.split()
+        for email in emails:
+            if not NOREPLY.search(email):
+                errors.append(f"commit {sha}: address {email.split('@')[0][:3]}***@{email.split('@')[-1]} is not a "
+                              "noreply address")
+
+
 def load_deny_list(path):
     if path is None:
         default = ROOT / ".git" / "info" / "deny-list.txt"
@@ -237,6 +259,7 @@ def main(argv=None):
     check_structure(errors)
     check_skills(errors)
     check_versions(errors)
+    check_commit_emails(errors)
     check_confidentiality(errors, deny_terms)
     n_md = sum(1 for _ in files("**/*.md"))
     for e in errors:
